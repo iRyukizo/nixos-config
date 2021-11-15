@@ -8,9 +8,17 @@
       repo = "flake-utils";
       ref = "master";
     };
+
+    home-manager = {
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
+      ref = "master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations =
     let
       system = "x86_64-linux";
@@ -22,6 +30,8 @@
           {
             imports = [
               ./machines/SaturnV
+
+              home-manager.nixosModule
             ];
           }
         ];
