@@ -63,6 +63,8 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    trustedUsers = [ "@wheel" ];
   };
 
   environment.systemPackages = with pkgs; [
