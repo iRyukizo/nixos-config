@@ -58,11 +58,19 @@
     ];
   };
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   environment.systemPackages = with pkgs; [
+    firefox
+    git
+    networkmanagerapplet
     vim
     wget
-    networkmanagerapplet
-    firefox
   ];
 
   programs.gnupg.agent = {
