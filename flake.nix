@@ -16,39 +16,77 @@
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixpkgs = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "nixos-unstable";
+    };
+
+    pre-commit-hooks = {
+      type = "github";
+      owner = "cachix";
+      repo = "pre-commit-hooks.nix";
+      ref = "master";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosModules = {
-      home = {
-        home-manager = {
-          useUserPackages = true;
-          useGlobalPkgs = true;
-          verbose = true;
-          users = {
-            ryuki = import ./home;
+  outputs =
+    { self
+    , flake-utils
+    , home-manager
+    , nixpkgs
+    , pre-commit-hooks
+    , ...
+    }@inputs:
+    flake-utils.lib.eachDefaultSystem
+      (system:
+      {
+        checks = {
+          pre-commit = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks.nixpkgs-fmt.enable = true;
+          };
+        };
+      }
+      )
+    //
+    {
+      nixosModules = {
+        home = {
+          home-manager = {
+            useUserPackages = true;
+            useGlobalPkgs = true;
+            verbose = true;
+            users = {
+              ryuki = import ./home;
+            };
           };
         };
       };
-    };
 
-    nixosConfigurations =
-      let
-        system = "x86_64-linux";
-      in
-      {
-        SaturnV = nixpkgs.lib.nixosSystem rec {
-          inherit system;
-          modules = [
-            {
-              imports = [
-                ./machines/SaturnV
+      nixosConfigurations =
+        let
+          system = "x86_64-linux";
+        in
+        {
+          SaturnV = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              {
+                imports = [
+                  ./machines/SaturnV
 
-                home-manager.nixosModule
-              ] ++ (nixpkgs.lib.attrValues self.nixosModules);
-            }
-          ];
+                  home-manager.nixosModule
+                ] ++ (nixpkgs.lib.attrValues self.nixosModules);
+              }
+            ];
+          };
         };
-      };
-  };
+    };
 }
