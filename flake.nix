@@ -75,12 +75,12 @@
           system = "x86_64-linux";
         in
         {
-          SaturnV = nixpkgs.lib.nixosSystem {
+          millenium = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
               {
                 imports = [
-                  ./machines/SaturnV
+                  ./machines/millenium
 
                   home-manager.nixosModule
                 ] ++ (nixpkgs.lib.attrValues self.nixosModules);

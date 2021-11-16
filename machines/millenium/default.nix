@@ -6,11 +6,10 @@
   ];
 
   networking = {
-    hostName = "SaturnV";
+    hostName = "millenium";
     networkmanager.enable = true;
     useDHCP = false;
     interfaces.wlp2s0.useDHCP = true;
-    proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
   time.timeZone = "Europe/Paris";
@@ -85,7 +84,10 @@
     permitRootLogin = "no";
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
 
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "21.05";
 }
