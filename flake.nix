@@ -80,7 +80,7 @@
             modules = [
               {
                 imports = [
-                  ./machines/millenium
+                  ./machines/millenium.nix
 
                   home-manager.nixosModule
                 ] ++ (nixpkgs.lib.attrValues self.nixosModules);
