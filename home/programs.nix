@@ -5,9 +5,11 @@
     neofetch
     gotop
     nixpkgs-fmt
+    arandr
+    xclip
 
     # Fonts:
-    (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
+    meslo-lgs-nf
   ];
 
   fonts.fontconfig.enable = true;
