@@ -5,8 +5,8 @@
     neofetch
     gotop
     nixpkgs-fmt
-    arandr
     xclip
+    discord
 
     # Fonts:
     meslo-lgs-nf

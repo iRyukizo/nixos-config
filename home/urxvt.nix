@@ -31,6 +31,7 @@ in
       bar = {
         enable = false;
       };
+      scrollOnOutput = true;
     };
     transparent = true;
     shading = 30;
