@@ -1,8 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  home.file."${config.home.homeDirectory}/.p10k.zsh".source = ./.p10k.zsh;
+  home.file = {
+    "${config.home.homeDirectory}/.p10k.zsh".source = ./.p10k.zsh;
+    "${config.home.homeDirectory}/.zsh/custom/plugins/zsh-syntax-highlighting".source = pkgs.fetchFromGitHub {
+      owner = "zsh-users";
+      repo = "zsh-syntax-highlighting";
+      rev = "c7caf57ca805abd54f11f756fda6395dd4187f8a";
+      sha256 = "YbNwQ960OTVuX+MBy5nFzFUlF0+HTSyoYtEg+/adSos=";
+    };
+  };
 
+  # Mixing zsh and oh-my-zsh plugins does not seem the best thing to do
   programs.zsh = {
     enable = true;
     plugins = [
@@ -81,13 +90,17 @@
 
     enableAutosuggestions = true;
     enableCompletion = true;
-    enableSyntaxHighlighting = true;
+    # Doesn't work well with oh-my-zsh, it's better to load it in oh-my-zsh plugins
+    # enableSyntaxHighlighting = true;
+
     oh-my-zsh = {
       enable = true;
+      custom = "$HOME/.zsh/custom";
       plugins = [
         "git"
         "docker"
         "golang"
+        "zsh-syntax-highlighting"
       ];
     };
   };
