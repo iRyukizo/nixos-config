@@ -12,6 +12,7 @@
     ./urxvt.nix
     ./xdg.nix
     ./zsh
+    ./rofi
   ];
 
   home.stateVersion = "21.05";

@@ -6,32 +6,32 @@
   programs.zsh = {
     enable = true;
     plugins = [
-        {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        }
-        {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.1.0";
-            sha256 = "vUpBkwowQiSmlB/4ZmPlC8794xi9+1kVaQN5BxNk0Go=";
-          };
-        }
-        {
-          name = "zsh-cargo-completion";
-          file = "zsh-cargo-completion.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "MenkeTechnologies";
-            repo = "zsh-cargo-completion";
-            rev = "35a9ca5ff58d228b4a332eb70a31172fc4716b61";
-            sha256 = "OAC6wXuZoqVVZITS6ygact/Le4+Ty9sdARh2J3S6d/M=";
-          };
-        }
-      ];
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "zsh-nix-shell";
+        file = "nix-shell.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "chisui";
+          repo = "zsh-nix-shell";
+          rev = "v0.1.0";
+          sha256 = "vUpBkwowQiSmlB/4ZmPlC8794xi9+1kVaQN5BxNk0Go=";
+        };
+      }
+      {
+        name = "zsh-cargo-completion";
+        file = "zsh-cargo-completion.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "MenkeTechnologies";
+          repo = "zsh-cargo-completion";
+          rev = "35a9ca5ff58d228b4a332eb70a31172fc4716b61";
+          sha256 = "OAC6wXuZoqVVZITS6ygact/Le4+Ty9sdARh2J3S6d/M=";
+        };
+      }
+    ];
 
     initExtraFirst = ''
     '';

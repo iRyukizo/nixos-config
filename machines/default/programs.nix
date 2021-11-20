@@ -17,6 +17,8 @@
     xfce.thunar
     evince
     wget
+
+    own.system-san-francisco-font
   ];
 
   services.dbus.enable = true;

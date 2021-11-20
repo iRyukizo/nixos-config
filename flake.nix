@@ -47,6 +47,7 @@
     flake-utils.lib.eachDefaultSystem
       (system:
       let
+        inherit (inputs.flake-utils.lib) flattenTree;
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
@@ -64,6 +65,11 @@
             nixpkgs-fmt
           ];
         };
+
+        packages = flattenTree
+          (import ./pkgs {
+            pkgs = import nixpkgs { inherit system; };
+          });
       }
       )
     //
@@ -84,6 +90,11 @@
       nixosConfigurations =
         let
           system = "x86_64-linux";
+          custom_overlays = [
+            (self: super: {
+              own = import ./pkgs { pkgs = super; };
+            })
+          ];
         in
         {
           millenium = nixpkgs.lib.nixosSystem {
@@ -94,6 +105,7 @@
                   ./machines/millenium.nix
 
                   home-manager.nixosModule
+                  { nixpkgs.overlays = custom_overlays; }
                 ] ++ (nixpkgs.lib.attrValues self.nixosModules);
               }
             ];
