@@ -23,6 +23,7 @@
     EDITOR = "vim";
     TERMINAL = "urxvt";
     MANPAGER = "less --mouse";
+    PAGER = "less --mouse";
   };
 
   # TODO: setup go
