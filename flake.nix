@@ -46,12 +46,23 @@
     }@inputs:
     flake-utils.lib.eachDefaultSystem
       (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
       {
         checks = {
           pre-commit = pre-commit-hooks.lib.${system}.run {
             src = ./.;
             hooks.nixpkgs-fmt.enable = true;
           };
+        };
+
+        devShell = pkgs.mkShell {
+          name = "NixOS-config-devShell";
+          nativeBuildInputs = with pkgs; [
+            nix-prefetch-github
+            nixpkgs-fmt
+          ];
         };
       }
       )
