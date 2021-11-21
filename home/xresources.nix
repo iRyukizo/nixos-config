@@ -20,8 +20,6 @@ in
       "Xft.autohint" = false;
       "Xft.hintstyle" = "hintfull";
       "Xft.lcdfilter" = "lcddefault";
-      "Xcursor.theme" = "xcursor-breeze";
-      "Xcursor.size" = 32;
     };
     extraConfig = ''
       #include "${config.home.homeDirectory}/.Xresources-themes/nord.Xresources"

@@ -14,6 +14,7 @@
     ./zsh
     ./rofi
     ./dunst.nix
+    ./xcursor.nix
   ];
 
   home.stateVersion = "21.05";

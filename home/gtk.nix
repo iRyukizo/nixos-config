@@ -29,7 +29,7 @@
     gtk3 = {
       extraConfig = {
         gtk-cursor-theme-name = "Adwaita";
-        gtk-cursor-theme-size = 24;
+        gtk-cursor-theme-size = 32;
       };
       bookmarks = [
         "file://${config.home.homeDirectory}/Downloads"
