@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # multiple monitors
-if ! pgrep -x polybar; then
+if ! pgrep polybar; then
     if type "xrandr"; then
       for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
         MONITOR=$m polybar mybar &
@@ -10,7 +10,14 @@ if ! pgrep -x polybar; then
       polybar --reload mybar &
     fi
 else
-    pkill -USR1 polybar
+    pkill polybar
+    if type "xrandr"; then
+      for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+        MONITOR=$m polybar mybar &
+      done
+    else
+      polybar --reload mybar &
+    fi
 fi
 
 echo "Bars launched..."
