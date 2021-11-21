@@ -123,7 +123,7 @@ in
           "${modifier}+Shift+e" = "exec \"i3-nagbar -t warning -m 'Do you want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'\"";
           "${modifier}+Shift+c" = "reload";
           "${modifier}+Shift+r" = "restart";
-          "${modifier}+i" = "exec --no-startup-id betterlockscreen --lock";
+          "${modifier}+i" = ''exec --no-startup-id "pkill -u $USER -USR1 dunst; betterlockscreen --lock; pkill -u $USER -USR2 dunst"'';
         }
         {
           "${modifier}+d" = "exec rofi -show run";
