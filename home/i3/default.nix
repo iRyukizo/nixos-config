@@ -32,7 +32,7 @@ let
           "${command} \$ws${toString num}";
       oneToTen = genList (x: x + 1) 10;
     in
-      genAttrs' oneToTen createWorkspaceBinding;
+    genAttrs' oneToTen createWorkspaceBinding;
 
   makeModeBindings = attrs: (addVimKeyBindings attrs) // {
     "Escape" = "mode default";
