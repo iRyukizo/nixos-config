@@ -34,6 +34,7 @@
       bookmarks = [
         "file://${config.home.homeDirectory}/Downloads"
         "file://${config.home.homeDirectory}/EPITA"
+        "file://${config.home.homeDirectory}/Pictures/screenshots"
       ];
     };
   };

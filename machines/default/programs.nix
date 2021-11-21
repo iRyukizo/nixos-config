@@ -17,8 +17,16 @@
     xfce.thunar
     evince
     wget
+    playerctl
+    pavucontrol
+    brightnessctl
+    pamixer
+  ];
 
+  fonts.fonts = with pkgs; [
     own.system-san-francisco-font
+    own.san-francisco-display-regular-nerd-font
+    own.san-francisco-font
   ];
 
   services.dbus.enable = true;

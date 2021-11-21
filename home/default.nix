@@ -6,13 +6,14 @@
     ./programs.nix
     ./git.nix
     ./gtk.nix
-    ./i3.nix
+    ./i3
     ./ranger.nix
     ./xresources.nix
     ./urxvt.nix
     ./xdg.nix
     ./zsh
     ./rofi
+    ./dunst.nix
   ];
 
   home.stateVersion = "21.05";
