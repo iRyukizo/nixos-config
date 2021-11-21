@@ -5,6 +5,7 @@
     # Machine own config
     ./millenium
     ./millenium/hardware.nix
+    ./millenium/home.nix
 
     # Inherit default config
     ./default/crypt-system.nix
