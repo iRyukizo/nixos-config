@@ -102,6 +102,10 @@
               own = import ./pkgs { pkgs = super; };
             })
           ];
+          custom_modules = [
+            home-manager.nixosModule
+            { nixpkgs.overlays = custom_overlays; }
+          ] ++ (nixpkgs.lib.attrValues self.nixosModules);
         in
         {
           millenium = nixpkgs.lib.nixosSystem {
@@ -111,13 +115,9 @@
                 imports = [
                   ./machines/millenium.nix
 
-                  home-manager.nixosModule
-
                   inputs.nixos-hardware.nixosModules.common-cpu-intel
                   inputs.nixos-hardware.nixosModules.common-pc-laptop
-
-                  { nixpkgs.overlays = custom_overlays; }
-                ] ++ (nixpkgs.lib.attrValues self.nixosModules);
+                ] ++ custom_modules;
               }
             ];
           };
