@@ -24,6 +24,13 @@
       ref = "nixos-unstable";
     };
 
+    nixos-hardware = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixos-hardware";
+      ref = "master";
+    };
+
     pre-commit-hooks = {
       type = "github";
       owner = "cachix";
@@ -105,6 +112,10 @@
                   ./machines/millenium.nix
 
                   home-manager.nixosModule
+
+                  inputs.nixos-hardware.nixosModules.common-cpu-intel
+                  inputs.nixos-hardware.nixosModules.common-pc-laptop
+
                   { nixpkgs.overlays = custom_overlays; }
                 ] ++ (nixpkgs.lib.attrValues self.nixosModules);
               }
