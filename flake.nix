@@ -121,6 +121,19 @@
               }
             ];
           };
+
+          arcadia = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              {
+                imports = [
+                  ./machines/arcadia.nix
+
+                  inputs.nixos-hardware.nixosModules.common-cpu-intel
+                ] ++ custom_modules;
+              }
+            ];
+          };
         };
     };
 }
