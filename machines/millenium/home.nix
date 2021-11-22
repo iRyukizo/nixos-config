@@ -5,6 +5,7 @@
     my.polybar = {
       enable = true;
       wlan = "wlp2s0";
+      backlight = true;
       batteries = [
         {
           battery = "BAT0";

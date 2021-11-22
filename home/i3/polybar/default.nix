@@ -99,6 +99,13 @@ in
         eth interface
       '';
     };
+    backlight = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        enable backlight
+      '';
+    };
     batteries = mkOption {
       type = types.listOf batteryModule;
       default = [ ];
@@ -166,7 +173,7 @@ in
             font-3 = "Font Awesome 5 Brands:style=Regular:size=10;4";
 
             modules-left = "i3";
-            modules-center = "${(concatMapStrings (bat: (removePrefix "module/" bat.name) + " ") batteriesPair)}backlight pulseaudio";
+            modules-center = "${(concatMapStrings (bat: (removePrefix "module/" bat.name) + " ") batteriesPair)}${if cfg.backlight then "backlight " else ""}pulseaudio";
             modules-right = "cpu-info memory-info ${if !(isNull cfg.wlan) then "wlan " else ""}${if !(isNull cfg.eth) then "eth " else ""}custom-date xkeyboard";
 
             tray-position = "right";
