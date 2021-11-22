@@ -2,7 +2,10 @@
 
 {
   home.file = {
-    "${config.home.homeDirectory}/.p10k.zsh".source = ./.p10k.zsh;
+    "${config.home.homeDirectory}/.p10k.zsh".source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/iRyukizo/dotfiles/a027b42823cb25a8505f10550481022105b7f356/zsh/.p10k.zsh";
+      sha256 = "1vaia65fp392pxa1jqgs9vqrcmcplpynfxvai9pq79l11bvri2q5";
+    };
     "${config.home.homeDirectory}/.zsh/custom/plugins/zsh-syntax-highlighting".source = pkgs.fetchFromGitHub {
       owner = "zsh-users";
       repo = "zsh-syntax-highlighting";

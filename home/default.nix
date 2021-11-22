@@ -2,19 +2,19 @@
 
 {
   imports = [
-    ./vim.nix
-    ./programs.nix
+    ./dunst.nix
     ./git.nix
     ./gtk.nix
     ./i3
+    ./programs.nix
     ./ranger.nix
-    ./xresources.nix
-    ./urxvt.nix
-    ./xdg.nix
-    ./zsh
     ./rofi
-    ./dunst.nix
+    ./urxvt.nix
+    ./vim.nix
     ./xcursor.nix
+    ./xdg.nix
+    ./xresources.nix
+    ./zsh.nix
   ];
 
   home.stateVersion = "21.05";
