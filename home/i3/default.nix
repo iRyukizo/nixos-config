@@ -56,12 +56,182 @@ in
   home.file = {
     ".background-image".source = ./background.png;
     ".lock.png".source = ./lock.png;
-    ".scripts/system_status/volumeControl.sh".source = ./scripts/system_status/volumeControl.sh;
-    ".scripts/system_status/micControl.sh".source = ./scripts/system_status/micControl.sh;
-    ".scripts/system_status/brightnessControl.sh".source = ./scripts/system_status/brightnessControl.sh;
-    ".scripts/system_status/cpu.sh".source = ./scripts/system_status/cpu.sh;
-    ".scripts/system_status/memory.sh".source = ./scripts/system_status/memory.sh;
-    ".config/polybar/launch.sh".source = ./polybar/launch.sh;
+    ".scripts/system_status/volumeControl.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env bash
+
+        # You can call this script like this:
+        # $ ./volumeControl.sh up
+        # $ ./volumeControl.sh down
+        # $ ./volumeControl.sh mute
+
+        function get_volume {
+          amixer -M get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+        }
+
+        function is_mute {
+          amixer -M get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+        }
+
+        function send_notification {
+          iconSound="audio-volume-high"
+          iconMuted="audio-volume-muted"
+          if is_mute ; then
+            dunstify -t 1000 -i $iconMuted -r 2593 -u normal "mute"
+          else
+            volume=$(get_volume)
+            bar=$(seq --separator="─" 0 "$((volume / 5))" | sed 's/[0-9]//g')
+            dunstify -t 1000 -i $iconSound -r 2593 -u normal "$volume%"$'\n'"$bar"
+          fi
+        }
+
+        case $1 in
+        up)
+          pamixer --allow-boost -i 5
+          send_notification
+        ;;
+        down)
+          pamixer --allow-boost -d 5
+          send_notification
+        ;;
+        mute)
+          pamixer --toggle-mute
+          send_notification
+        ;;
+        esac
+      '';
+    };
+    ".scripts/system_status/micControl.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env bash
+
+        function is_mic_mute {
+          pactl list | sed -n '/^Source/,/^$/p' | grep Mute | grep yes > /dev/null
+        }
+
+        function send_notification {
+          iconMic="microphone-sensitivity-high-symbolic"
+          iconMuted="microphone-sensitivity-muted-symbolic"
+          if is_mic_mute ; then
+            dunstify -t 1000 -i $iconMuted -r 2593 -u normal "mute"
+          else
+            dunstify -t 1000 -i $iconMic -r 2593 -u normal  "unmute"
+          fi
+        }
+
+        case $1 in
+        mute)
+                pactl set-source-mute @DEFAULT_SOURCE@ toggle
+                send_notification
+        ;;
+        esac
+      '';
+    };
+    ".scripts/system_status/brightnessControl.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env bash
+
+        # You can call this script like this:
+        # $ ./brightnessControl.sh up
+        # $ ./brightnessControl.sh down
+
+        function send_notification {
+          icon="notification-display-brightness"
+          brightness="$1"
+          bar=$(seq -s "─" 0 $((brightness / 5)) | sed 's/[0-9]//g')
+          dunstify -t 1000 -i "$icon" -r 5432 -u normal "$brightness%"$'\n'"$bar"
+        }
+
+        case $1 in
+          up)
+            newBrightness=$(brightnessctl -m set "+2%" | cut -d, -f4 | tr -d '%')
+            send_notification "$newBrightness"
+            ;;
+          down)
+            newBrightness=$(brightnessctl -m set "2%-" | cut -d, -f4 | tr -d '%')
+            send_notification "$newBrightness"
+            ;;
+        esac
+      '';
+    };
+    ".scripts/system_status/cpu.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env zsh
+
+        case "$1" in
+        --popup)
+          dunstify -i "" -t 3000 -r 9574 -u normal " CPU time (%)" "$(ps axch -o cmd:10,pcpu k -pcpu | head | awk '$0=$0"%"' )"
+          ;;
+        *)
+          # calculate cpu load (percentage)
+          cpu_clock=$(lscpu | grep "CPU MHz:" | awk '{print $3}')
+          max_clock=$(lscpu | grep "CPU max MHz:" | awk '{print $4}')
+          # replace , in max clock with .
+          max_clock="''${max_clock//[,]/.}"
+          # calculate clock percentage of max
+          clock_percentage="$(( cpu_clock * 100 / max_clock ))"
+          # for print, separate int part and floating point digits
+          clock_percentage_int=''${clock_percentage%%.*}
+          clock_percentage_rat=''${clock_percentage##*.}
+          # only display 2 floating digits
+          clock_percentage="''${clock_percentage_int}.''${clock_percentage_rat:0:2}"
+
+          # get cpu temperature
+          cpu_temp=$(sensors | grep "Package id 0:" | head -1 | awk '{print $4}')
+          # remove + and floating point digit
+          cpu_temp="''${cpu_temp//+}"
+          cpu_temp="''${cpu_temp//.0}"
+          echo " $clock_percentage%    $cpu_temp"
+          ;;
+        esac
+      '';
+    };
+    ".scripts/system_status/memory.sh" = {
+      executable = true;
+      text = ''
+        #!/bin/sh
+        case "$1" in
+        --popup)
+          dunstify -i "" -t 3000 -r 9574 -u normal " Memory (%)" "$(ps axch -o cmd:10,pmem k -pmem | head | awk '$0=$0"%"' )"
+        ;;
+        *)
+          echo " $(free -h --si | awk '/^Mem:/ {print $3 "/" $2}')"
+        ;;
+        esac
+      '';
+    };
+    ".config/polybar/launch.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env sh
+
+        # multiple monitors
+        if ! pgrep polybar; then
+            if type "xrandr"; then
+              for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+                MONITOR=$m polybar mybar &
+              done
+            else
+              polybar --reload mybar &
+            fi
+        else
+            pkill polybar
+            if type "xrandr"; then
+              for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+                MONITOR=$m polybar mybar &
+              done
+            else
+              polybar --reload mybar &
+            fi
+        fi
+
+        echo "Bars launched..."
+      '';
+    };
   };
 
   imports = [
