@@ -134,6 +134,21 @@
               }
             ];
           };
+
+          mothership = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              {
+                imports = [
+                  ./machines/mothership.nix
+
+                  inputs.nixos-hardware.nixosModules.common-cpu-intel
+
+                  { nixpkgs.overlays = custom_overlays; }
+                ];
+              }
+            ];
+          };
         };
     };
 }
