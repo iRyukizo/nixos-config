@@ -251,6 +251,8 @@ in
         size = 14.0;
       };
 
+      defaultWorkspace = "workspace number $ws1";
+
       keybindings = recursiveMerge [
         (
           genMovementBindings (
