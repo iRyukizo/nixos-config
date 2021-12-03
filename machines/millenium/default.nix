@@ -16,4 +16,7 @@
     enable = true;
     permitRootLogin = "no";
   };
+
+  services.xserver.layout = "gb";
+  console.keyMap = "uk";
 }
