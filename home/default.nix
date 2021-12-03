@@ -4,6 +4,7 @@
   imports = [
     ./dunst.nix
     ./git.nix
+    ./go.nix
     ./gtk.nix
     ./i3
     ./programs.nix
@@ -28,6 +29,8 @@
     PAGER = "less --mouse";
   };
 
-  # TODO: setup go
-  programs.go.enable = true;
+  home.sessionPath = [
+    # Some packages are not packaged in go, so old `go install pkgs@version` makes it
+    "$HOME/go/bin"
+  ];
 }
