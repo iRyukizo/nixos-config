@@ -24,6 +24,7 @@
   ];
 
   fonts.fonts = with pkgs; [
+    font-awesome_5
     own.system-san-francisco-font
     own.san-francisco-display-regular-nerd-font
     own.san-francisco-font
