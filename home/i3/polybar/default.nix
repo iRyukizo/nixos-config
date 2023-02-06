@@ -120,7 +120,7 @@ in
       enable = true;
 
       package = pkgs.polybar.override {
-        i3GapsSupport = true;
+        i3Support = true;
         pulseSupport = true;
       };
 
@@ -146,7 +146,7 @@ in
           };
 
           "bar/mybar" = {
-            monitor = "\${env:MONITOR:HDMI-1}";
+            monitor = "\${env:MONITOR:DP-1}";
             width = "100%";
             height = 40;
             radius = 6.0;
