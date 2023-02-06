@@ -135,6 +135,19 @@
             ];
           };
 
+          dragon = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              {
+                imports = [
+                  ./machines/dragon.nix
+
+                  inputs.nixos-hardware.nixosModules.common-cpu-intel
+                ] ++ custom_modules;
+              }
+            ];
+          };
+
           mothership = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
