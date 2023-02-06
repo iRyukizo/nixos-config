@@ -8,7 +8,7 @@
         wlan = "wlp3s0";
         eth = "enp60s0u1u3c2";
       };
-      fonts.enable = true;
+      urxvt.enable = true;
       zsh.enable = true;
     };
   };
