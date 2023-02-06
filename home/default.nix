@@ -4,6 +4,7 @@
   imports = [
     ./dunst.nix
     ./flameshot.nix
+    ./fonts.nix
     ./git.nix
     ./go.nix
     ./gtk.nix
