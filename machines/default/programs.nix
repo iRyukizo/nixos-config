@@ -11,7 +11,6 @@
     firefox
     git
     tree
-    ranger
     networkmanagerapplet
     vim
     xfce.thunar

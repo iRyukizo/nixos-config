@@ -9,6 +9,7 @@
         eth = "enp60s0u1u3c2";
       };
       fonts.enable = true;
+      ranger.enable = true;
     };
   };
 }
