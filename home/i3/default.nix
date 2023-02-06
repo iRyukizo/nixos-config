@@ -168,8 +168,18 @@ in
           ;;
         *)
           # calculate cpu load (percentage)
-          cpu_clock=$(lscpu | grep "CPU MHz:" | awk '{print $3}')
+          cpu_clock=0.000
+          count=0
+          while read -r line
+          do
+              cpu_clock=$(awk '{print $1+$2}' <<<"''${cpu_clock} ''${line}")
+              count=$(($count + 1))
+          done < <(lscpu -e=MHZ | tail -n +2)
+          cpu_clock=$(awk '{print $1/$2}' <<<"''${cpu_clock} ''${count}")
+          min_clock=$(lscpu | grep "CPU min MHz:" | awk '{print $4}')
+          cpu_clock=$(awk '{print $1-$2}' <<<"''${cpu_clock} ''${min_clock}")
           max_clock=$(lscpu | grep "CPU max MHz:" | awk '{print $4}')
+          max_clock=$(awk '{print $1-$2}' <<<"''${max_clock} ''${min_clock}")
           # replace , in max clock with .
           max_clock="''${max_clock//[,]/.}"
           # calculate clock percentage of max
