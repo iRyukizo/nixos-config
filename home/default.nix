@@ -3,6 +3,7 @@
 {
   imports = [
     ./dunst.nix
+    ./flameshot.nix
     ./git.nix
     ./go.nix
     ./gtk.nix
