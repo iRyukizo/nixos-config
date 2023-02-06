@@ -4,7 +4,7 @@ with lib;
 let
   inherit (builtins) map genList length listToAttrs toString;
 
-  cfg = config.my.polybar;
+  cfg = config.my.home.polybar;
 
   batteryModule = types.submodule {
     options = {
@@ -83,7 +83,7 @@ let
   ;
 in
 {
-  options.my.polybar = {
+  options.my.home.polybar = {
     enable = mkEnableOption "polybar configurations";
     wlan = mkOption {
       type = types.nullOr types.str;
