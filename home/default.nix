@@ -26,7 +26,6 @@
 
   home.sessionVariables = {
     EDITOR = "vim";
-    TERMINAL = "urxvt";
     MANPAGER = "less --mouse";
     PAGER = "less --mouse";
   };
