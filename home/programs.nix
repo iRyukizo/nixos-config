@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    neofetch
-    gotop
     nixpkgs-fmt
     xclip
     discord
