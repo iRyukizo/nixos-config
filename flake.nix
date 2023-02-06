@@ -81,7 +81,7 @@
       )
     //
     {
-      nixosModules = {
+      nixosModules = (import ./modules) // {
         home = {
           home-manager = {
             useUserPackages = true;
