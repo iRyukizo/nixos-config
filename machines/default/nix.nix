@@ -9,6 +9,8 @@
       experimental-features = nix-command flakes
     '';
 
-    trustedUsers = [ "@wheel" ];
+    settings = {
+      trusted-users = [ "@wheel" ];
+    };
   };
 }
