@@ -89,7 +89,6 @@ in
         EDITOR = "vim";
         VISUAL = "vim";
         CLICOLOR = "1";
-        TERMINAL = "urxvt";
       };
 
       history = {
