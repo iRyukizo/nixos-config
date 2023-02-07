@@ -12,6 +12,7 @@
       xdg.enable = true;
       i3.enable = true;
       vim.enable = true;
+      go.enable = true;
     };
   };
 }
