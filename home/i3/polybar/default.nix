@@ -123,6 +123,7 @@ in
     home.packages = with pkgs; [
       coreutils
       gawk
+      lm_sensors
       procps
       util-linux
       zsh

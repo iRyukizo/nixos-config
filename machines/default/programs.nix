@@ -7,19 +7,13 @@
     arandr
     dconf
     dbus
-    feh
     firefox
     git
     tree
     networkmanagerapplet
     vim
-    xfce.thunar
     evince
     wget
-    playerctl
-    pavucontrol
-    brightnessctl
-    pamixer
   ];
 
   my.packages.core.enable = true;
