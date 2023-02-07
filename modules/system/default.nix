@@ -7,6 +7,7 @@ in
 {
   imports = [
     ./crypt-system.nix
+    ./docker.nix
     ./gui.nix
     ./locales.nix
     ./networking.nix
@@ -22,6 +23,7 @@ in
   config = mkIf cfg.enableDefault {
     my.system = {
       crypt.enable = mkDefault true;
+      docker.enable = mkDefault true;
       gui.enable = mkDefault true;
       locales.enable = mkDefault true;
       networking.enable = mkDefault true;
