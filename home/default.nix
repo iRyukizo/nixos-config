@@ -23,9 +23,4 @@
   home.stateVersion = "21.05";
 
   home.username = "ryuki";
-
-  home.sessionPath = [
-    # Some packages are not packaged in go, so old `go install pkgs@version` makes it
-    "$HOME/go/bin"
-  ];
 }
