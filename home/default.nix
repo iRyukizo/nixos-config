@@ -14,7 +14,6 @@
     ./rofi
     ./urxvt.nix
     ./vim.nix
-    ./xcursor.nix
     ./xdg.nix
     ./xresources.nix
     ./zsh.nix
