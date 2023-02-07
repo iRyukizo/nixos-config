@@ -1,12 +1,14 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkDefault mkEnableOption mkIf;
+  inherit (lib) mkDefault mkEnableOption mkIf optional;
+  inherit (lib.strings) optionalString;
   cfg = config.my.home.zsh;
 in
 {
-  options.my.home.zsh= {
+  options.my.home.zsh = {
     enable = mkEnableOption "Zsh home configuration";
+    p10k = mkEnableOption "Zsh P10K prompt" // { default = true; };
   };
 
   config = mkIf cfg.enable {
@@ -16,15 +18,17 @@ in
     };
 
     home.file = {
-      "${config.home.homeDirectory}/.p10k.zsh".source = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/iRyukizo/dotfiles/a027b42823cb25a8505f10550481022105b7f356/zsh/.p10k.zsh";
-        sha256 = "1vaia65fp392pxa1jqgs9vqrcmcplpynfxvai9pq79l11bvri2q5";
-      };
       "${config.home.homeDirectory}/.zsh/custom/plugins/zsh-syntax-highlighting".source = pkgs.fetchFromGitHub {
         owner = "zsh-users";
         repo = "zsh-syntax-highlighting";
         rev = "c7caf57ca805abd54f11f756fda6395dd4187f8a";
         sha256 = "MeuPqDeJpbJi2hT7VUgyQNSmDPY/biUncvyY78IBfzM=";
+      };
+      "${config.home.homeDirectory}/.p10k.zsh" = mkIf cfg.p10k {
+        source = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/iRyukizo/dotfiles/a027b42823cb25a8505f10550481022105b7f356/zsh/.p10k.zsh";
+          sha256 = "1vaia65fp392pxa1jqgs9vqrcmcplpynfxvai9pq79l11bvri2q5";
+        };
       };
     };
 
@@ -32,11 +36,6 @@ in
     programs.zsh = {
       enable = true;
       plugins = [
-        {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        }
         {
           name = "zsh-nix-shell";
           file = "nix-shell.plugin.zsh";
@@ -57,14 +56,19 @@ in
             sha256 = "OAC6wXuZoqVVZITS6ygact/Le4+Ty9sdARh2J3S6d/M=";
           };
         }
-      ];
+      ] ++ optional (cfg.p10k) {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      };
 
       initExtraFirst = ''
       '';
 
-      initExtra = ''
+      initExtra = optionalString cfg.p10k ''
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      '' + ''
         ZSH_HIGHLIGHT_STYLES[arg0]=fg=4,bold
         ZLE_RPROMPT_INDENT=0
 
