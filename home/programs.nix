@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     nixpkgs-fmt
-    xclip
     discord
 
     betterlockscreen
