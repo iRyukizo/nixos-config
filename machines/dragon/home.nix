@@ -10,6 +10,7 @@
       };
       urxvt.enable = true;
       zsh.enable = true;
+      dunst.enable = true;
     };
   };
 }
