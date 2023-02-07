@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./devenv
     ./dunst.nix
     ./flameshot.nix
     ./fonts.nix
