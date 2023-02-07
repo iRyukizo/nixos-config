@@ -5,6 +5,11 @@ let
   gnome-path = "${pkgs.gnome-icon-theme}/share/icons/gnome";
 in
 {
+  home.packages = with pkgs; [
+    faba-icon-theme
+    gnome-icon-theme
+  ];
+
   services.dunst = {
     enable = true;
     settings = {

@@ -7,8 +7,6 @@
     discord
     scrot
 
-    faba-icon-theme
-    gnome-icon-theme
     betterlockscreen
     lm_sensors
   ];
