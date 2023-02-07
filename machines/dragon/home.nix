@@ -11,6 +11,7 @@
       zsh.enable = true;
       xdg.enable = true;
       i3.enable = true;
+      vim.enable = true;
     };
   };
 }
