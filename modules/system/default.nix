@@ -7,6 +7,7 @@ in
 {
   imports = [
     ./crypt-system.nix
+    ./locales.nix
     ./nix.nix
     ./users.nix
     ./xserver.nix
@@ -19,6 +20,7 @@ in
   config = mkIf cfg.enableDefault {
     my.system = {
       crypt.enable = mkDefault true;
+      locales.enable = mkDefault true;
       nix.enable = mkDefault true;
       users.enable = mkDefault true;
       xserver.enable = mkDefault true;
