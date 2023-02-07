@@ -29,15 +29,14 @@ in
     networking = {
       hostName = cfg.hostname;
       useDHCP = false;
-      networkmanager.enable = false;
+      networkmanager.enable = true;
+      interfaces = recursiveMerge (map
+        (int:
+          { "${int}".useDHCP = true; }
+        ) cfg.interfaces
+      );
     };
 
     time.timeZone = "Europe/Paris";
-  } // mkIf cfg.enable (recursiveMerge (map
-    (int:
-    {
-      networking.interfaces."${int}" = true;
-    }
-    ) cfg.interfaces
-  ));
+  };
 }
