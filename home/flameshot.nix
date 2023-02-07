@@ -1,11 +1,21 @@
-{ config, ... }:
+{ config, lib, ... }:
 
+let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.my.home.flameshot;
+in
 {
-  services.flameshot = {
-    enable = true;
-    settings = {
-      General = {
-        savePath = "/home/ryuki/Pictures/screenshots";
+  options.my.home.flameshot = {
+    enable = mkEnableOption "Home flameshot configuration";
+  };
+
+  config = mkIf cfg.enable {
+    services.flameshot = {
+      enable = true;
+      settings = {
+        General = {
+          savePath = "/home/ryuki/Pictures/screenshots";
+        };
       };
     };
   };
