@@ -13,6 +13,7 @@
       dunst.enable = true;
       flameshot.enable = true;
       gtk.enable = true;
+      xdg.enable = true;
     };
   };
 }
