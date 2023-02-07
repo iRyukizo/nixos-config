@@ -13,6 +13,7 @@
       i3.enable = true;
       vim.enable = true;
       go.enable = true;
+      git.enable = true;
     };
   };
 }
