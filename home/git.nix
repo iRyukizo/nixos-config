@@ -6,19 +6,21 @@ let
   cfg = config.my.home.git;
 
   emailCondition = types.submodule {
-    directory = {
-      type = types.str;
-      default = "~";
-      description = ''
-        Location to use.
-      '';
-    };
+    options = {
+      directory = mkOption {
+        type = types.str;
+        default = "~";
+        description = ''
+          Location to use.
+        '';
+      };
 
-    email = mkOption {
-      type = types.str;
-      description = ''
-        Email to use.
-      '';
+      email = mkOption {
+        type = types.str;
+        description = ''
+          Email to use.
+        '';
+      };
     };
   };
 
@@ -67,7 +69,7 @@ in
 
       includes = [
         {
-          condition = "gitdir:~/EPITA/LRDE";
+          condition = "gitdir:~/EPITA/LRDE/";
           contents = {
             user = {
               email = "hmoreau@lrde.epita.fr";
@@ -75,7 +77,7 @@ in
           };
         }
         {
-          condition = "gitdir:~/EPITA/ASSISTANTS";
+          condition = "gitdir:~/EPITA/ASSISTANTS/";
           contents = {
             init = {
               defaultBranch = "main";
