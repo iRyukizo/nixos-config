@@ -8,6 +8,7 @@ in
   imports = [
     ./crypt-system.nix
     ./nix.nix
+    ./users.nix
     ./xserver.nix
   ];
 
@@ -19,6 +20,7 @@ in
     my.system = {
       crypt.enable = mkDefault true;
       nix.enable = mkDefault true;
+      users.enable = mkDefault true;
       xserver.enable = mkDefault true;
     };
   };
