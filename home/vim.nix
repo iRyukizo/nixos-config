@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf optional;
+  inherit (lib) mkDefault mkEnableOption mkIf optional;
   inherit (lib.strings) optionalString;
   inherit (pkgs) fetchFromGitHub vimUtils;
   inherit (vimUtils) buildVimPlugin;
@@ -33,9 +33,14 @@ in
   options.my.home.vim = {
     enable = mkEnableOption "Home vim configuration";
     clangFormatSupport = mkEnableOption "Home vim-clang-format support" // { default = true; };
+    goSupport = mkEnableOption "Home vim-go support" // { default = true; };
   };
 
   config = mkIf cfg.enable {
+    my.home = {
+      go.enable = mkDefault cfg.goSupport;
+    };
+
     home.packages = with pkgs; [] ++ optional cfg.clangFormatSupport pkgs.clang-tools;
 
     programs.vim = {
@@ -53,11 +58,11 @@ in
         vim-airline
         vim-airline-themes
         vim-gitgutter
-        vim-go
         vim-nix
         vim-operator-user
         vim-snippets
-      ] ++ optional cfg.clangFormatSupport pkgs.vimPlugins.vim-clang-format;
+      ] ++ optional cfg.clangFormatSupport pkgs.vimPlugins.vim-clang-format
+        ++ optional cfg.goSupport pkgs.vimPlugins.vim-go;
       settings = {
         number = true;
         expandtab = true;
@@ -114,9 +119,6 @@ in
 
         autocmd FileType c,cpp set comments+=s0:/*,mb:**,ex:*/
 
-        autocmd FileType go map <Leader>x :GoFmt<CR>
-        autocmd FileType go map <Leader>j :GoAddTags<CR>
-
         " Set ultisnips triggers
         let g:UltiSnipsExpandTrigger="<tab>"
         let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -131,6 +133,9 @@ in
       '' + optionalString cfg.clangFormatSupport ''
         " Set Clang-Format
         autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+      '' + optionalString cfg.goSupport ''
+        autocmd FileType go map <Leader>x :GoFmt<CR>
+        autocmd FileType go map <Leader>j :GoAddTags<CR>
       '';
     };
   };
