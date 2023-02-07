@@ -123,6 +123,11 @@ in
         let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
         let g:UltiSnipsListSnippets="<c-tab>"
         let g:snips_author="iRyukizo"
+
+        " Don't use sensible, for some reason sensible is installed
+        " TODO: figure out why there is sensible, may think because 
+        " it's the default option on home-manager for plugins
+        let g:loaded_sensible="no"
       '' + optionalString cfg.clangFormatSupport ''
         " Set Clang-Format
         autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
