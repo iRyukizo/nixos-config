@@ -12,6 +12,7 @@ in
     ./locales.nix
     ./networking.nix
     ./nix.nix
+    ./ssh.nix
     ./users.nix
     ./xserver.nix
   ];
@@ -28,6 +29,7 @@ in
       locales.enable = mkDefault true;
       networking.enable = mkDefault true;
       nix.enable = mkDefault true;
+      ssh.enable = mkDefault true;
       users.enable = mkDefault true;
       xserver.enable = mkDefault true;
     };
