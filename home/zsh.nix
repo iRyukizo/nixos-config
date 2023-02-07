@@ -89,6 +89,8 @@ in
         EDITOR = "vim";
         VISUAL = "vim";
         CLICOLOR = "1";
+        MANPAGER = "less --mouse";
+        PAGER = "less --mouse";
       };
 
       history = {

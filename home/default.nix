@@ -24,12 +24,6 @@
 
   home.username = "ryuki";
 
-  home.sessionVariables = {
-    EDITOR = "vim";
-    MANPAGER = "less --mouse";
-    PAGER = "less --mouse";
-  };
-
   home.sessionPath = [
     # Some packages are not packaged in go, so old `go install pkgs@version` makes it
     "$HOME/go/bin"
