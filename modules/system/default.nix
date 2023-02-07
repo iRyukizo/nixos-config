@@ -9,6 +9,7 @@ in
     ./crypt-system.nix
     ./gui.nix
     ./locales.nix
+    ./networking.nix
     ./nix.nix
     ./users.nix
     ./xserver.nix
@@ -23,6 +24,7 @@ in
       crypt.enable = mkDefault true;
       gui.enable = mkDefault true;
       locales.enable = mkDefault true;
+      networking.enable = mkDefault true;
       nix.enable = mkDefault true;
       users.enable = mkDefault true;
       xserver.enable = mkDefault true;
