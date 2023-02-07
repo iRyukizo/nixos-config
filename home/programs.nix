@@ -5,7 +5,6 @@
     nixpkgs-fmt
     xclip
     discord
-    scrot
 
     betterlockscreen
     lm_sensors
