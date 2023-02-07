@@ -8,12 +8,8 @@
         wlan = "wlp3s0";
         eth = "enp60s0u1u3c2";
       };
-      zsh.enable = true;
-      xdg.enable = true;
       i3.enable = true;
-      vim.enable = true;
-      go.enable = true;
-      git.enable = true;
+      devenv.enable = true;
     };
   };
 }
