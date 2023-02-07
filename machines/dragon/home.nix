@@ -12,6 +12,7 @@
       zsh.enable = true;
       dunst.enable = true;
       flameshot.enable = true;
+      gtk.enable = true;
     };
   };
 }
