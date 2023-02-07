@@ -14,6 +14,7 @@
       flameshot.enable = true;
       gtk.enable = true;
       xdg.enable = true;
+      rofi.enable = true;
     };
   };
 }
