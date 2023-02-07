@@ -23,6 +23,13 @@ in
         all interfaces to open
       '';
     };
+    timeZone = mkOption {
+      type = types.str;
+      default = "Europe/Paris";
+      description = ''
+        timezone (default: Europe/Paris)
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -37,6 +44,6 @@ in
       );
     };
 
-    time.timeZone = "Europe/Paris";
+    time.timeZone = cfg.timeZone;
   };
 }
