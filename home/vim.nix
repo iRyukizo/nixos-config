@@ -86,6 +86,7 @@ in
         scriptencoding utf-8
         set encoding=utf8
 
+        set backspace=indent,eol,start
         set listchars=tab:>-,eol:¬,trail:-
 
         set nobackup
