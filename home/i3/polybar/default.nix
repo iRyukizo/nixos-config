@@ -116,6 +116,106 @@ in
   };
 
   config = mkIf cfg.enable {
+    my.home = {
+      dunst.enable = mkDefault true;
+    };
+
+    home.packages = with pkgs; [
+      coreutils
+      gawk
+      procps
+      util-linux
+      zsh
+    ];
+
+    home.file = {
+      ".scripts/system_status/cpu.sh" = {
+        executable = true;
+        text = ''
+          #!/usr/bin/env zsh
+
+          case "$1" in
+          --popup)
+            dunstify -i "" -t 3000 -r 9574 -u normal " CPU time (%)" "$(ps axch -o cmd:10,pcpu k -pcpu | head | awk '$0=$0"%"' )"
+            ;;
+          *)
+            # calculate cpu load (percentage)
+            cpu_clock=0.000
+            count=0
+            while read -r line
+            do
+                cpu_clock=$(awk '{print $1+$2}' <<<"''${cpu_clock} ''${line}")
+                count=$(($count + 1))
+            done < <(lscpu -e=MHZ | tail -n +2)
+            cpu_clock=$(awk '{print $1/$2}' <<<"''${cpu_clock} ''${count}")
+            min_clock=$(lscpu | grep "CPU min MHz:" | awk '{print $4}')
+            cpu_clock=$(awk '{print $1-$2}' <<<"''${cpu_clock} ''${min_clock}")
+            max_clock=$(lscpu | grep "CPU max MHz:" | awk '{print $4}')
+            max_clock=$(awk '{print $1-$2}' <<<"''${max_clock} ''${min_clock}")
+            # replace , in max clock with .
+            max_clock="''${max_clock//[,]/.}"
+            # calculate clock percentage of max
+            clock_percentage="$(( cpu_clock * 100 / max_clock ))"
+            # for print, separate int part and floating point digits
+            clock_percentage_int=''${clock_percentage%%.*}
+            clock_percentage_rat=''${clock_percentage##*.}
+            # only display 2 floating digits
+            clock_percentage="''${clock_percentage_int}.''${clock_percentage_rat:0:2}"
+
+            # get cpu temperature
+            cpu_temp=$(sensors | grep "Package id 0:" | head -1 | awk '{print $4}')
+            # remove + and floating point digit
+            cpu_temp="''${cpu_temp//+}"
+            cpu_temp="''${cpu_temp//.0}"
+            echo " $clock_percentage%    $cpu_temp"
+            ;;
+          esac
+        '';
+      };
+      ".scripts/system_status/memory.sh" = {
+        executable = true;
+        text = ''
+          #!/bin/sh
+          case "$1" in
+          --popup)
+            dunstify -i "" -t 3000 -r 9574 -u normal " Memory (%)" "$(ps axch -o cmd:10,pmem k -pmem | head | awk '$0=$0"%"' )"
+          ;;
+          *)
+            echo " $(free -h --si | awk '/^Mem:/ {print $3 "/" $2}')"
+          ;;
+          esac
+        '';
+      };
+      ".config/polybar/launch.sh" = {
+        executable = true;
+        text = ''
+          #!/usr/bin/env sh
+
+          # multiple monitors
+          if ! pgrep polybar; then
+              if type "xrandr"; then
+                for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+                  MONITOR=$m polybar mybar &
+                done
+              else
+                polybar --reload mybar &
+              fi
+          else
+              pkill polybar
+              if type "xrandr"; then
+                for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+                  MONITOR=$m polybar mybar &
+                done
+              else
+                polybar --reload mybar &
+              fi
+          fi
+
+          echo "Bars launched..."
+        '';
+      };
+    };
+
     services.polybar = {
       enable = true;
 
