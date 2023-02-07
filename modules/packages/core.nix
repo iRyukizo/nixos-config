@@ -11,10 +11,15 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      file
       git
       htop
       man-pages
       man-pages-posix
+      tmux
+      tree
+      usbutils
+      util-linux
       unzip
       wget
       zip
