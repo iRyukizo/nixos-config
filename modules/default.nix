@@ -1,4 +1,6 @@
 {
-  packages = ./packages;
-  system = ./system;
+  imports = [
+    ./packages
+    ./system
+  ];
 }
