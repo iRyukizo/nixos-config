@@ -3,8 +3,6 @@
 {
   imports = [
     ./dragon/hardware.nix
-
-    ./default/programs.nix
   ];
 
   home-manager.users.ryuki = {
@@ -17,6 +15,11 @@
       i3.enable = true;
       devenv.enable = true;
     };
+  };
+
+  my.packages = {
+    core.enable = true;
+    desktop.enable = true;
   };
 
   my.system = {

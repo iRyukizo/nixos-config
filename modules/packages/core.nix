@@ -21,6 +21,7 @@ in
       usbutils
       util-linux
       unzip
+      vim
       wget
       zip
     ];
