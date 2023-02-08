@@ -17,7 +17,7 @@ in
       evince
       feh
       firefox
-      stack
+      slack
       teams
       vlc
     ];
