@@ -113,15 +113,11 @@
           millenium = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
-              {
-                imports = [
-                  ./machines/millenium
+              ./machines/millenium
 
-                  inputs.nixos-hardware.nixosModules.common-cpu-intel
-                  inputs.nixos-hardware.nixosModules.common-pc-laptop
-                ] ++ custom_modules;
-              }
-            ];
+              inputs.nixos-hardware.nixosModules.common-cpu-intel
+              inputs.nixos-hardware.nixosModules.common-pc-laptop
+            ] ++ custom_modules;
             specialArgs = {
               inherit inputs;
             };
@@ -130,14 +126,10 @@
           arcadia = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
-              {
-                imports = [
-                  ./machines/arcadia
+              ./machines/arcadia
 
-                  inputs.nixos-hardware.nixosModules.common-cpu-intel
-                ] ++ custom_modules;
-              }
-            ];
+              inputs.nixos-hardware.nixosModules.common-cpu-intel
+            ] ++ custom_modules;
             specialArgs = {
               inherit inputs;
             };
@@ -146,14 +138,10 @@
           dragon = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
-              {
-                imports = [
-                  ./machines/dragon
+              ./machines/dragon
 
-                  inputs.nixos-hardware.nixosModules.common-cpu-intel
-                ] ++ custom_modules;
-              }
-            ];
+              inputs.nixos-hardware.nixosModules.common-cpu-intel
+            ] ++ custom_modules;
             specialArgs = {
               inherit inputs;
             };
