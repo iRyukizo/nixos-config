@@ -5,7 +5,7 @@ let
   cfg = config.my.system.gui;
 in
 {
-  options.my.system.gui= {
+  options.my.system.gui = {
     enable = mkEnableOption "GUI configuration";
   };
 

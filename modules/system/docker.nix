@@ -5,7 +5,7 @@ let
   cfg = config.my.system.docker;
 in
 {
-  options.my.system.docker= {
+  options.my.system.docker = {
     enable = mkEnableOption "Basic docker configuration";
   };
 

@@ -5,7 +5,7 @@ let
   cfg = config.my.system.xserver;
 in
 {
-  options.my.system.xserver= {
+  options.my.system.xserver = {
     enable = mkEnableOption "Basic xserver configuration";
     layout = mkOption {
       type = types.str;

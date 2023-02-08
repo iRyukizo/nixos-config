@@ -40,7 +40,8 @@ in
       interfaces = recursiveMerge (map
         (int:
           { "${int}".useDHCP = true; }
-        ) cfg.interfaces
+        )
+        cfg.interfaces
       );
     };
 

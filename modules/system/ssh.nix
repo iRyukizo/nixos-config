@@ -27,7 +27,7 @@ let
   };
 in
 {
-  options.my.system.ssh= {
+  options.my.system.ssh = {
     enable = mkEnableOption "Basic ssh configuration";
     usersAndKeys = mkOption {
       type = types.listOf uakModule;
@@ -50,7 +50,8 @@ in
     users.users = recursiveMerge (map
       (u:
         { "${u.user}".openssh.authorizedKeys.keys = u.keys; }
-      ) cfg.usersAndKeys
+      )
+      cfg.usersAndKeys
     );
   };
 }
