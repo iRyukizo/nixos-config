@@ -42,7 +42,7 @@ in
     services.openssh = {
       enable = true;
       settings = {
-        passwordAuthentication = true;
+        passwordAuthentication = false;
         permitRootLogin = if (any (x: x.user == "root") cfg.usersAndKeys) then "yes" else "no";
       };
     };
