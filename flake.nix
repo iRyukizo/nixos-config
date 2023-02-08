@@ -108,43 +108,34 @@
             home-manager.nixosModule
             { nixpkgs.overlays = custom_overlays; }
           ] ++ (nixpkgs.lib.attrValues self.nixosModules);
-        in
-        {
-          millenium = nixpkgs.lib.nixosSystem {
-            inherit system;
-            modules = [
-              ./machines/millenium
 
+          buildMachine = name: { system, hardwareModules }: nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = custom_modules ++ hardwareModules ++ [ (./. + "/machines/${name}") ];
+            specialArgs = {
+              inherit inputs;
+            };
+          };
+        in
+        nixpkgs.lib.mapAttrs buildMachine {
+          millenium = {
+            inherit system;
+            hardwareModules = [
               inputs.nixos-hardware.nixosModules.common-cpu-intel
               inputs.nixos-hardware.nixosModules.common-pc-laptop
-            ] ++ custom_modules;
-            specialArgs = {
-              inherit inputs;
-            };
+            ];
           };
-
-          arcadia = nixpkgs.lib.nixosSystem {
+          arcadia = {
             inherit system;
-            modules = [
-              ./machines/arcadia
-
+            hardwareModules = [
               inputs.nixos-hardware.nixosModules.common-cpu-intel
-            ] ++ custom_modules;
-            specialArgs = {
-              inherit inputs;
-            };
+            ];
           };
-
-          dragon = nixpkgs.lib.nixosSystem {
+          dragon = {
             inherit system;
-            modules = [
-              ./machines/dragon
-
+            hardwareModules = [
               inputs.nixos-hardware.nixosModules.common-cpu-intel
-            ] ++ custom_modules;
-            specialArgs = {
-              inherit inputs;
-            };
+            ];
           };
         };
     };
