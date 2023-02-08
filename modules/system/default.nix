@@ -6,7 +6,7 @@ let
 in
 {
   imports = [
-    ./crypt-system.nix
+    ./file-system.nix
     ./docker.nix
     ./gui.nix
     ./locales.nix
@@ -25,8 +25,8 @@ in
   config = mkMerge [
     (mkIf cfg.enableDefault {
       my.system = {
-        crypt.enable = mkDefault true;
         docker.enable = mkDefault true;
+        fileSystem.enable = mkDefault true;
         gui.enable = mkDefault true;
         locales.enable = mkDefault true;
         networking.enable = mkDefault true;
@@ -39,8 +39,11 @@ in
 
     (mkIf cfg.enableBasic {
       my.system = {
-        crypt.enable = mkDefault true;
         docker.enable = mkDefault true;
+        fileSystem = {
+          enable = mkDefault true;
+          crypt = mkDefault false;
+        };
         locales.enable = mkDefault true;
         networking.enable = mkDefault true;
         nix.enable = mkDefault true;

@@ -1,12 +1,13 @@
 { config, lib, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.my.system.crypt;
+  inherit (lib) mkEnableOption mkIf optional;
+  cfg = config.my.system.fileSystem;
 in
 {
-  options.my.system.crypt = {
-    enable = mkEnableOption "If system use my default encryption with LUKS";
+  options.my.system.fileSystem = {
+    enable = mkEnableOption "Default EFI system (500M boot + all in ext4)";
+    crypt = mkEnableOption "Use LUKS device and swap device" // { default = true; };
   };
 
   config = mkIf cfg.enable {
@@ -21,9 +22,9 @@ in
       fsType = "vfat";
     };
 
-    swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+    swapDevices = [] ++ optional (cfg.crypt) { device = "/dev/disk/by-label/swap"; };
 
-    boot.initrd.luks.devices.cryptroot = {
+    boot.initrd.luks.devices.cryptroot = mkIf cfg.crypt {
       device = "/dev/disk/by-label/cryptroot";
       preLVM = true;
       allowDiscards = true;
