@@ -13,7 +13,7 @@
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     loader = {
-      timeout = 15;
+      timeout = 10;
       grub = {
         enable = true;
         version = 2;

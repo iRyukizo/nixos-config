@@ -7,23 +7,16 @@
 
   home-manager.users.ryuki = {
     my.home = {
-      polybar = {
-        enable = true;
-        wlan = "wlp3s0";
-        eth = "enp60s0u1u3c2";
-      };
-      i3.enable = true;
       devenv.enable = true;
     };
   };
 
   my.packages = {
     core.enable = true;
-    desktop.enable = true;
   };
 
   my.system = {
-    enableDefault = true;
+    enableBasic = true;
     networking = {
       hostname = "dragon";
       interfaces = [ "eno1" "wlp3s0" "enp60s0u1u3c2" ];
