@@ -42,9 +42,14 @@ in
     services.openssh = {
       enable = true;
       settings = {
-        passwordAuthentication = false;
-        permitRootLogin = if (any (x: x.user == "root") cfg.usersAndKeys) then "yes" else "no";
+        PasswordAuthentication = false;
+        PermitRootLogin = if (any (x: x.user == "root") cfg.usersAndKeys) then "yes" else "no";
       };
+      extraConfig = ''
+        PubkeyAuthentication yes
+        PermitEmptyPasswords no
+        MaxAuthTries 3
+      '';
     };
 
     users.users = recursiveMerge (map
