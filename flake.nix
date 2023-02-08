@@ -51,7 +51,11 @@
     , pre-commit-hooks
     , ...
     }@inputs:
-    flake-utils.lib.eachDefaultSystem
+    flake-utils.lib.eachSystem
+      [
+        flake-utils.lib.system.aarch64-linux
+        flake-utils.lib.system.x86_64-linux
+      ]
       (system:
       let
         inherit (inputs.flake-utils.lib) flattenTree;
@@ -65,12 +69,14 @@
           };
         };
 
-        devShell = pkgs.mkShell {
-          name = "NixOS-config-devShell";
-          nativeBuildInputs = with pkgs; [
-            nix-prefetch-github
-            nixpkgs-fmt
-          ];
+        devShells = (import ./shells { inherit (pkgs) lib; inherit pkgs; }) // {
+          default = pkgs.mkShell {
+            name = "NixOS-config-devShell";
+            nativeBuildInputs = with pkgs; [
+              nix-prefetch-github
+              nixpkgs-fmt
+            ];
+          };
         };
 
         packages = flattenTree
