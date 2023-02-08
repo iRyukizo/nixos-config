@@ -120,6 +120,9 @@
                 ] ++ custom_modules;
               }
             ];
+            specialArgs = {
+              inherit inputs;
+            };
           };
 
           arcadia = nixpkgs.lib.nixosSystem {
@@ -133,6 +136,9 @@
                 ] ++ custom_modules;
               }
             ];
+            specialArgs = {
+              inherit inputs;
+            };
           };
 
           dragon = nixpkgs.lib.nixosSystem {
@@ -146,6 +152,9 @@
                 ] ++ custom_modules;
               }
             ];
+            specialArgs = {
+              inherit inputs;
+            };
           };
         };
     };
