@@ -40,7 +40,7 @@ in
 
   config = mkIf cfg.enable {
     services.openssh = {
-      enable = true;
+      enable = cfg.usersAndKeys != [ ];
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = if (any (x: x.user == "root") cfg.usersAndKeys) then "yes" else "no";
