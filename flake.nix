@@ -127,7 +127,7 @@
             modules = [
               {
                 imports = [
-                  ./machines/arcadia.nix
+                  ./machines/arcadia
 
                   inputs.nixos-hardware.nixosModules.common-cpu-intel
                 ] ++ custom_modules;
