@@ -41,7 +41,7 @@ in
       go.enable = mkDefault cfg.goSupport;
     };
 
-    home.packages = with pkgs; [] ++ optional cfg.clangFormatSupport pkgs.clang-tools;
+    home.packages = with pkgs; [ ] ++ optional cfg.clangFormatSupport pkgs.clang-tools;
 
     programs.vim = {
       enable = true;
@@ -62,7 +62,7 @@ in
         vim-operator-user
         vim-snippets
       ] ++ optional cfg.clangFormatSupport pkgs.vimPlugins.vim-clang-format
-        ++ optional cfg.goSupport pkgs.vimPlugins.vim-go;
+      ++ optional cfg.goSupport pkgs.vimPlugins.vim-go;
       settings = {
         number = true;
         expandtab = true;

@@ -12,7 +12,7 @@ let
     nameValuePair
     recursiveUpdate
     toLower
-  ;
+    ;
 
   cfg = config.my.home.i3;
 

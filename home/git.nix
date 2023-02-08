@@ -25,14 +25,16 @@ let
   };
 
   makeConditions = emConds: (
-    map (emCond:
-      {
-        condition = "gitdir:" + emCond.directory;
-        contents = {
-          user.email = emCond.email;
-        };
-      }
-    ) emConds
+    map
+      (emCond:
+        {
+          condition = "gitdir:" + emCond.directory;
+          contents = {
+            user.email = emCond.email;
+          };
+        }
+      )
+      emConds
   );
 in
 {
