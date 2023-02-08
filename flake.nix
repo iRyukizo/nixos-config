@@ -140,7 +140,7 @@
             modules = [
               {
                 imports = [
-                  ./machines/dragon.nix
+                  ./machines/dragon
 
                   inputs.nixos-hardware.nixosModules.common-cpu-intel
                 ] ++ custom_modules;
