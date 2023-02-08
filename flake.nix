@@ -79,6 +79,8 @@
           };
         };
 
+        formatter = pkgs.nixpkgs-fmt;
+
         packages = flattenTree
           (import ./pkgs {
             pkgs = import nixpkgs { inherit system; };
