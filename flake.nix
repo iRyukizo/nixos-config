@@ -113,7 +113,7 @@
             modules = [
               {
                 imports = [
-                  ./machines/millenium.nix
+                  ./machines/millenium
 
                   inputs.nixos-hardware.nixosModules.common-cpu-intel
                   inputs.nixos-hardware.nixosModules.common-pc-laptop
