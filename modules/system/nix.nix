@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   inherit (lib) mkEnableOption mkIf mkOption types;
@@ -27,6 +27,10 @@ in
         dates = "weekly";
         options = "--delete-older-than " + cfg.gcCleanDuration;
         persistent = true;
+      };
+
+      registry = {
+        config.flake = inputs.self;
       };
 
       settings = {
