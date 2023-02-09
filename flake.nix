@@ -89,6 +89,8 @@
       )
     //
     {
+      templates = import ./templates { inherit (nixpkgs) lib; };
+
       nixosModules = {
         modules = import ./modules;
 
