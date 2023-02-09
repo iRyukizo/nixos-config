@@ -6,6 +6,7 @@ let
 in
 {
   imports = [
+    ./bluetooth.nix
     ./file-system.nix
     ./docker.nix
     ./gui.nix
@@ -25,6 +26,7 @@ in
   config = mkMerge [
     (mkIf cfg.enableDefault {
       my.system = {
+        bluetooth.enable = mkDefault true;
         docker.enable = mkDefault true;
         fileSystem.enable = mkDefault true;
         gui.enable = mkDefault true;
