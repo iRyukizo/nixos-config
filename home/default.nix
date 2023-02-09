@@ -14,6 +14,7 @@
     ./programs.nix
     ./ranger.nix
     ./rofi
+    ./spotify.nix
     ./urxvt.nix
     ./vim.nix
     ./xdg.nix

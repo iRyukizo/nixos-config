@@ -81,6 +81,7 @@ in
       fonts.enable = mkDefault true;
       gtk.enable = mkDefault true;
       rofi.enable = mkDefault true;
+      spotify.enable = mkDefault true;
       urxvt.enable = mkDefault true;
       polybar.enable = mkDefault true;
     };
