@@ -19,7 +19,7 @@
     enableBasic = true;
     networking = {
       hostname = "dragon";
-      interfaces = [ "eno1" "wlp3s0" "enp60s0u1u3c2" ];
+      interfaces = [ "eno1" "wlp3s0" ];
     };
     ssh.usersAndKeys = [
       {
