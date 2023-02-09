@@ -3,8 +3,10 @@
 with lib;
 let
   inherit (builtins) map genList length listToAttrs toString;
+  inherit (lib.strings) optionalString;
 
   cfg = config.my.home.polybar;
+  spotifyCfg = config.my.home.spotify;
 
   batteryModule = types.submodule {
     options = {
@@ -239,6 +241,7 @@ in
             primary = "#ffb52a";
             secondary = "#e60053";
             alert = "#bd2c40";
+            spotify = "#1db954";
           };
 
           "global/wm" = {
@@ -274,7 +277,7 @@ in
             font-3 = "Font Awesome 5 Brands:style=Regular:size=10;4";
 
             modules-left = "i3";
-            modules-center = "${(concatMapStrings (bat: (removePrefix "module/" bat.name) + " ") batteriesPair)}${if cfg.backlight then "backlight " else ""}pulseaudio";
+            modules-center = "${(concatMapStrings (bat: (removePrefix "module/" bat.name) + " ") batteriesPair)}${if cfg.backlight then "backlight " else ""}${optionalString spotifyCfg.enable "spotify "}pulseaudio";
             modules-right = "cpu-info memory-info ${if !(isNull cfg.wlan) then "wlan " else ""}${if !(isNull cfg.eth) then "eth " else ""}custom-date xkeyboard";
 
             tray-position = "right";
@@ -446,6 +449,29 @@ in
             format-underline = "#0a6cf5";
 
             label = "%date%  %time%";
+          };
+
+          "module/spotify" = {
+            type = "custom/script";
+
+            interval = 1;
+            exec-if = "pgrep spotify";
+
+            format-prefix = "\" \"";
+            format-prefix-foreground = "\${colors.foreground}";
+            format-prefix-underline = "\${colors.spotify}";
+            format-underline = "\${colors.spotify}";
+
+            format = "<label>";
+
+            label = "%output:0:30:...%";
+
+            exec = "${pkgs.own.spotify-song-getter}/bin/spotify-get-song";
+
+            scroll-up = "playerctl --player=spotify previous";
+            scroll-down = "playerctl --player=spotify next";
+            click-left = "playerctl --player=spotify play-pause";
+            click-right = "i3-msg [class=Spotify] focus";
           };
 
           "module/pulseaudio" = {
