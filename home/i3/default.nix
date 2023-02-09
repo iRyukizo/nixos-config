@@ -75,6 +75,7 @@ in
 
   config = mkIf cfg.enable {
     my.home = {
+      bluetooth.enable = mkDefault true;
       dunst.enable = mkDefault true;
       flameshot.enable = mkDefault true;
       fonts.enable = mkDefault true;

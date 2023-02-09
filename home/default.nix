@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./bluetooth.nix
     ./devenv
     ./dunst.nix
     ./flameshot.nix
