@@ -14,7 +14,14 @@ in
       enable = true;
       settings = {
         General = {
+          contrastOpacity = 173;
+          contrastUiColor = "#d1d1d1";
+          drawColor = "#00ff00";
+          uiColor = "#383C4A";
+          saveAfterCopy = true;
           savePath = "/home/ryuki/Pictures/screenshots";
+          uploadWithoutConfirmation = true;
+          useJpgForClipboard = true;
         };
       };
     };
