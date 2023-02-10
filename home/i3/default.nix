@@ -200,6 +200,16 @@ in
           esac
         '';
       };
+      ".scripts/i3-exit.sh" = {
+        executable = true;
+        text = ''
+          #!/usr/bin/env bash
+
+          ${pkgs.gnome.zenity}/bin/zenity --question --no-wrap --default-cancel \
+          --text "You pressed the exit shortcut. Do you really want to exit i3?" \
+          --ok-label="Yes, exit i3" --title="Exit i3?" && i3-msg exit
+        '';
+      };
     };
 
     xsession.windowManager.i3 = {
@@ -256,7 +266,10 @@ in
             "${modifier}+Shift+Q" = "kill";
             "${modifier}+f" = "fullscreen toggle";
             "${modifier}+Return" = "exec ${terminal}";
-            "${modifier}+Shift+e" = "exec \"i3-nagbar -t warning -m 'Do you want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'\"";
+            "${modifier}+Shift+e" =
+              if config.my.home.polybar.enable
+              then "exec ~/.scripts/i3-exit.sh"
+              else "exec \"i3-nagbar -t warning -m 'Do you want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'\"";
             "${modifier}+Shift+c" = "reload";
             "${modifier}+Shift+r" = "restart";
             "${modifier}+i" = ''exec --no-startup-id "pkill -u $USER -USR1 dunst; betterlockscreen --lock; pkill -u $USER -USR2 dunst"'';
