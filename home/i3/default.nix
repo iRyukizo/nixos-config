@@ -384,7 +384,7 @@ in
           "$mode_gaps_outer" = makeGapsBindings "outer";
           "$mode_gaps_inner" = makeGapsBindings "inner";
           "$mode_gaps_horiz" = makeGapsBindings "horizontal";
-          "$mode_gaps_verti" = makeGapsBindings "veritcal";
+          "$mode_gaps_verti" = makeGapsBindings "vertical";
           "$mode_gaps_top" = makeGapsBindings "top";
           "$mode_gaps_bottom" = makeGapsBindings "bottom";
           "$mode_gaps_left" = makeGapsBindings "left";
