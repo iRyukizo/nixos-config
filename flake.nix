@@ -51,12 +51,7 @@
     , pre-commit-hooks
     , ...
     }@inputs:
-    flake-utils.lib.eachSystem
-      [
-        flake-utils.lib.system.aarch64-linux
-        flake-utils.lib.system.x86_64-linux
-        flake-utils.lib.system.aarch64-darwin
-      ]
+    flake-utils.lib.eachDefaultSystem
       (system:
       let
         inherit (inputs.flake-utils.lib) flattenTree;
