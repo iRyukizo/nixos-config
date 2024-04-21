@@ -55,6 +55,7 @@
       [
         flake-utils.lib.system.aarch64-linux
         flake-utils.lib.system.x86_64-linux
+        flake-utils.lib.system.aarch64-darwin
       ]
       (system:
       let
@@ -69,7 +70,7 @@
           };
         };
 
-        devShells = (import ./shells { inherit (pkgs) lib; inherit pkgs; }) // {
+        devShells = (import ./shells { inherit (pkgs) lib; inherit pkgs system; }) // {
           default = pkgs.mkShell {
             name = "NixOS-config-devShell";
             nativeBuildInputs = with pkgs; [
@@ -84,6 +85,7 @@
         packages = flattenTree
           (import ./pkgs {
             pkgs = import nixpkgs { inherit system; };
+            inherit system;
           });
       }
       )
@@ -111,7 +113,7 @@
           system = "x86_64-linux";
           custom_overlays = [
             (self: super: {
-              own = import ./pkgs { pkgs = super; };
+              own = import ./pkgs { pkgs = super; inherit system; };
             })
           ];
           custom_modules = [

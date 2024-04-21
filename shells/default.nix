@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, system, ... }:
 
 let
   inherit (builtins) map;
@@ -11,7 +11,7 @@ let
   ];
 
   importFunc = name: {
-    "${name}" = import (./. + "/${name}.nix") { inherit pkgs; };
+    "${name}" = import (./. + "/${name}.nix") { inherit pkgs system; };
   };
 in
 recursiveMerge (map importFunc toImport)

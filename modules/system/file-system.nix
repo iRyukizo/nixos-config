@@ -22,7 +22,7 @@ in
       fsType = "vfat";
     };
 
-    swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+    swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
     boot.initrd.luks.devices.cryptroot = mkIf cfg.crypt {
       device = "/dev/disk/by-label/cryptroot";
