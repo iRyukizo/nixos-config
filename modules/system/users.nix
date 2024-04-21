@@ -19,6 +19,7 @@ in
   config = mkIf cfg.enable {
     users.users."${cfg.name}" = {
       shell = pkgs.zsh;
+      ignoreShellProgramCheck = true;
       isNormalUser = true;
       extraGroups = [
         "audio"

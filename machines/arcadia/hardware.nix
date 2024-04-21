@@ -16,7 +16,6 @@
       timeout = 15;
       grub = {
         enable = true;
-        version = 2;
         device = "nodev";
         efiSupport = true;
         gfxmodeEfi = "1920x1080";

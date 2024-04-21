@@ -18,7 +18,6 @@ in
       feh
       firefox
       slack
-      teams
       vlc
     ];
   };

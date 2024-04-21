@@ -17,20 +17,24 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.xserver = {
-      libinput.enable = true;
-      enable = true;
-      inherit (cfg) layout;
-      desktopManager.xterm.enable = false;
+    services = {
       displayManager.defaultSession = "none+i3";
-      windowManager.i3 = {
-        package = pkgs.i3-gaps;
+      xserver = {
+        libinput.enable = true;
         enable = true;
-        extraPackages = with pkgs; [
-          dmenu
-          i3status
-          i3lock
-        ];
+        xkb = {
+          inherit (cfg) layout;
+        };
+        desktopManager.xterm.enable = false;
+        windowManager.i3 = {
+          package = pkgs.i3-gaps;
+          enable = true;
+          extraPackages = with pkgs; [
+            dmenu
+            i3status
+            i3lock
+          ];
+        };
       };
     };
   };

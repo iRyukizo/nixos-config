@@ -110,7 +110,7 @@ in
         gprs = "git pull --recurse-submodules";
       };
 
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       enableCompletion = true;
       # Doesn't work well with oh-my-zsh, it's better to load it in oh-my-zsh plugins
       # enableSyntaxHighlighting = true;
