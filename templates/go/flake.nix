@@ -1,12 +1,12 @@
 {
-  description = "My go-package";
+  description = "go-package";
 
   inputs = {
     nixpkgs = {
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-22.11";
+      ref = "nixos-unstable";
     };
 
     futils = {
@@ -18,16 +18,16 @@
   };
 
   outputs =
-  { self
-  , futils
-  , nixpkgs
-  }@inputs:
-  let
-    inherit (futils.lib) eachDefaultSystem;
+    { self
+    , futils
+    , nixpkgs
+    }@inputs:
+    let
+      inherit (futils.lib) eachDefaultSystem;
 
-    version = builtins.substring 0 8 (self.lastModifiedDate or self.lastModified or "19700101");
-  in
-  eachDefaultSystem (system:
+      version = builtins.substring 0 8 (self.lastModifiedDate or self.lastModified or "19700101");
+    in
+    eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
     in
@@ -37,7 +37,7 @@
           pname = "go-package";
           inherit version;
           src = ./.;
-          vendorSha256 = "sha256-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=";
+          vendorHash = null;
         };
       };
 
@@ -50,5 +50,5 @@
         ];
       };
     }
-  );
+    );
 }
