@@ -65,7 +65,7 @@
           };
         };
 
-        devShells = (import ./shells { inherit (pkgs) lib; inherit pkgs system; }) // {
+        devShells = (import ./shells { inherit (pkgs) lib; inherit pkgs; }) // {
           default = pkgs.mkShell {
             name = "NixOS-config-devShell";
             nativeBuildInputs = with pkgs; [
@@ -80,7 +80,6 @@
         packages = flattenTree
           (import ./pkgs {
             pkgs = import nixpkgs { inherit system; };
-            inherit system;
           });
       }
       )

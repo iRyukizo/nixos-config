@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { }, system }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
@@ -12,11 +12,10 @@ pkgs.mkShell {
 
     criterion
     gtest
-  ] ++ (if (system != "aarch64-darwin") then
-    with pkgs; [
-      gdb
-      strace
-      valgrind
-    ] else [
-  ]);
+  ] ++ lib.optional (!stdenv.isAarch64) [
+    gdb
+  ] ++ lib.optional (!stdenv.isDarwin) [
+    strace
+    valgrind
+  ];
 }
