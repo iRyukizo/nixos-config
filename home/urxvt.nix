@@ -68,7 +68,7 @@ in
 
         "internalBorder" = "5";
 
-        "perl-lib" = "${pkgs.rxvt_unicode}/lib/urxvt/perl/";
+        "perl-lib" = "${pkgs.rxvt-unicode-unwrapped}/lib/urxvt/perl/";
         "perl-ext-common" = "default,matcher,clipboard,url-select,keyboard-select,font-size";
 
         "copyCommand" = "xclip -i selection clipboard";

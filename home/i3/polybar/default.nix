@@ -135,44 +135,31 @@ in
       ".scripts/system_status/cpu.sh" = {
         executable = true;
         text = ''
-          #!/usr/bin/env zsh
+        #!/usr/bin/env zsh
 
-          case "$1" in
-          --popup)
-            dunstify -i "" -t 3000 -r 9574 -u normal " CPU time (%)" "$(ps axch -o cmd:10,pcpu k -pcpu | head | awk '$0=$0"%"' )"
-            ;;
-          *)
-            # calculate cpu load (percentage)
-            cpu_clock=0.000
-            count=0
-            while read -r line
-            do
-                cpu_clock=$(awk '{print $1+$2}' <<<"''${cpu_clock} ''${line}")
-                count=$(($count + 1))
-            done < <(lscpu -e=MHZ | tail -n +2)
-            cpu_clock=$(awk '{print $1/$2}' <<<"''${cpu_clock} ''${count}")
-            min_clock=$(lscpu | grep "CPU min MHz:" | awk '{print $4}')
-            cpu_clock=$(awk '{print $1-$2}' <<<"''${cpu_clock} ''${min_clock}")
-            max_clock=$(lscpu | grep "CPU max MHz:" | awk '{print $4}')
-            max_clock=$(awk '{print $1-$2}' <<<"''${max_clock} ''${min_clock}")
-            # replace , in max clock with .
-            max_clock="''${max_clock//[,]/.}"
-            # calculate clock percentage of max
-            clock_percentage="$(( cpu_clock * 100 / max_clock ))"
-            # for print, separate int part and floating point digits
-            clock_percentage_int=''${clock_percentage%%.*}
-            clock_percentage_rat=''${clock_percentage##*.}
-            # only display 2 floating digits
-            clock_percentage="''${clock_percentage_int}.''${clock_percentage_rat:0:2}"
+        cores=$(nproc)
 
-            # get cpu temperature
-            cpu_temp=$(sensors | grep "Package id 0:" | head -1 | awk '{print $4}')
-            # remove + and floating point digit
-            cpu_temp="''${cpu_temp//+}"
-            cpu_temp="''${cpu_temp//.0}"
-            echo " $clock_percentage%    $cpu_temp"
-            ;;
-          esac
+        case "$1" in
+        --popup)
+          dunstify -i "" -t 3000 -r 9574 -u normal " CPU time (%)" "$(ps axch -o cmd:20,pcpu k -pcpu | head | awk -v cores="$cores" '{printf "%-20s %.2f%%\n", $1, $2/cores}')"
+          ;;
+        *)
+
+          get_cpu_usage() { awk '/^cpu / {total=$2+$3+$4+$5+$6+$7+$8; idle=$5} END {print total, idle}' /proc/stat }
+          read total1 idle1 < <(get_cpu_usage)
+          sleep 1
+          read total2 idle2 < <(get_cpu_usage)
+          total_diff=$((total2 - total1)) idle_diff=$((idle2 - idle1))
+          cpu_usage=$((100 * (total_diff - idle_diff) / total_diff))
+
+          # get cpu temperature
+          cpu_temp=$(sensors | grep "Package id 0:" | head -1 | awk '{print $4}')
+          # remove + and floating point digit
+          cpu_temp="''${cpu_temp//+}"
+          cpu_temp="''${cpu_temp//.0}"
+          echo " $cpu_usage%    $cpu_temp"
+          ;;
+        esac
         '';
       };
       ".scripts/system_status/memory.sh" = {

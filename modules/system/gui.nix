@@ -23,7 +23,24 @@ in
       nm-applet.enable = true;
     };
 
-    sound.enable = true;
-    hardware.pulseaudio.enable = true;
+    # sound.enable = false;
+    services.pipewire = {
+      enable = true;
+
+      extraConfig.pipewire."99-disable-bell" = {
+        "context.properties"= {
+          "module.x11.bell" = false;
+        };
+      };
+
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+      jack.enable = true;
+
+    };
+    # hardware.pulseaudio.enable = true;
   };
 }

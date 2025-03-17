@@ -87,6 +87,7 @@ in
     };
 
     home.packages = with pkgs; [
+      alsa-utils
       betterlockscreen
       brightnessctl
       feh
@@ -205,7 +206,7 @@ in
         text = ''
           #!/usr/bin/env bash
 
-          ${pkgs.gnome.zenity}/bin/zenity --question --no-wrap --default-cancel \
+          ${pkgs.zenity}/bin/zenity --question --no-wrap --default-cancel \
           --text "You pressed the exit shortcut. Do you really want to exit i3?" \
           --ok-label="Yes, exit i3" --title="Exit i3?" && i3-msg exit
         '';

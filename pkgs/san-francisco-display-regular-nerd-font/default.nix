@@ -1,10 +1,10 @@
-{ fetchurl, fetchsvn, lib, stdenv, pkgs, ... }:
+{ fetchurl, fetchzip, lib, stdenv, pkgs, ... }:
 
 stdenv.mkDerivation rec {
   version = "20211120";
   pname = "san-francisco-display-regular-nerd-font";
   at = "59cf0dc3660e99e66813665354f787895fb41fe1";
-  nerd-font-at = "3a05ea62d38e0cb2e4d0f5b06ad674ce3576a7f8";
+  nerd-font-version = "v3.3.0";
 
   srcs = [
     (fetchurl {
@@ -12,15 +12,11 @@ stdenv.mkDerivation rec {
       name = "SanFranciscoDisplay-Regular.otf";
       sha256 = "0w03gl9pz8wgv3c8dfvka3b5lz89s89wj571xkls12i0m2508l75";
     })
-    (fetchurl {
-      url = "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${nerd-font-at}/font-patcher";
-      name = "font-patcher";
-      sha256 = "1k8yakfml9dwbw6yh5j9hap7lgbrf964fxlpwydc3940ajyh5nd9";
-    })
-    (fetchsvn {
-      url = "https://github.com/ryanoasis/nerd-fonts/trunk/src/";
-      rev = "1410";
-      sha256 = "fn37zPQO1Z9Q9o8TsFG67IzI0aHhOW6rvM9PjxVW/Vs=";
+    (fetchzip {
+      url = "https://github.com/ryanoasis/nerd-fonts/releases/download/${nerd-font-version}/FontPatcher.zip";
+      name = "FontPatcher.zip";
+      sha256 = "/LbO8+ZPLFIUjtZHeyh6bQuplqRfR6SZRu9qPfVZ0Mw=";
+      stripRoot = false;
     })
   ];
 
@@ -42,8 +38,9 @@ stdenv.mkDerivation rec {
       cp -r "$_src" $(stripHash "$_src")
     done
 
-    ls
-    mv src-r1410 src
+    cp -r FontPatcher.zip/bin bin
+    cp -r FontPatcher.zip/src src
+    cp FontPatcher.zip/font-patcher font-patcher
 
     runHook postUnpack
   '';

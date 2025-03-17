@@ -19,8 +19,11 @@ in
   config = mkIf cfg.enable {
     services = {
       displayManager.defaultSession = "none+i3";
+      libinput = {
+        enable = true;
+        touchpad.naturalScrolling = true;
+      };
       xserver = {
-        libinput.enable = true;
         enable = true;
         xkb = {
           inherit (cfg) layout;

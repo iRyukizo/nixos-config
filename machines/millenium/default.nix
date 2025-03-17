@@ -34,6 +34,7 @@
     networking = {
       hostname = "millenium";
       interfaces = [ "wlp2s0" ];
+      timeZone = "Asia/Taipei";
     };
     xserver.layout = "gb";
   };

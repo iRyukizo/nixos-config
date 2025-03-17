@@ -13,13 +13,13 @@ in
     home.packages = with pkgs; [
       arc-theme
       cantarell-fonts
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       papirus-icon-theme
     ];
 
     home.pointerCursor = {
       x11.enable = true;
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
 

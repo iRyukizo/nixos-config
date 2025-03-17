@@ -37,7 +37,6 @@
       repo = "pre-commit-hooks.nix";
       ref = "master";
       inputs = {
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -111,7 +110,7 @@
             })
           ];
           custom_modules = [
-            home-manager.nixosModule
+            home-manager.nixosModules.default
             { nixpkgs.overlays = custom_overlays; }
           ] ++ (nixpkgs.lib.attrValues self.nixosModules);
 
