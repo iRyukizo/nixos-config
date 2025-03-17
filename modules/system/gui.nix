@@ -28,7 +28,7 @@ in
       enable = true;
 
       extraConfig.pipewire."99-disable-bell" = {
-        "context.properties"= {
+        "context.properties" = {
           "module.x11.bell" = false;
         };
       };

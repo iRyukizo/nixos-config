@@ -135,31 +135,31 @@ in
       ".scripts/system_status/cpu.sh" = {
         executable = true;
         text = ''
-        #!/usr/bin/env zsh
+          #!/usr/bin/env zsh
 
-        cores=$(nproc)
+          cores=$(nproc)
 
-        case "$1" in
-        --popup)
-          dunstify -i "" -t 3000 -r 9574 -u normal " CPU time (%)" "$(ps axch -o cmd:20,pcpu k -pcpu | head | awk -v cores="$cores" '{printf "%-20s %.2f%%\n", $1, $2/cores}')"
-          ;;
-        *)
+          case "$1" in
+          --popup)
+            dunstify -i "" -t 3000 -r 9574 -u normal " CPU time (%)" "$(ps axch -o cmd:20,pcpu k -pcpu | head | awk -v cores="$cores" '{printf "%-20s %.2f%%\n", $1, $2/cores}')"
+            ;;
+          *)
 
-          get_cpu_usage() { awk '/^cpu / {total=$2+$3+$4+$5+$6+$7+$8; idle=$5} END {print total, idle}' /proc/stat }
-          read total1 idle1 < <(get_cpu_usage)
-          sleep 1
-          read total2 idle2 < <(get_cpu_usage)
-          total_diff=$((total2 - total1)) idle_diff=$((idle2 - idle1))
-          cpu_usage=$((100 * (total_diff - idle_diff) / total_diff))
+            get_cpu_usage() { awk '/^cpu / {total=$2+$3+$4+$5+$6+$7+$8; idle=$5} END {print total, idle}' /proc/stat }
+            read total1 idle1 < <(get_cpu_usage)
+            sleep 1
+            read total2 idle2 < <(get_cpu_usage)
+            total_diff=$((total2 - total1)) idle_diff=$((idle2 - idle1))
+            cpu_usage=$((100 * (total_diff - idle_diff) / total_diff))
 
-          # get cpu temperature
-          cpu_temp=$(sensors | grep "Package id 0:" | head -1 | awk '{print $4}')
-          # remove + and floating point digit
-          cpu_temp="''${cpu_temp//+}"
-          cpu_temp="''${cpu_temp//.0}"
-          echo " $cpu_usage%    $cpu_temp"
-          ;;
-        esac
+            # get cpu temperature
+            cpu_temp=$(sensors | grep "Package id 0:" | head -1 | awk '{print $4}')
+            # remove + and floating point digit
+            cpu_temp="''${cpu_temp//+}"
+            cpu_temp="''${cpu_temp//.0}"
+            echo " $cpu_usage%    $cpu_temp"
+            ;;
+          esac
         '';
       };
       ".scripts/system_status/memory.sh" = {
