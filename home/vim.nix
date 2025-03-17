@@ -14,8 +14,8 @@ let
       src = fetchFromGitHub {
         owner = "iRyukizo";
         repo = "snippets";
-        rev = "7ce071c554c56e4f619bc74a26fe8057cf34940b";
-        sha256 = "2soBRVsKAf/11SMsm6TiALTLJM+VhUdbDL5FfDr2fYI=";
+        rev = "4371d313978f337397b17ccef462a2d4cf4bd603";
+        sha256 = "4Q6Sg4ooIdXHN0aGFXdbzwxg7XmbijN3KYotlipPzh8=";
       };
     };
     tiger-syntax = buildVimPlugin {
