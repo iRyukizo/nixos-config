@@ -76,6 +76,7 @@ in
         set cc=80
         set cursorline
         set hlsearch
+        set incsearch
         set list
         set ruler
 
@@ -107,6 +108,12 @@ in
         let g:airline_theme='nord'
         let g:airline#extensions#whitespace#show_message = 0
         set laststatus=1
+
+        " Change comments color
+        set nocompatible
+        if (has("termguicolors"))
+          set termguicolors
+        endif
 
         " Weird bug where plugins are not loaded correctly, obliged to manually
         " update the `runtimepath`, must create an issue on home-manager.
