@@ -13,6 +13,7 @@ in
     my.home = {
       git.enable = mkDefault true;
       go.enable = mkDefault true;
+      tmux.enable = mkDefault true;
       vim.enable = mkDefault true;
       xdg.enable = mkDefault true;
       zsh.enable = mkDefault true;
