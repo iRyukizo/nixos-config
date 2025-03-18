@@ -54,8 +54,8 @@ in
           gtk-cursor-theme-size = 32;
         };
         bookmarks = [
+          "file://${config.home.homeDirectory}/Workspace"
           "file://${config.home.homeDirectory}/Downloads"
-          "file://${config.home.homeDirectory}/EPITA"
           "file://${config.home.homeDirectory}/Pictures/screenshots"
         ];
       };

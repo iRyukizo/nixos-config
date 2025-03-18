@@ -14,10 +14,9 @@ in
       enable = true;
       createDirectories = true;
       extraConfig = {
-        XDG_PERSO_DIR = "$HOME/PERSO";
-        XDG_EPITA_DIR = "$HOME/EPITA";
-        XDG_ASSIST_DIR = "$HOME/EPITA/ASSISTANTS";
-        XDG_LRDE_DIR = "$HOME/EPITA/LRDE";
+        XDG_WORKSPACE_DIR = "$HOME/Workspace";
+        XDG_PROJECTS_DIR = "$HOME/Workspace/Projects";
+        XDG_PERSONAL_DIR = "$HOME/Workspace/Personal";
         XDG_SCROT_DIR = "$HOME/Pictures/screenshots";
       };
     };
