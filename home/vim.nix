@@ -75,8 +75,8 @@ in
         set smarttab
         set cc=80
         set cursorline
-        set hlsearch
         set incsearch
+        set hlsearch
         set list
         set ruler
 
