@@ -10,6 +10,7 @@
       polybar = {
         enable = true;
         wlan = "wlp2s0";
+        eth = "enp0s20f0u2";
         backlight = true;
         batteries = [
           {
@@ -33,9 +34,15 @@
     enableDefault = true;
     networking = {
       hostname = "millenium";
-      interfaces = [ "wlp2s0" ];
+      interfaces = [ "wlp2s0" "enp0s20f0u2" ];
       timeZone = "Asia/Taipei";
     };
+    ssh.usersAndKeys = [
+      {
+        user = "ryuki";
+        keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpSIW4gW755/FEFFV2rGvFwM8ixSMDHqEegEj0kPYpk" ];
+      }
+    ];
     xserver.layout = "gb";
   };
 
