@@ -9,6 +9,7 @@
     ./fonts.nix
     ./git.nix
     ./go.nix
+    ./gpg.nix
     ./gtk.nix
     ./i3
     ./programs.nix

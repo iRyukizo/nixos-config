@@ -57,7 +57,10 @@ in
       userName = "Hugo Moreau";
 
       extraConfig = {
-        commit = { verbose = true; };
+        commit = { 
+          verbose = true;
+          gpgsign = true;
+        };
         color = { ui = true; };
         core = {
           editor = "vim";
