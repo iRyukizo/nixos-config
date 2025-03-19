@@ -75,9 +75,6 @@ in
         # Set shell in vi mode
         set -o vi
         bindkey -M vicmd "^V" edit-command-line
-
-        # programs.zsh.completionInit never called
-        autoload -U compinit && compinit
       '';
 
       sessionVariables = {
