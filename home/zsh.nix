@@ -122,6 +122,7 @@ in
           "git"
           "docker"
           "golang"
+          "tmux"
           "zsh-syntax-highlighting"
         ];
       };

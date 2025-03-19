@@ -61,6 +61,7 @@ in
         vim-nix
         vim-operator-user
         vim-snippets
+        vim-tmux-navigator
       ] ++ optional cfg.clangFormatSupport pkgs.vimPlugins.vim-clang-format
       ++ optional cfg.goSupport pkgs.vimPlugins.vim-go;
       settings = {
