@@ -18,6 +18,7 @@ in
       mouse = true;
       baseIndex = 1;
       disableConfirmationPrompt = true;
+      aggressiveResize = true;
       terminal = "screen-256color";
 
       extraConfig = ''
