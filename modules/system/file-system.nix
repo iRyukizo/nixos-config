@@ -24,6 +24,8 @@ in
 
     swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
+    boot.cleanTmpDir = true;
+
     boot.initrd.luks.devices.cryptroot = mkIf cfg.crypt {
       device = "/dev/disk/by-label/cryptroot";
       preLVM = true;
