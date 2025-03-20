@@ -14,6 +14,7 @@ in
       git.enable = mkDefault true;
       go.enable = mkDefault true;
       gpg.enable = mkDefault true;
+      ssh.enable = mkDefault true;
       tmux.enable = mkDefault true;
       vim.enable = mkDefault true;
       xdg.enable = mkDefault true;
