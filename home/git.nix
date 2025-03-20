@@ -57,7 +57,7 @@ in
       userName = "Hugo Moreau";
 
       extraConfig = {
-        commit = { 
+        commit = {
           verbose = true;
           gpgsign = true;
         };

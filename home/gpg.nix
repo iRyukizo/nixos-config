@@ -14,11 +14,11 @@ in
 
     services.gpg-agent = {
       enable = true;
-       enableSshSupport = true;
-       pinentryPackage = pkgs.pinentry-tty;
-       extraConfig = ''
-         allow-loopback-pinentry
-       '';
+      enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-tty;
+      extraConfig = ''
+        allow-loopback-pinentry
+      '';
     };
   };
 }
