@@ -23,7 +23,7 @@
   };
 
   my.system = {
-    enableDefault = true;
+    type = "gui";
     networking = {
       hostname = "arcadia";
       interfaces = [ "eno1" "wlp58s0" "enp57s0u1u3c2" ];

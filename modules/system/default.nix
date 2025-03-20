@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  inherit (lib) mkDefault mkEnableOption mkIf mkMerge;
+  inherit (lib) literalExpression mkDefault mkIf mkMerge mkOption types;
   cfg = config.my.system;
 in
 {
@@ -19,12 +19,19 @@ in
   ];
 
   options.my.system = {
-    enableDefault = mkEnableOption "Enable all default options";
-    enableBasic = mkEnableOption "Enable everything except graphic interface";
+    type = mkOption {
+      type = types.enum [ "gui" "standard" ];
+      default = "gui";
+      example = literalExpression ''gui'';
+      description = ''
+        Type of system (default: gui).
+        Options: gui standard
+      '';
+    };
   };
 
   config = mkMerge [
-    (mkIf cfg.enableDefault {
+    (mkIf (cfg.type == "gui") {
       my.system = {
         bluetooth.enable = mkDefault true;
         docker.enable = mkDefault true;
@@ -39,7 +46,7 @@ in
       };
     })
 
-    (mkIf cfg.enableBasic {
+    (mkIf (cfg.type == "standard") {
       my.system = {
         docker.enable = mkDefault true;
         fileSystem = {

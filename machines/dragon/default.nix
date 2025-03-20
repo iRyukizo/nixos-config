@@ -16,7 +16,7 @@
   };
 
   my.system = {
-    enableBasic = true;
+    type = "standard";
     networking = {
       hostname = "dragon";
       interfaces = [ "eno1" "wlp3s0" ];

@@ -31,7 +31,7 @@
   };
 
   my.system = {
-    enableDefault = true;
+    type = "gui";
     networking = {
       hostname = "millenium";
       interfaces = [ "wlp2s0" "enp0s20f0u2" ];
