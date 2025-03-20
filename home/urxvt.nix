@@ -81,6 +81,8 @@ in
         "keyboard-select.clipboard" = "true";
         "matcher.button" = "1";
         "matcher.pattern.1" = "\\\\bwww\\\\.[\\\\w-]+\\\\.]\\\\w./?&@#-]*[\\\\w/-]";
+
+        "geometry" = "400x400";
       };
       keybindings = {
         "Shift-Control-V" = "eval:paste_clipboard";
