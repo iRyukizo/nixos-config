@@ -50,6 +50,13 @@
     , pre-commit-hooks
     , ...
     }@inputs:
+    let
+      custom_overlays = system: [
+        (self: super: {
+          own = import ./pkgs { pkgs = super; inherit system; };
+        })
+      ];
+    in
     flake-utils.lib.eachDefaultSystem
       (system:
       let
@@ -101,17 +108,33 @@
         };
       };
 
+      homeConfigurations = let
+        username = "hugomoreau";
+        system = "aarch64-darwin";
+      in {
+        "hugomoreau" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."${system}";
+          modules = [
+            ./home
+            {
+              nixpkgs.overlays = custom_overlays system;
+              home = {
+                inherit username;
+                homeDirectory = "/Users/${username}";
+              };
+              programs.home-manager.enable = true;
+              my.home.macos.enable = true;
+            }
+          ];
+        };
+      };
+
       nixosConfigurations =
         let
           system = "x86_64-linux";
-          custom_overlays = [
-            (self: super: {
-              own = import ./pkgs { pkgs = super; inherit system; };
-            })
-          ];
           custom_modules = [
             home-manager.nixosModules.default
-            { nixpkgs.overlays = custom_overlays; }
+            { nixpkgs.overlays = custom_overlays system; }
           ] ++ (nixpkgs.lib.attrValues self.nixosModules);
 
           buildMachine = name: { system, hardwareModules }: nixpkgs.lib.nixosSystem {

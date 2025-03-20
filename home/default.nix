@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -12,6 +12,7 @@
     ./gpg.nix
     ./gtk.nix
     ./i3
+    ./macos
     ./programs.nix
     ./ranger.nix
     ./rofi
@@ -24,7 +25,7 @@
     ./zsh.nix
   ];
 
-  home.stateVersion = "21.05";
+  home.stateVersion = "25.05";
 
-  home.username = "ryuki";
+  home.username = lib.mkDefault "ryuki";
 }
