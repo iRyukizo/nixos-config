@@ -1,14 +1,18 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkDefault mkEnableOption mkIf optional;
+  inherit (lib) literalExpression mkDefault mkEnableOption mkIf mkOption optional types;
   inherit (lib.strings) optionalString;
   cfg = config.my.home.zsh;
 in
 {
   options.my.home.zsh = {
     enable = mkEnableOption "Zsh home configuration";
-    p10k = mkEnableOption "Zsh P10K prompt" // { default = true; };
+    theme = mkOption {
+      type = types.enum [ "powerlevel10k" "robbyrussell" ];
+      default = "powerlevel10k";
+      example = literalExpression ''powerlevel10k'';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -24,7 +28,7 @@ in
         rev = "c7caf57ca805abd54f11f756fda6395dd4187f8a";
         sha256 = "MeuPqDeJpbJi2hT7VUgyQNSmDPY/biUncvyY78IBfzM=";
       };
-      "${config.home.homeDirectory}/.p10k.zsh" = mkIf cfg.p10k {
+      "${config.home.homeDirectory}/.p10k.zsh" = mkIf (cfg.theme == "powerlevel10k") {
         source = pkgs.fetchurl {
           url = "https://raw.githubusercontent.com/iRyukizo/dotfiles/a027b42823cb25a8505f10550481022105b7f356/zsh/.p10k.zsh";
           sha256 = "1vaia65fp392pxa1jqgs9vqrcmcplpynfxvai9pq79l11bvri2q5";
@@ -56,7 +60,7 @@ in
             sha256 = "OAC6wXuZoqVVZITS6ygact/Le4+Ty9sdARh2J3S6d/M=";
           };
         }
-      ] ++ optional (cfg.p10k) {
+      ] ++ optional (cfg.theme == "powerlevel10k") {
         name = "powerlevel10k";
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
@@ -65,9 +69,17 @@ in
       initExtraFirst = ''
       '';
 
-      initExtra = optionalString cfg.p10k ''
+      initExtra = optionalString (cfg.theme == "powerlevel10k") ''
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      '' + optionalString (cfg.theme == "robbyrussell") ''
+        PROMPT="%(?:%{$fg_bold[green]%}%1{➜%}:%{$fg_bold[red]%}%1{➜%}) %{$fg_bold[magenta]%}%(1j.%j .)%{$fg_bold[cyan]%}%c%{$reset_color%}"
+        PROMPT+=' $(git_prompt_info)'
+
+        ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+        ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+        ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}"
+        ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
       '' + ''
         ZSH_HIGHLIGHT_STYLES[arg0]=fg=4,bold
         ZLE_RPROMPT_INDENT=0
@@ -105,6 +117,8 @@ in
       # enableSyntaxHighlighting = true;
 
       oh-my-zsh = {
+        theme = optionalString (cfg.theme != "powerlevel10k") cfg.theme;
+
         enable = true;
         custom = "$HOME/.zsh/custom";
         plugins = [
@@ -113,7 +127,7 @@ in
           "golang"
           "tmux"
           "zsh-syntax-highlighting"
-        ];
+        ] ++ optional (cfg.theme == "robbyrussell") "vi-mode";
       };
     };
   };
