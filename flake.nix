@@ -108,26 +108,31 @@
         };
       };
 
-      homeConfigurations = let
-        username = "hugomoreau";
-        system = "aarch64-darwin";
-      in {
-        "hugomoreau" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."${system}";
-          modules = [
-            ./home
-            {
-              nixpkgs.overlays = custom_overlays system;
-              home = {
-                inherit username;
-                homeDirectory = "/Users/${username}";
-              };
-              programs.home-manager.enable = true;
-              my.home.macos.enable = true;
-            }
-          ];
+      homeConfigurations =
+        let
+          username = "hugomoreau";
+          system = "aarch64-darwin";
+        in
+        {
+          "hugomoreau" = home-manager.lib.homeManagerConfiguration {
+            pkgs = nixpkgs.legacyPackages."${system}";
+            modules = [
+              ./home
+              {
+                nixpkgs.overlays = custom_overlays system;
+                home = {
+                  inherit username;
+                  homeDirectory = "/Users/${username}";
+                };
+                programs.home-manager.enable = true;
+                my.home.devenv = {
+                  enable = true;
+                  type = "darwin";
+                };
+              }
+            ];
+          };
         };
-      };
 
       nixosConfigurations =
         let

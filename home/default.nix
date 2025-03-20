@@ -3,7 +3,7 @@
 {
   imports = [
     ./bluetooth.nix
-    ./devenv
+    ./devenv.nix
     ./dunst.nix
     ./flameshot.nix
     ./fonts.nix
@@ -12,7 +12,6 @@
     ./gpg.nix
     ./gtk.nix
     ./i3
-    ./macos
     ./programs.nix
     ./ranger.nix
     ./rofi
