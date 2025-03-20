@@ -38,9 +38,9 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable || (cfg.usersAndKeys != [ ])) {
     services.openssh = {
-      enable = cfg.usersAndKeys != [ ];
+      enable = true;
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = if (any (x: x.user == "root") cfg.usersAndKeys) then "yes" else "no";
