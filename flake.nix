@@ -64,7 +64,7 @@
         inherit (inputs.flake-utils.lib) flattenTree;
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      {
+      rec {
         checks = {
           pre-commit = pre-commit-hooks.lib.${system}.run {
             src = ./.;
@@ -88,10 +88,13 @@
           (import ./pkgs {
             pkgs = import nixpkgs { inherit system; };
           });
+
+        helpers = import ./pkgs/helpers.nix { pkgs = import nixpkgs { inherit system; } // packages; };
       }
       )
     //
     {
+
       templates = import ./templates { inherit (nixpkgs) lib; };
 
       nixosModules = {
