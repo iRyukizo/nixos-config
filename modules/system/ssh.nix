@@ -1,8 +1,20 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (builtins) any map;
-  inherit (lib) mkEnableOption mkIf mkOption types foldl recursiveUpdate;
+  inherit (builtins)
+    any
+    attrValues
+    isList
+    isAttrs
+    map;
+  inherit (lib)
+    literalExpression
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    foldl
+    recursiveUpdate;
   recursiveMerge = foldl recursiveUpdate { };
   cfg = config.my.system.ssh;
 
@@ -17,14 +29,29 @@ let
       };
 
       keys = mkOption {
-        type = types.listOf types.str;
-        default = [ ];
+        type = types.either (types.listOf types.str) (types.attrsOf types.str);
+        default = { };
+        example = literalExpression ''
+          {
+            "machine" = "ssh-rsa ...";
+          }
+        '';
         description = ''
           keys
         '';
       };
     };
   };
+
+  defaultKeys = { };
+
+  toList = x:
+    if isList x then
+      x
+    else if isAttrs x then
+      attrValues x
+    else
+      [ ];
 in
 {
   options.my.system.ssh = {
@@ -38,7 +65,7 @@ in
     };
   };
 
-  config = mkIf (cfg.enable || (cfg.usersAndKeys != [ ])) {
+  config = mkIf cfg.enable {
     services.openssh = {
       enable = true;
       settings = {
@@ -54,7 +81,7 @@ in
 
     users.users = recursiveMerge (map
       (u:
-        { "${u.user}".openssh.authorizedKeys.keys = u.keys; }
+        { "${u.user}".openssh.authorizedKeys.keys = (toList u.keys) ++ (toList (defaultKeys.${u.user} or { })); }
       )
       cfg.usersAndKeys
     );
