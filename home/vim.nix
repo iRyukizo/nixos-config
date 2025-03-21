@@ -89,10 +89,10 @@ in
         let g:airline#extensions#whitespace#show_message = 0
         set laststatus=1
 
-        " Change comments color
-        set nocompatible
+        " Fix visual colors
         if (has("termguicolors"))
           set termguicolors
+          hi Normal guibg=NONE ctermbg=NONE
         endif
 
         " Weird bug where plugins are not loaded correctly, obliged to manually
