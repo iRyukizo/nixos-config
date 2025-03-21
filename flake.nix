@@ -52,6 +52,7 @@
     }@inputs:
     let
       custom_overlays = system: [
+        (import ./overlays)
         (self: super: {
           own = import ./pkgs { pkgs = super; inherit system; };
         })
