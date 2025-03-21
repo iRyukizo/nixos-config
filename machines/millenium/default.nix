@@ -37,12 +37,12 @@
       interfaces = [ "wlp2s0" "enp0s20f0u2" ];
       timeZone = "Asia/Taipei";
     };
-    ssh.usersAndKeys = [
-      {
-        user = "ryuki";
-        keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpSIW4gW755/FEFFV2rGvFwM8ixSMDHqEegEj0kPYpk" ];
-      }
-    ];
+    ssh = {
+      enable = true;
+      usersAndKeys = [
+        { user = "ryuki"; }
+      ];
+    };
     xserver.layout = "gb";
   };
 
