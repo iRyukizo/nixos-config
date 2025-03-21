@@ -19,7 +19,8 @@ in
       baseIndex = 1;
       disableConfirmationPrompt = true;
       aggressiveResize = true;
-      terminal = "screen-256color";
+      terminal = "tmux-256color";
+      escapeTime = 0;
 
       extraConfig = ''
       '';
