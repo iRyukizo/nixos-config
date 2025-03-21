@@ -21,7 +21,7 @@ rec {
 
       ${if tokenEnvEnable then "${pkgs.envsubst}/bin/envsubst -i $tmpConfig -o $tmpConfig" else ""}
 
-      ${pkgs.lichess-bot}/bin/lichess-bot --config $tmpConfig
+      ${pkgs.lichess-bot}/bin/lichess-bot --config $tmpConfig -- $@
 
       rm $tmpConfig
     '' // {
