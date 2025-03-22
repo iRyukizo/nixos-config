@@ -37,6 +37,15 @@ in
         warn-dirty = true;
         experimental-features = [ "nix-command" "flakes" ];
         trusted-users = [ "@wheel" ];
+        substituters = [
+          "https://nix-community.cachix.org"
+          "https://iryukizo.cachix.org"
+        ];
+
+        trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "iryukizo.cachix.org-1:F7M4oyFKTfx6rJgI2MYB7FTXV+EL8c9BP3v1tDSNr08="
+        ];
       };
     };
   };
