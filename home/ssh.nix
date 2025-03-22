@@ -12,6 +12,7 @@ in
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
+      addKeysToAgent = "yes";
 
       includes = [
         "config.local"
