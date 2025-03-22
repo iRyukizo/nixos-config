@@ -122,6 +122,7 @@ in
         enable = true;
         custom = "$HOME/.zsh/custom";
         plugins = [
+          "direnv"
           "git"
           "docker"
           "golang"
