@@ -149,6 +149,7 @@
         let
           system = "x86_64-linux";
           custom_modules = [
+            { system.configurationRevision = self.rev or "dirty"; }
             home-manager.nixosModules.default
             { nixpkgs.overlays = custom_overlays system; }
           ] ++ (nixpkgs.lib.attrValues self.nixosModules);
