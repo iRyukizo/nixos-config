@@ -34,7 +34,8 @@ in
       settings = {
         warn-dirty = true;
         experimental-features = [ "nix-command" "flakes" ];
-        substituters = [
+        trusted-users = [ "@wheel" ];
+        trusted-substituters = [
           "https://nix-community.cachix.org"
           "https://iryukizo.cachix.org"
         ];
