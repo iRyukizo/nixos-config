@@ -113,7 +113,7 @@
             users = {
               ryuki = import ./home;
             };
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
           };
         };
       };
@@ -141,7 +141,7 @@
                 };
               }
             ];
-            extraSpecialArgs = { inherit inputs; };
+            extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
           };
         };
 
