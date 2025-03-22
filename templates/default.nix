@@ -2,9 +2,7 @@
 
 let
   inherit (builtins) map;
-  inherit (lib) foldl recursiveUpdate;
-
-  recursiveMerge = foldl recursiveUpdate { };
+  inherit (lib.my) recursiveMerge;
 
   toImport = [
     "go"

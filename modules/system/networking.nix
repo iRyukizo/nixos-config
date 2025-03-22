@@ -2,9 +2,10 @@
 
 let
   inherit (builtins) map;
-  inherit (lib) mkEnableOption mkIf mkOption types foldl recursiveUpdate;
+  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib.my) recursiveMerge;
+
   cfg = config.my.system.networking;
-  recursiveMerge = foldl recursiveUpdate { };
 in
 {
   options.my.system.networking = {

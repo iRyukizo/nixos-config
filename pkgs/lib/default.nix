@@ -2,20 +2,16 @@
 
 let
   defaultLichessBotConfiguration = {
-        token = "$LICHESS_API_KEY";
-        url = "https://lichess.org/";
-        engine = {
-          dir = "./.";
-          name = "engine";
-          protocol = "uci";
-        };
-      };
+    token = "$LICHESS_API_KEY";
+    url = "https://lichess.org/";
+    engine = {
+      dir = "./.";
+      name = "engine";
+      protocol = "uci";
+    };
+  };
 
-  createLichessBotWrapper =
-    { configuration ? defaultLichessBotConfiguration
-    , environementSubstitution ? true
-    }:
-
+  createLichessBotWrapper = { configuration ? defaultLichessBotConfiguration, environementSubstitution ? true }:
     pkgs.writeShellScriptBin "lichess-bot-wrapper" ''
       tmpConfig=$(mktemp --tmpdir lichess-bot-config-XXX.yml)
 
@@ -34,10 +30,7 @@ let
       ];
     };
 
-  createLichessBotWrapperApp =
-    { configuration ? defaultLichessBotConfiguration
-    , environementSubstitution ? true
-    }:
+  createLichessBotWrapperApp = { configuration ? defaultLichessBotConfiguration, environementSubstitution ? true }:
     {
       type = "app";
       program = "${createLichessBotWrapper { inherit configuration environementSubstitution; }}/bin/lichess-bot-wrapper";

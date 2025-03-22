@@ -12,10 +12,9 @@ let
     mkEnableOption
     mkIf
     mkOption
-    types
-    foldl
-    recursiveUpdate;
-  recursiveMerge = foldl recursiveUpdate { };
+    types;
+  inherit (lib.my) recursiveMerge;
+
   cfg = config.my.system.ssh;
 
   uakModule = types.submodule {

@@ -57,8 +57,11 @@
           own = import ./pkgs { pkgs = super; inherit system; };
         })
       ];
+      inherit (flake-utils.lib) eachDefaultSystem;
+      inherit (nixpkgs.lib) recursiveUpdate;
     in
-    flake-utils.lib.eachDefaultSystem
+    recursiveUpdate
+    (eachDefaultSystem
       (system:
       let
         inherit (inputs.flake-utils.lib) flattenTree;
@@ -72,7 +75,7 @@
           };
         };
 
-        devShells = (import ./shells { inherit (pkgs) lib; inherit pkgs; }) // {
+        devShells = (import ./shells { inherit (self) lib; inherit pkgs; }) // {
           default = pkgs.mkShell {
             name = "NixOS-config-devShell";
             nativeBuildInputs = with pkgs; [
@@ -84,18 +87,20 @@
 
         formatter = pkgs.nixpkgs-fmt;
 
-        packages = flattenTree
+        packages = flake-utils.lib.flattenTree
           (import ./pkgs {
             pkgs = import nixpkgs { inherit system; };
           });
-
-        helpers = import ./pkgs/helpers.nix { pkgs = import nixpkgs { inherit system; } // packages; };
       }
-      )
-    //
+      ))
     {
+      lib = nixpkgs.lib.extend (final: _: recursiveUpdate {
+        my = import ./lib { inherit inputs; pkgs = nixpkgs; lib = final; };
+      } (eachDefaultSystem (system: {
+        my = import ./pkgs/lib { pkgs = import nixpkgs { inherit system; } // self.packages.${system}; };
+      })));
 
-      templates = import ./templates { inherit (nixpkgs) lib; };
+      templates = import ./templates { inherit (self) lib; };
 
       nixosModules = {
         modules = import ./modules;
@@ -151,9 +156,7 @@
           buildMachine = name: { system, hardwareModules }: nixpkgs.lib.nixosSystem {
             inherit system;
             modules = custom_modules ++ hardwareModules ++ [ (./. + "/machines/${name}") ];
-            specialArgs = {
-              inherit inputs;
-            };
+            specialArgs = { inherit inputs; inherit (self) lib; };
           };
         in
         nixpkgs.lib.mapAttrs buildMachine {

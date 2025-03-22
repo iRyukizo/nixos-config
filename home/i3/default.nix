@@ -3,22 +3,21 @@
 let
   inherit (builtins) genList map replaceStrings;
   inherit (lib)
-    foldl
     listToAttrs
     mapAttrs'
     mkDefault
     mkEnableOption
     mkIf
     nameValuePair
-    recursiveUpdate
     toLower
     ;
+
+  inherit (lib.my) recursiveMerge;
 
   cfg = config.my.home.i3;
 
   renameAttrs = f: mapAttrs' (name: value: nameValuePair (f name) value);
   genAttrs' = values: f: listToAttrs (map f values);
-  recursiveMerge = foldl recursiveUpdate { };
 
   modifier = "Mod4";
   terminal = "i3-sensible-terminal";
