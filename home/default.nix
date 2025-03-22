@@ -4,6 +4,7 @@
   imports = [
     ./bluetooth.nix
     ./devenv.nix
+    ./direnv.nix
     ./dunst.nix
     ./flameshot.nix
     ./fonts.nix
