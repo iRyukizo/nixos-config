@@ -1,8 +1,7 @@
 { pkgs, ... }:
 
-rec {
-  createLichessBotWrapper = {
-    configuration ? {
+let
+  defaultLichessBotConfiguration = {
         token = "$LICHESS_API_KEY";
         url = "https://lichess.org/";
         engine = {
@@ -10,18 +9,21 @@ rec {
           name = "engine";
           protocol = "uci";
         };
-      }
-    , tokenEnvEnable ? true
+      };
+
+  createLichessBotWrapper =
+    { configuration ? defaultLichessBotConfiguration
+    , environementSubstitution ? true
     }:
 
     pkgs.writeShellScriptBin "lichess-bot-wrapper" ''
-      tmpConfig=$(mktemp /tmp/lichess-bot-config-XXXXX.yml)
+      tmpConfig=$(mktemp --tmpdir lichess-bot-config-XXX.yml)
 
       echo '${builtins.toJSON configuration}' > $tmpConfig
 
-      ${if tokenEnvEnable then "${pkgs.envsubst}/bin/envsubst -i $tmpConfig -o $tmpConfig" else ""}
+      ${if environementSubstitution then "${pkgs.envsubst}/bin/envsubst -i $tmpConfig -o $tmpConfig" else ""}
 
-      ${pkgs.lichess-bot}/bin/lichess-bot --config $tmpConfig -- $@
+      ${pkgs.lichess-bot}/bin/lichess-bot --config $tmpConfig $@
 
       rm $tmpConfig
     '' // {
@@ -32,20 +34,17 @@ rec {
       ];
     };
 
-  createLichessBotWrapperApp = {
-    configuration ? {
-        token = "$LICHESS_API_KEY";
-        url = "https://lichess.org/";
-        engine = {
-          dir = "./.";
-          name = "engine";
-          protocol = "uci";
-        };
-      }
-    , tokenEnvEnable ? true
+  createLichessBotWrapperApp =
+    { configuration ? defaultLichessBotConfiguration
+    , environementSubstitution ? true
     }:
     {
       type = "app";
-      program = "${createLichessBotWrapper { inherit configuration tokenEnvEnable; }}/bin/lichess-bot-wrapper";
+      program = "${createLichessBotWrapper { inherit configuration environementSubstitution; }}/bin/lichess-bot-wrapper";
     };
+in
+{
+  inherit
+    createLichessBotWrapper
+    createLichessBotWrapperApp;
 }
