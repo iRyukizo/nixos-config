@@ -99,9 +99,9 @@ in
       };
 
       history = {
-        size = 5000;
-        save = 5000;
-        share = false;
+        size = 10000;
+        save = 10000;
+        share = true;
       };
 
       shellAliases = {
