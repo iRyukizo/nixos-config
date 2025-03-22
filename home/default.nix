@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
   imports = [
@@ -13,6 +13,7 @@
     ./gpg.nix
     ./gtk.nix
     ./i3
+    ./nix.nix
     ./programs.nix
     ./ranger.nix
     ./rofi

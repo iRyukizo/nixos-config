@@ -108,6 +108,7 @@
             users = {
               ryuki = import ./home;
             };
+            extraSpecialArgs = { inherit inputs; };
           };
         };
       };
@@ -135,6 +136,7 @@
                 };
               }
             ];
+            extraSpecialArgs = { inherit inputs; };
           };
         };
 
