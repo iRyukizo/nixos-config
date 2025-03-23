@@ -104,21 +104,7 @@
 
         templates = import ./templates { inherit (self) lib; };
 
-        nixosModules = {
-          modules = import ./modules;
-
-          home = {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              verbose = true;
-              users = {
-                ryuki = import ./home;
-              };
-              extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
-            };
-          };
-        };
+        nixosModules = import ./modules { inherit inputs self home-manager; };
 
         homeConfigurations =
           let
@@ -129,7 +115,7 @@
             "hugomoreau" = home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages."${system}";
               modules = [
-                ./home
+                ./modules/home
                 {
                   nixpkgs.overlays = custom_overlays system;
                   home = {
