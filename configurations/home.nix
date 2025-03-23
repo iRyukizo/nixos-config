@@ -1,8 +1,8 @@
-{ inputs, self, custom_overlays, ... }:
+{ inputs, self, ... }:
 
 let
   inherit (inputs) home-manager nixpkgs;
-  inherit (nixpkgs.lib) mapAttrs;
+  inherit (nixpkgs.lib) attrValues mapAttrs;
   inherit (home-manager.lib) homeManagerConfiguration;
 
   buildHomeConfiguration =
@@ -14,7 +14,7 @@ let
       modules = [
         ./../modules/home
         {
-          nixpkgs.overlays = custom_overlays system;
+          nixpkgs.overlays = (attrValues self.overlays);
           programs.home-manager.enable = true;
           home = {
             inherit username;

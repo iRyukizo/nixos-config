@@ -51,12 +51,6 @@
     , ...
     }@inputs:
     let
-      custom_overlays = system: [
-        (import ./overlays)
-        (self: super: {
-          own = import ./pkgs { pkgs = super; inherit system; };
-        })
-      ];
       inherit (flake-utils.lib) eachDefaultSystem flattenTree;
       inherit (nixpkgs.lib) recursiveUpdate;
     in
@@ -102,10 +96,12 @@
 
       templates = import ./templates { inherit (self) lib; };
 
+      overlays = import ./configurations/overlays.nix { inherit self; };
+
       nixosModules = import ./modules { inherit inputs self home-manager; };
 
-      homeConfigurations = import ./configurations/home.nix { inherit inputs self custom_overlays; };
+      homeConfigurations = import ./configurations/home.nix { inherit inputs self; };
 
-      nixosConfigurations = import ./configurations/nixos.nix { inherit inputs self custom_overlays; };
+      nixosConfigurations = import ./configurations/nixos.nix { inherit inputs self; };
     };
 }

@@ -453,7 +453,7 @@ in
 
             label = "%output:0:30:...%";
 
-            exec = "${pkgs.own.spotify-song-getter}/bin/spotify-get-song";
+            exec = "${pkgs.ryuki.spotify-song-getter}/bin/spotify-get-song";
 
             scroll-up = "playerctl --player=spotify previous";
             scroll-down = "playerctl --player=spotify next";

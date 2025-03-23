@@ -15,9 +15,9 @@ in
       font-awesome
       siji
       font-awesome_5
-      own.system-san-francisco-font
-      own.san-francisco-display-regular-nerd-font
-      own.san-francisco-font
+      ryuki.system-san-francisco-font
+      ryuki.san-francisco-display-regular-nerd-font
+      ryuki.san-francisco-font
     ];
 
     fonts.fontconfig.enable = true;
