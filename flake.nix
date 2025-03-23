@@ -57,14 +57,12 @@
           own = import ./pkgs { pkgs = super; inherit system; };
         })
       ];
-      inherit (flake-utils.lib) eachDefaultSystem;
+      inherit (flake-utils.lib) eachDefaultSystem flattenTree;
       inherit (nixpkgs.lib) recursiveUpdate;
     in
-    recursiveUpdate
-      (eachDefaultSystem
+      eachDefaultSystem
         (system:
         let
-          inherit (inputs.flake-utils.lib) flattenTree;
           pkgs = nixpkgs.legacyPackages.${system};
         in
         rec {
@@ -87,12 +85,12 @@
 
           formatter = pkgs.nixpkgs-fmt;
 
-          packages = flake-utils.lib.flattenTree
+          packages = flattenTree
             (import ./pkgs {
               pkgs = import nixpkgs { inherit system; };
             });
         }
-        ))
+        ) //
       {
         lib = nixpkgs.lib.extend (final: _: recursiveUpdate
           {
