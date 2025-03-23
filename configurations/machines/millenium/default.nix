@@ -10,7 +10,6 @@
       polybar = {
         enable = true;
         wlan = "wlp2s0";
-        eth = "enp0s20f0u2";
         backlight = true;
         batteries = [
           {
@@ -34,7 +33,7 @@
     type = "gui";
     networking = {
       hostname = "millenium";
-      interfaces = [ "wlp2s0" "enp0s20f0u2" ];
+      interfaces = [ "wlp2s0" ];
       timeZone = "Asia/Taipei";
     };
     ssh = {
