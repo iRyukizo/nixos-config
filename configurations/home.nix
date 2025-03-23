@@ -2,11 +2,13 @@
 
 let
   inherit (inputs) home-manager nixpkgs;
+  inherit (nixpkgs.lib) mapAttrs;
+  inherit (home-manager.lib) homeManagerConfiguration;
 
   buildHomeConfiguration =
     username:
     { system, configModule, homePrefix ? "/home" }:
-    home-manager.lib.homeManagerConfiguration {
+    homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."${system}";
       extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
       modules = [
@@ -24,7 +26,7 @@ let
       ];
     };
 in
-nixpkgs.lib.mapAttrs buildHomeConfiguration {
+mapAttrs buildHomeConfiguration {
   "hugomoreau" = {
     system = "aarch64-darwin";
     homePrefix = "/Users";
