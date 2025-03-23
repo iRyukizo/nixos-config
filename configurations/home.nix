@@ -12,7 +12,8 @@ let
       pkgs = nixpkgs.legacyPackages."${system}";
       extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
       modules = [
-        ./../modules/home
+        "${self}/modules/home"
+        "${self}/modules/secrets"
         {
           nixpkgs.overlays = (attrValues self.overlays);
           programs.home-manager.enable = true;

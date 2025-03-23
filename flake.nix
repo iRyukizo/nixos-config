@@ -2,6 +2,17 @@
   description = "Ryuki's NixOS configuration.";
 
   inputs = {
+    agenix = {
+      type = "github";
+      owner = "ryantm";
+      repo = "agenix";
+      ref = "main";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     flake-utils = {
       type = "github";
       owner = "numtide";
@@ -44,6 +55,7 @@
 
   outputs =
     { self
+    , agenix
     , flake-utils
     , home-manager
     , nixpkgs

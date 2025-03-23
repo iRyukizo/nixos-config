@@ -2,14 +2,16 @@
 
 let
 
-  inherit (inputs) home-manager nixpkgs;
+  inherit (inputs) agenix home-manager nixpkgs;
   inherit (nixpkgs.lib) attrValues mapAttrs nixosSystem;
 
   system = "x86_64-linux";
   custom_modules = [
     { system.configurationRevision = self.rev or "dirty"; }
     home-manager.nixosModules.default
-    { nixpkgs.overlays = (attrValues self.overlays); }
+    agenix.nixosModules.default
+    "${self}/modules/secrets"
+    { nixpkgs.overlays = (attrValues self.overlays) ++ [ agenix.overlays.default ]; }
   ] ++ (nixpkgs.lib.attrValues self.nixosModules);
 
   buildMachine = name: { system, hardwareModules }: nixosSystem {

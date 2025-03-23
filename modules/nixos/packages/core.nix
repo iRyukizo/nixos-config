@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   inherit (lib) mkEnableOption mkIf;
@@ -10,6 +10,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.vim.enable = true;
+
     environment.systemPackages = with pkgs; [
       file
       git
@@ -24,6 +26,8 @@ in
       vim
       wget
       zip
+
+      inputs.agenix.packages."${system}".default
     ];
   };
 }

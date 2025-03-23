@@ -42,12 +42,7 @@ let
     };
   };
 
-  defaultKeys = {
-    "ryuki" = {
-      "milano" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpSIW4gW755/FEFFV2rGvFwM8ixSMDHqEegEj0kPYpk";
-      "iPh" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjM1jp+7eg4H2Bpt53pQqVXZxfRLrVoEChkVD8rirop";
-    };
-  };
+  defaultKeys = import ../../secrets/keys.nix;
 
   toList = x:
     if isList x then

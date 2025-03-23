@@ -2,6 +2,8 @@
 
 let
   inherit (lib) mkDefault mkEnableOption mkIf mkOption types;
+  inherit (config.age) secrets;
+
   cfg = config.my.system.users;
 in
 {
@@ -17,17 +19,26 @@ in
   };
 
   config = mkIf cfg.enable {
-    users.users."${cfg.name}" = {
-      shell = pkgs.zsh;
-      ignoreShellProgramCheck = true;
-      isNormalUser = true;
-      extraGroups = [
-        "audio"
-        "docker"
-        "networkmanager"
-        "video"
-        "wheel"
-      ];
+    users = {
+      mutableUsers = false;
+
+      users = {
+        root.hashedPasswordFile = secrets."users/root/hashed-password".path;
+
+        "${cfg.name}" = {
+          hashedPasswordFile = secrets."users/ryuki/hashed-password".path;
+          shell = pkgs.zsh;
+          ignoreShellProgramCheck = true;
+          isNormalUser = true;
+          extraGroups = [
+            "audio"
+            "docker"
+            "networkmanager"
+            "video"
+            "wheel"
+          ];
+        };
+      };
     };
   };
 }
