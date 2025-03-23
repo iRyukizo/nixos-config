@@ -19,7 +19,7 @@ in
           drawColor = "#00ff00";
           uiColor = "#383C4A";
           saveAfterCopy = true;
-          savePath = "/home/ryuki/Pictures/screenshots";
+          savePath = "${config.home.homeDirectory}/Pictures/screenshots";
           uploadWithoutConfirmation = true;
           useJpgForClipboard = true;
         };

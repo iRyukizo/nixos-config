@@ -27,7 +27,9 @@
     ./zsh.nix
   ];
 
-  home.stateVersion = "25.05";
-
-  home.username = lib.mkDefault "ryuki";
+  home = rec {
+    stateVersion = "25.05";
+    username = lib.mkDefault "ryuki";
+    homeDirectory = lib.mkDefault "/home/${username}";
+  };
 }
