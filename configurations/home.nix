@@ -1,7 +1,7 @@
 { inputs, self, ... }:
 
 let
-  inherit (inputs) home-manager nixpkgs;
+  inherit (inputs) agenix home-manager nixpkgs;
   inherit (nixpkgs.lib) attrValues mapAttrs;
   inherit (home-manager.lib) homeManagerConfiguration;
 
@@ -13,9 +13,8 @@ let
       extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
       modules = [
         "${self}/modules/home"
-        "${self}/modules/secrets"
         {
-          nixpkgs.overlays = (attrValues self.overlays);
+          nixpkgs.overlays = (attrValues self.overlays) ++ [ agenix.overlays.default ];
           programs.home-manager.enable = true;
           home = {
             inherit username;

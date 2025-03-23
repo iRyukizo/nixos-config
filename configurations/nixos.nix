@@ -9,8 +9,6 @@ let
   custom_modules = [
     { system.configurationRevision = self.rev or "dirty"; }
     home-manager.nixosModules.default
-    agenix.nixosModules.default
-    "${self}/modules/secrets"
     { nixpkgs.overlays = (attrValues self.overlays) ++ [ agenix.overlays.default ]; }
   ] ++ (nixpkgs.lib.attrValues self.nixosModules);
 

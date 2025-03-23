@@ -1,3 +1,5 @@
+{ inputs, ... }:
+
 {
   imports = [
     ./packages

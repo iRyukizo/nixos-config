@@ -13,6 +13,7 @@ in
     ./locales.nix
     ./networking.nix
     ./nix.nix
+    ./secrets.nix
     ./ssh.nix
     ./users.nix
     ./xserver.nix

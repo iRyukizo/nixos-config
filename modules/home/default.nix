@@ -17,9 +17,11 @@
     ./programs.nix
     ./ranger.nix
     ./rofi
+    ./secrets.nix
     ./spotify.nix
     ./ssh.nix
     ./tmux.nix
+    ./token.nix
     ./urxvt.nix
     ./vim.nix
     ./xdg.nix
