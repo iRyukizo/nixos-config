@@ -126,6 +126,7 @@ in
         plugins = [
           "direnv"
           "git"
+          "fzf"
           "docker"
           "golang"
           "tmux"

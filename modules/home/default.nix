@@ -8,6 +8,7 @@
     ./dunst.nix
     ./flameshot.nix
     ./fonts.nix
+    ./fzf.nix
     ./git.nix
     ./go.nix
     ./gpg.nix

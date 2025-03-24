@@ -28,6 +28,7 @@ in
   config = mkIf cfg.enable {
     my.home = {
       direnv.enable = mkDefault true;
+      fzf.enable = mkDefault true;
       git.enable = mkDefault true;
       go.enable = mkDefault true;
       gpg.enable = mkDefault true;
