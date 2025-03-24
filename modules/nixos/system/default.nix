@@ -14,6 +14,7 @@ in
     ./networking.nix
     ./nix.nix
     ./secrets.nix
+    ./sddm.nix
     ./ssh.nix
     ./users.nix
     ./xserver.nix
@@ -41,6 +42,7 @@ in
         locales.enable = mkDefault true;
         networking.enable = mkDefault true;
         nix.enable = mkDefault true;
+        sddm.enable = mkDefault true;
         ssh.enable = mkDefault false;
         users.enable = mkDefault true;
         xserver.enable = mkDefault true;
