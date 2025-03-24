@@ -27,6 +27,7 @@ in
 
   config = mkIf cfg.enable {
     my.home = {
+      bat.enable = mkDefault true;
       direnv.enable = mkDefault true;
       fzf.enable = mkDefault true;
       git.enable = mkDefault true;

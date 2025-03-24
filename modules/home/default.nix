@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./bat.nix
     ./bluetooth.nix
     ./devenv.nix
     ./direnv.nix
