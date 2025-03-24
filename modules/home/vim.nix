@@ -36,10 +36,12 @@ in
         UltiSnips
         vim-airline
         vim-airline-themes
+        vim-commentary
         vim-gitgutter
         vim-nix
         vim-operator-user
         vim-snippets
+        vim-surround
         vim-tmux-navigator
       ] ++ optional cfg.clangFormatSupport pkgs.vimPlugins.vim-clang-format
       ++ optional cfg.goSupport pkgs.vimPlugins.vim-go;
