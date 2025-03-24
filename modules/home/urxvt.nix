@@ -47,6 +47,8 @@ in
       enable = true;
       fonts = [
         "xft:MesloLGS NF:size=10"
+        "xft:DejaVu Serif:size=10"
+        "xft:FreeMono:size=10"
       ];
       scroll = {
         bar = {
