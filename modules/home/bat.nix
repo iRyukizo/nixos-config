@@ -13,6 +13,7 @@ in
       enable = true;
       config = {
         theme = "Nord";
+        color = "always";
 
         pager = with config.programs.zsh.sessionVariables; "${PAGER}";
       };
