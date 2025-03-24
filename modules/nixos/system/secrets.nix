@@ -8,6 +8,10 @@
 
   config.my.secrets = {
     enable = true;
+    folderPrefix = {
+      enable = true;
+      prefix = "nixos/";
+    };
   };
 
   config.age.identityPaths = lib.mkDefault [

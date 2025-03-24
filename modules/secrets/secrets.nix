@@ -9,8 +9,8 @@ let
   ];
 in
 {
-  "users/root/hashed-password.age".publicKeys = all;
-  "users/ryuki/hashed-password.age".publicKeys = all;
+  "nixos/users/root/hashed-password.age".publicKeys = all;
+  "nixos/users/ryuki/hashed-password.age".publicKeys = all;
 
-  "github/token.age".publicKeys = all;
+  "home/github/token.age".publicKeys = all;
 }

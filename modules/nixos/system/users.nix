@@ -23,10 +23,10 @@ in
       mutableUsers = false;
 
       users = {
-        root.hashedPasswordFile = secrets."users/root/hashed-password".path;
+        root.hashedPasswordFile = secrets."nixos/users/root/hashed-password".path;
 
         "${cfg.name}" = {
-          hashedPasswordFile = secrets."users/ryuki/hashed-password".path;
+          hashedPasswordFile = secrets."nixos/users/ryuki/hashed-password".path;
           shell = pkgs.zsh;
           ignoreShellProgramCheck = true;
           isNormalUser = true;

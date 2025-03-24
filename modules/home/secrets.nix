@@ -10,6 +10,10 @@ in
 
   config.my.secrets = {
     enable = true;
+    folderPrefix = {
+      enable = true;
+      prefix = "home/";
+    };
   };
 
   config.age.identityPaths = options.age.identityPaths.default ++ [
