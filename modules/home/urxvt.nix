@@ -82,7 +82,7 @@ in
         "matcher.button" = "1";
         "matcher.pattern.1" = "\\\\bwww\\\\.[\\\\w-]+\\\\.]\\\\w./?&@#-]*[\\\\w/-]";
 
-        "geometry" = "400x400";
+        "geometry" = "130x-1";
       };
       keybindings = {
         "Shift-Control-V" = "eval:paste_clipboard";
