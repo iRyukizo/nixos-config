@@ -99,8 +99,10 @@ in
       };
 
       history = {
-        size = 10000;
-        save = 10000;
+        size = 100000;
+        save = 100000;
+        extended = true;
+        expireDuplicatesFirst = true;
         share = true;
       };
 
