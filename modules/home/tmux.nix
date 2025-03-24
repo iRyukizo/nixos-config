@@ -55,6 +55,13 @@ in
             bind C-l send-keys 'C-l'
           '';
         }
+
+        {
+          plugin = resurrect;
+          extraConfig = ''
+            set -g @resurrect-dir '${config.xdg.stateHome}/tmux/resurrect'
+          '';
+        }
       ];
     };
   };
