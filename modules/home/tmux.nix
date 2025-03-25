@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) literalExpression mkEnableOption mkIf mkOption types;
   inherit (lib.strings) optionalString;
 
   cfg = config.my.home.tmux;
@@ -10,6 +10,15 @@ in
 {
   options.my.home.tmux = {
     enable = mkEnableOption "Home tmux configuration";
+    type = mkOption {
+      type = types.enum [ "standard" "darwin" ];
+      default = "standard";
+      example = literalExpression ''standard'';
+      description = ''
+        Type of system (default: standard).
+        Options: standard darwin
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -22,10 +31,17 @@ in
       baseIndex = 1;
       disableConfirmationPrompt = true;
       aggressiveResize = true;
-      terminal = "tmux-256color";
+      terminal = if (cfg.type == "darwin") then "xterm-256color" else "tmux-256color";
       escapeTime = 0;
 
       extraConfig = ''
+        # Vim binding for copy mode
+        bind-key -T copy-mode-vi v send -X begin-selection
+        bind-key -T copy-mode-vi C-v send -X rectangle-toggle
+        bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
+
+        set -g set-clipboard on
+
         # Smart pane switching with awareness of vim and fzf
         forward_programs="view|n?vim?|fzf"
 

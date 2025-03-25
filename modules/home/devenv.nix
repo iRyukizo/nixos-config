@@ -38,7 +38,10 @@ in
         enable = mkDefault true;
       };
       ssh.enable = mkDefault true;
-      tmux.enable = mkDefault true;
+      tmux = {
+        inherit (cfg) type;
+        enable = mkDefault true;
+      };
       vim.enable = mkDefault true;
 
       xdg = {
