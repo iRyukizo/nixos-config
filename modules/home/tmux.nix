@@ -26,6 +26,19 @@ in
       escapeTime = 0;
 
       extraConfig = ''
+        # Smart pane switching with awareness of vim and fzf
+        forward_programs="view|n?vim?|fzf"
+
+        should_forward="ps -o state= -o comm= -t '#{pane_tty}' \
+        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?($forward_programs)(diff)?$'"
+
+        bind -n C-j if-shell "$should_forward" "send-keys C-j" "select-pane -D"
+        bind -n C-k if-shell "$should_forward" "send-keys C-k" "select-pane -U"
+        bind -n C-\\ if-shell "$should_forward" "send-keys C-\\" "select-pane -l"
+
+        # Don't need to forward but still in case
+        # bind -n C-h if-shell "$should_forward" "send-keys C-h" "select-pane -L"
+        # bind -n C-l if-shell "$should_forward" "send-keys C-l" "select-pane -R"
       '' + optionalString urxvtCfg.enable ''
         set -as terminal-features ",rxvt*:RGB"
       '';
