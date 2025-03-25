@@ -11,12 +11,12 @@ in
   options.my.home.tmux = {
     enable = mkEnableOption "Home tmux configuration";
     type = mkOption {
-      type = types.enum [ "standard" "darwin" ];
+      type = types.enum [ "standard" "darwin" "remote" ];
       default = "standard";
       example = literalExpression ''standard'';
       description = ''
         Type of system (default: standard).
-        Options: standard darwin
+        Options: standard darwin remote
       '';
     };
   };

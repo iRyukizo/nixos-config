@@ -15,12 +15,12 @@ in
   options.my.home.devenv = {
     enable = mkEnableOption "Home dev environment configuration";
     type = mkOption {
-      type = types.enum [ "standard" "darwin" ];
+      type = types.enum [ "standard" "darwin" "remote" ];
       default = "standard";
       example = literalExpression ''standard'';
       description = ''
         Type of system (default: standard).
-        Options: standard darwin
+        Options: standard darwin remote
       '';
     };
   };
@@ -46,7 +46,7 @@ in
 
       xdg = {
         enable = true;
-        userDirsEnable = mkDefault (cfg.type == "standard");
+        userDirsEnable = mkDefault (cfg.type != "darwin");
       };
 
       zsh = {

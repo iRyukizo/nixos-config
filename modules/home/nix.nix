@@ -22,12 +22,12 @@ in
       '';
     };
     type = mkOption {
-      type = types.enum [ "standard" "darwin" ];
+      type = types.enum [ "standard" "darwin" "remote" ];
       default = "standard";
       example = literalExpression ''standard'';
       description = ''
         Type of system (default: standard).
-        Options: standard darwin
+        Options: standard darwin remote
       '';
     };
   };
@@ -50,12 +50,12 @@ in
       settings = {
         warn-dirty = true;
         experimental-features = [ "nix-command" "flakes" ];
-        "${if (cfg.type == "standard") then "extra-" else "trusted-"}substituters" = [
+        "${if (cfg.type != "darwin") then "extra-" else "trusted-"}substituters" = [
           "https://nix-community.cachix.org"
           "https://iryukizo.cachix.org"
         ];
 
-        "${if (cfg.type == "standard") then "extra-" else ""}trusted-public-keys" = [
+        "${if (cfg.type != "darwin") then "extra-" else ""}trusted-public-keys" = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "iryukizo.cachix.org-1:F7M4oyFKTfx6rJgI2MYB7FTXV+EL8c9BP3v1tDSNr08="
         ];

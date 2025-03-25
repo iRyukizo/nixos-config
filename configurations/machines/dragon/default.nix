@@ -7,7 +7,10 @@
 
   home-manager.users.ryuki = {
     my.home = {
-      devenv.enable = true;
+      devenv = {
+        enable = true;
+        type = "remote";
+      };
     };
   };
 
