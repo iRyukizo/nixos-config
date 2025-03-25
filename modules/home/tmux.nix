@@ -91,6 +91,13 @@ in
         }
 
         {
+          plugin = yank;
+          extraConfig = ''
+            set -g @yank_selection_mouse 'clipboard'
+          '';
+        }
+
+        {
           plugin = resurrect;
           extraConfig = ''
             set -g @resurrect-dir '${config.xdg.stateHome}/tmux/resurrect'
