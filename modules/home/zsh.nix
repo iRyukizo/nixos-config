@@ -103,6 +103,7 @@ in
         save = 100000;
         extended = true;
         expireDuplicatesFirst = true;
+        ignoreDups = true;
         share = true;
       };
 
