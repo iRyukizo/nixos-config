@@ -38,7 +38,7 @@ in
         # Vim binding for copy mode
         bind-key -T copy-mode-vi v send -X begin-selection
         bind-key -T copy-mode-vi C-v send -X rectangle-toggle
-        bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
+        ${optionalString (cfg.type != "standard") "bind-key -T copy-mode-vi y send -X copy-selection-and-cancel"}
 
         set -g set-clipboard on
 
