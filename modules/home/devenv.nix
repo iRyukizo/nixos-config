@@ -41,7 +41,10 @@ in
       tmux.enable = mkDefault true;
       vim.enable = mkDefault true;
 
-      xdg.enable = mkDefault (cfg.type == "standard");
+      xdg = {
+        enable = true;
+        userDirsEnable = mkDefault (cfg.type == "standard");
+      };
 
       zsh = {
         enable = mkDefault true;
