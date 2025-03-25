@@ -27,5 +27,13 @@ in
       spinner = "#b48dac";
       header = "#a3be8b";
     };
+
+    fileWidgetOptions = [
+      "--preview 'bat -n {}'"
+      "--reverse"
+    ];
+    historyWidgetOptions = [
+      "--reverse"
+    ];
   };
 }
