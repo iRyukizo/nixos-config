@@ -2,7 +2,10 @@
 
 let
   inherit (lib) mkEnableOption mkIf;
+  inherit (lib.strings) optionalString;
+
   cfg = config.my.home.tmux;
+  urxvtCfg = config.my.home.urxvt;
 in
 {
   options.my.home.tmux = {
@@ -23,6 +26,8 @@ in
       escapeTime = 0;
 
       extraConfig = ''
+      '' + optionalString urxvtCfg.enable ''
+        set -as terminal-features ",rxvt*:RGB"
       '';
 
       plugins = with pkgs.tmuxPlugins; [
