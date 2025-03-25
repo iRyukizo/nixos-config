@@ -60,6 +60,10 @@ in
           "iryukizo.cachix.org-1:F7M4oyFKTfx6rJgI2MYB7FTXV+EL8c9BP3v1tDSNr08="
         ];
       };
+
+      extraOptions = ''
+        !include ${config.age.secrets."home/nix/extra-config".path}
+      '';
     };
   };
 }
