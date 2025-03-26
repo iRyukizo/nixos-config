@@ -13,7 +13,7 @@
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     loader = {
-      timeout = 10;
+      timeout = 3;
       grub = {
         enable = true;
         device = "nodev";
