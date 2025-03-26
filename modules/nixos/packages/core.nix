@@ -24,6 +24,7 @@ in
       util-linux
       unzip
       vim
+      wakeonlan
       wget
       zip
 

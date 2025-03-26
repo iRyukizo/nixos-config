@@ -24,6 +24,13 @@ in
         all interfaces to open
       '';
     };
+    wakeOnLanInterfaces = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = ''
+        wake on lan interfaces
+      '';
+    };
     timeZone = mkOption {
       type = types.str;
       default = "Europe/Paris";
@@ -38,11 +45,18 @@ in
       hostName = cfg.hostname;
       useDHCP = false;
       networkmanager.enable = true;
-      interfaces = recursiveMerge (map
+      interfaces = recursiveMerge
+        (map
+          (int:
+            { "${int}".useDHCP = true; }
+          )
+          cfg.interfaces
+        ) //
+      recursiveMerge (map
         (int:
-          { "${int}".useDHCP = true; }
+          { "${int}".wakeOnLan.enable = true; }
         )
-        cfg.interfaces
+        cfg.wakeOnLanInterfaces
       );
     };
 
