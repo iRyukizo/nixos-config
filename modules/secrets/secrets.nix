@@ -2,9 +2,11 @@ let
   keys = import ./keys.nix;
 
   all = with keys; [
+    root.dragon
     root.millenium
-    agenix.millenium
 
+    agenix.dragon
+    agenix.millenium
     agenix.milano
   ];
 in
