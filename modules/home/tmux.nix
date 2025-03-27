@@ -5,7 +5,7 @@ let
   inherit (lib.strings) optionalString;
 
   cfg = config.my.home.tmux;
-  urxvtCfg = config.my.home.urxvt;
+  urxvtCfg = config.my.home.terminal.urxvt;
 in
 {
   options.my.home.tmux = {

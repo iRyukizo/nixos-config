@@ -11,7 +11,6 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      meslo-lgs-nf
       font-awesome
       siji
       font-awesome_5

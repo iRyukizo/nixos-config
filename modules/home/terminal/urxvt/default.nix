@@ -2,7 +2,7 @@
 
 let
   inherit (lib) mkDefault mkEnableOption mkIf;
-  cfg = config.my.home.urxvt;
+  cfg = config.my.home.terminal.urxvt;
 
   urxvt-font-size = pkgs.fetchFromGitHub {
     owner = "majutsushi";
@@ -18,20 +18,28 @@ let
   };
 in
 {
-  options.my.home.urxvt = {
+  imports = [
+    ./xresources.nix
+  ];
+
+  options.my.home.terminal.urxvt = {
     enable = mkEnableOption "Urxvt home configuration";
   };
 
   config = mkIf cfg.enable {
-    my.home = {
-      fonts.enable = mkDefault true;
-    };
+    my.home.terminal.urxvt.xresources.enable = true;
 
     home.sessionVariables = {
       TERMINAL = "urxvt";
     };
 
+    fonts.fontconfig.enable = mkDefault true;
+
     home.packages = with pkgs; [
+      # font
+      meslo-lgs-nf
+
+      # utility
       xclip
       perl
     ];

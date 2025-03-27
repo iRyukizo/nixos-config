@@ -22,12 +22,11 @@
     ./secrets.nix
     ./spotify.nix
     ./ssh.nix
+    ./terminal
     ./tmux.nix
     ./token.nix
-    ./urxvt.nix
     ./vim.nix
     ./xdg.nix
-    ./xresources.nix
     ./zsh.nix
   ];
 
