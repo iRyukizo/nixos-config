@@ -36,13 +36,16 @@
       interfaces = [ "wlp2s0" ];
       timeZone = "Asia/Taipei";
     };
+    xserver.layout = "gb";
+  };
+
+  my.services = {
     ssh = {
       enable = true;
       usersAndKeys = [
         { user = "ryuki"; }
       ];
     };
-    xserver.layout = "gb";
   };
 
   services.logind.lidSwitch = "ignore";

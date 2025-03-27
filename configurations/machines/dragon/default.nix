@@ -26,6 +26,10 @@
       wakeOnLanInterfaces = [ "eno1" ];
       timeZone = "Asia/Taipei";
     };
+  };
+
+  my.services = {
+    type = "standard";
     ssh.usersAndKeys = [
       { user = "ryuki"; }
     ];

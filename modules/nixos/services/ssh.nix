@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   inherit (builtins)
@@ -15,7 +15,7 @@ let
     types;
   inherit (lib.my) recursiveMerge;
 
-  cfg = config.my.system.ssh;
+  cfg = config.my.services.ssh;
 
   uakModule = types.submodule {
     options = {
@@ -42,7 +42,7 @@ let
     };
   };
 
-  defaultKeys = import ../../secrets/keys.nix;
+  defaultKeys = import "${inputs.self}/modules/secrets/keys.nix";
 
   toList = x:
     if isList x then
@@ -53,7 +53,7 @@ let
       [ ];
 in
 {
-  options.my.system.ssh = {
+  options.my.services.ssh = {
     enable = mkEnableOption "Basic ssh configuration";
     usersAndKeys = mkOption {
       type = types.listOf uakModule;
