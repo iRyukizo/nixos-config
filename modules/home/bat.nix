@@ -10,12 +10,12 @@ in
   };
 
   config.programs.bat = mkIf cfg.enable {
-      enable = true;
-      config = {
-        theme = "Nord";
-        color = "always";
+    enable = true;
+    config = {
+      theme = "Nord";
+      color = "always";
 
-        pager = with config.programs.zsh.sessionVariables; "${PAGER}";
-      };
+      pager = with config.programs.zsh.sessionVariables; "${PAGER}";
+    };
   };
 }

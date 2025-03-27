@@ -5,10 +5,10 @@ let
   inherit (lib) mkEnableOption mkIf mkOption types;
   inherit (lib.my) recursiveMerge;
 
-  cfg = config.my.system.networking;
+  cfg = config.my.hardware.networking;
 in
 {
-  options.my.system.networking = {
+  options.my.hardware.networking = {
     enable = mkEnableOption "Networking configuration";
     hostname = mkOption {
       type = types.str;

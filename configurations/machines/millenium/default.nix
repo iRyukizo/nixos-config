@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  type = "gui";
+in
 {
   imports = [
     ./hardware.nix
@@ -24,27 +27,34 @@
     };
   };
 
-  my.packages = {
-    core.enable = true;
-    desktop.enable = true;
-  };
-
-  my.system = {
-    type = "gui";
-    networking = {
-      hostname = "millenium";
-      interfaces = [ "wlp2s0" ];
-      timeZone = "Asia/Taipei";
+  my = {
+    hardware = {
+      inherit type;
+      networking = {
+        hostname = "millenium";
+        interfaces = [ "wlp2s0" ];
+        timeZone = "Asia/Taipei";
+      };
     };
-    xserver.layout = "gb";
-  };
 
-  my.services = {
-    ssh = {
-      enable = true;
-      usersAndKeys = [
-        { user = "ryuki"; }
-      ];
+    packages = {
+      core.enable = true;
+      desktop.enable = true;
+    };
+
+    system = {
+      inherit type;
+      xserver.layout = "gb";
+    };
+
+    services = {
+      inherit type;
+      ssh = {
+        enable = true;
+        usersAndKeys = [
+          { user = "ryuki"; }
+        ];
+      };
     };
   };
 

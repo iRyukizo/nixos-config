@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  type = "standard";
+in
 {
   imports = [
     ./hardware.nix
@@ -14,25 +17,31 @@
     };
   };
 
-  my.packages = {
-    core.enable = true;
-  };
-
-  my.system = {
-    type = "standard";
-    networking = {
-      hostname = "dragon";
-      interfaces = [ "eno1" "wlp3s0" ];
-      wakeOnLanInterfaces = [ "eno1" ];
-      timeZone = "Asia/Taipei";
+  my = {
+    packages = {
+      core.enable = true;
     };
-  };
 
-  my.services = {
-    type = "standard";
-    ssh.usersAndKeys = [
-      { user = "ryuki"; }
-    ];
+    hardware = {
+      inherit type;
+      networking = {
+        hostname = "dragon";
+        interfaces = [ "eno1" "wlp3s0" ];
+        wakeOnLanInterfaces = [ "eno1" ];
+        timeZone = "Asia/Taipei";
+      };
+    };
+
+    system = {
+      inherit type;
+    };
+
+    services = {
+      inherit type;
+      ssh.usersAndKeys = [
+        { user = "ryuki"; }
+      ];
+    };
   };
 
   system.stateVersion = "23.05";

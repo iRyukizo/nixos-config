@@ -2,10 +2,10 @@
 
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.my.system.bluetooth;
+  cfg = config.my.hardware.bluetooth;
 in
 {
-  options.my.system.bluetooth = {
+  options.my.hardware.bluetooth = {
     enable = mkEnableOption "Basic bluetooth configuration";
   };
 

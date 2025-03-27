@@ -6,12 +6,10 @@ let
 in
 {
   imports = [
-    ./bluetooth.nix
     ./file-system.nix
     ./docker.nix
     ./gui.nix
     ./locales.nix
-    ./networking.nix
     ./nix.nix
     ./secrets.nix
     ./sddm.nix
@@ -34,12 +32,10 @@ in
   config = mkMerge [
     (mkIf (cfg.type == "gui") {
       my.system = {
-        bluetooth.enable = mkDefault true;
         docker.enable = mkDefault true;
         fileSystem.enable = mkDefault true;
         gui.enable = mkDefault true;
         locales.enable = mkDefault true;
-        networking.enable = mkDefault true;
         nix.enable = mkDefault true;
         sddm.enable = mkDefault true;
         users.enable = mkDefault true;
@@ -55,7 +51,6 @@ in
           crypt = mkDefault false;
         };
         locales.enable = mkDefault true;
-        networking.enable = mkDefault true;
         nix.enable = mkDefault true;
         users.enable = mkDefault true;
       };
