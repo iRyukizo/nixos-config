@@ -6,6 +6,7 @@ let
 
   cfg = config.my.home.tmux;
   urxvtCfg = config.my.home.terminal.urxvt;
+  alacrittyCfg = config.my.home.terminal.alacritty;
 in
 {
   options.my.home.tmux = {
@@ -27,7 +28,7 @@ in
 
       keyMode = "vi";
       customPaneNavigationAndResize = true;
-      mouse = true;
+      mouse = false;
       baseIndex = 1;
       disableConfirmationPrompt = true;
       aggressiveResize = true;
@@ -57,6 +58,7 @@ in
         # bind -n C-l if-shell "$should_forward" "send-keys C-l" "select-pane -R"
       '' + optionalString urxvtCfg.enable ''
         set -as terminal-features ",rxvt*:RGB"
+      '' + optionalString alacrittyCfg.enable ''
         set -as terminal-features ",alacritty:RGB"
       '';
 
