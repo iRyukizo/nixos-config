@@ -33,6 +33,10 @@ in
           option_as_alt = "OnlyLeft";
         };
 
+        mouse = {
+          hide_when_typing = true;
+        };
+
         font = {
           normal = {
             family = "MesloLGS NF";
