@@ -24,6 +24,7 @@
       hostname = "dragon";
       interfaces = [ "eno1" "wlp3s0" ];
       wakeOnLanInterfaces = [ "eno1" ];
+      timeZone = "Asia/Taipei";
     };
     ssh.usersAndKeys = [
       { user = "ryuki"; }
