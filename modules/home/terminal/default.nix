@@ -6,23 +6,25 @@ let
 in
 {
   imports = [
+    ./alacritty
     ./urxvt
   ];
 
   options.my.home.terminal = {
     enable = mkEnableOption "terminal home configuration";
     terminal = mkOption {
-      type = types.enum [ "urxvt" ];
-      default = "urxvt";
-      example = literalExpression ''urxvt'';
+      type = types.enum [ "alacritty" "urxvt" ];
+      default = "alacritty";
+      example = literalExpression ''alacritty'';
       description = ''
         terminal to use (default: urxvt).
-        Options: urxvt
+        Options: alacritty urxvt
       '';
     };
   };
 
   config.my.home.terminal = mkIf cfg.enable {
+    alacritty.enable = mkDefault (cfg.terminal == "alacritty");
     urxvt.enable = mkDefault (cfg.terminal == "urxvt");
   };
 }

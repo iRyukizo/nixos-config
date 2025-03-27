@@ -57,6 +57,7 @@ in
         # bind -n C-l if-shell "$should_forward" "send-keys C-l" "select-pane -R"
       '' + optionalString urxvtCfg.enable ''
         set -as terminal-features ",rxvt*:RGB"
+        set -as terminal-features ",alacritty:RGB"
       '';
 
       plugins = with pkgs.tmuxPlugins; [

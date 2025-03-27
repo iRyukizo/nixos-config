@@ -20,7 +20,7 @@ let
   genAttrs' = values: f: listToAttrs (map f values);
 
   modifier = "Mod4";
-  terminal = "i3-sensible-terminal";
+  terminal = config.my.home.terminal.terminal;
 
   movementKeys = [ "Left" "Down" "Up" "Right" ];
   vimMovementKeys = [ "h" "j" "k" "l" ];
