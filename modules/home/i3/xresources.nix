@@ -2,7 +2,7 @@
 
 let
   inherit (lib) mkEnableOption mkOption mkIf;
-  cfg = config.my.home.terminal.urxvt.xresources;
+  cfg = config.my.home.xresources;
 
   nord-xresources = pkgs.fetchFromGitHub {
     owner = "arcticicestudio";
@@ -12,7 +12,7 @@ let
   };
 in
 {
-  options.my.home.terminal.urxvt.xresources = {
+  options.my.home.xresources = {
     enable = mkEnableOption "Urxvt xresources file";
   };
 
@@ -22,7 +22,7 @@ in
 
     xresources = {
       properties = {
-        "Xft.dpi" = 140;
+        "Xft.dpi" = 120;
         "Xft.antialias" = true;
         "Xft.hinting" = true;
         "Xft.rgba" = "rgb";

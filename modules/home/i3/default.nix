@@ -66,6 +66,7 @@ in
 {
   imports = [
     ./polybar
+    ./xresources.nix
   ];
 
   options.my.home.i3 = {
@@ -83,6 +84,7 @@ in
       spotify.enable = mkDefault true;
       terminal.enable = mkDefault true;
       polybar.enable = mkDefault true;
+      xresources.enable = mkDefault true;
     };
 
     home.packages = with pkgs; [

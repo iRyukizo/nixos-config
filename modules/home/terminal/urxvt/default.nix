@@ -18,16 +18,11 @@ let
   };
 in
 {
-  imports = [
-    ./xresources.nix
-  ];
-
   options.my.home.terminal.urxvt = {
     enable = mkEnableOption "Urxvt home configuration";
   };
 
   config = mkIf cfg.enable {
-    my.home.terminal.urxvt.xresources.enable = true;
 
     home.sessionVariables = {
       TERMINAL = "urxvt";
