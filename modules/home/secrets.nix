@@ -11,9 +11,9 @@ in
 
   config.my.secrets = {
     enable = true;
-    folderPrefix = {
+    folderPrefixes = {
       enable = true;
-      prefix = "home/";
+      prefixes = [ "home/" ];
     };
   };
 

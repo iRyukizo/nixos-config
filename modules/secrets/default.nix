@@ -1,18 +1,18 @@
 { config, inputs, lib, ... }:
 
 let
-  inherit (lib) filterAttrs literalExpression mkEnableOption mkIf mkOption types;
+  inherit (lib) any filterAttrs literalExpression mkEnableOption mkIf mkOption types;
   inherit (lib.strings) hasPrefix;
 
   prefixModule = types.submodule {
     options = {
       enable = mkEnableOption "Enable folder prefixing";
-      prefix = mkOption {
-        type = types.str;
-        default = "";
-        example = literalExpression ''/home'';
+      prefixes = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        example = literalExpression ''[ "/home" ]'';
         description = ''
-          folder prefix to look for age files. (default: "")
+          folder prefix to look for age files. (default: [ ])
         '';
       };
     };
@@ -23,9 +23,9 @@ in
 {
   options.my.secrets = {
     enable = mkEnableOption "secrets configuration" // { default = true; };
-    folderPrefix = mkOption {
+    folderPrefixes = mkOption {
       type = prefixModule;
-      default = { enable = false; prefix = ""; };
+      default = { };
       description = ''
         Either we need to look for certain kind of files.
       '';
@@ -43,9 +43,9 @@ in
         secrets = import ./secrets.nix;
         secretsSet = lib.mapAttrs' convertSecrets secrets;
         prefixSecretsSet =
-          if (cfg.folderPrefix.enable)
+          if (cfg.folderPrefixes.enable)
           then
-            (filterAttrs (n: v: (hasPrefix cfg.folderPrefix.prefix n)) secretsSet)
+            (filterAttrs (n: v: any (p: hasPrefix p n) cfg.folderPrefixes.prefixes) secretsSet)
           else
             secretsSet;
       in

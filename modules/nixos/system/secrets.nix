@@ -8,9 +8,9 @@
 
   config.my.secrets = {
     enable = true;
-    folderPrefix = {
+    folderPrefixes = {
       enable = true;
-      prefix = "nixos/";
+      prefixes = [ "nixos/" ];
     };
   };
 
