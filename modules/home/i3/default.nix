@@ -98,7 +98,10 @@ in
 
     home.file = {
       ".background-image".source = ./background.png;
-      ".lock.png".source = ./lock.png;
+      ".lock.jpg".source = pkgs.fetchurl {
+        url = "https://raw.githubusercontent.com/OulipianSummer/nixos-pattern-nord-wallpapers/d6334f5b2a83c1072d804fc4750450e18f1a02e4/jpgs/nix-d-nord-blue.jpg";
+        sha256 = "0ambkmjcsbmmjl5hji5sq0bm44xd3scg3gxkjzfrl83dp0a5bx7y";
+      };
       ".scripts/system_status/volumeControl.sh" = {
         executable = true;
         text = ''
