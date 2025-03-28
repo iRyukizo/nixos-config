@@ -51,6 +51,13 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+
+    mac-app-util = {
+      type = "github";
+      owner = "hraban";
+      repo = "mac-app-util";
+      ref = "master";
+    };
   };
 
   outputs =
@@ -60,6 +67,7 @@
     , home-manager
     , nixpkgs
     , pre-commit-hooks
+    , mac-app-util
     , ...
     }@inputs:
     let

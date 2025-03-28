@@ -1,7 +1,7 @@
 { inputs, self, ... }:
 
 let
-  inherit (inputs) agenix home-manager nixpkgs;
+  inherit (inputs) agenix home-manager mac-app-util nixpkgs;
   inherit (nixpkgs.lib) attrValues mapAttrs;
   inherit (home-manager.lib) homeManagerConfiguration;
 
@@ -12,6 +12,10 @@ let
       pkgs = nixpkgs.legacyPackages."${system}";
       extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
       modules = [
+        # Mac App util on darwin will automatically creates trampoline apps,
+        # but be careful as updating apps will create doubles. Then when
+        # updating, try to sync apps accordingly.
+        mac-app-util.homeManagerModules.default
         "${self}/modules/home"
         {
           nixpkgs.overlays = (attrValues self.overlays) ++ [ agenix.overlays.default ];
@@ -31,9 +35,12 @@ mapAttrs buildHomeConfiguration {
     system = "aarch64-darwin";
     homePrefix = "/Users";
     configModule = {
-      my.home.devenv = {
-        enable = true;
-        type = "darwin";
+      my.home = {
+        terminal.alacritty.enable = true;
+        devenv = {
+          enable = true;
+          type = "darwin";
+        };
       };
     };
   };
