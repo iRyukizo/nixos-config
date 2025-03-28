@@ -20,7 +20,7 @@ in
     };
 
     services.picom = {
-      enable = true;
+      enable = !pkgs.stdenv.isDarwin;
     };
 
     programs.alacritty = {
@@ -42,7 +42,9 @@ in
             family = "MesloLGS NF";
             style = "Regular";
           };
-          size = 10;
+          size = if !pkgs.stdenv.isDarwin
+          then 10
+          else 17;
         };
 
         colors = {
