@@ -33,10 +33,7 @@ in
       git.enable = mkDefault true;
       go.enable = mkDefault true;
       gpg.enable = mkDefault true;
-      nix = {
-        inherit (cfg) type;
-        enable = mkDefault true;
-      };
+      nix.enable = mkDefault true;
       ssh.enable = mkDefault true;
       tmux = {
         inherit (cfg) type;
