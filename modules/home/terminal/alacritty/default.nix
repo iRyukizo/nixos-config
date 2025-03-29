@@ -51,7 +51,7 @@ in
             style = "Regular";
           };
           size = if !pkgs.stdenv.isDarwin
-          then 10
+          then 12
           else 17;
         };
 
