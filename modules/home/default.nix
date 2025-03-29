@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./aerospace.nix
     ./bat.nix
     ./bluetooth.nix
     ./devenv.nix

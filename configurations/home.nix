@@ -36,6 +36,7 @@ mapAttrs buildHomeConfiguration {
     homePrefix = "/Users";
     configModule = {
       my.home = {
+        aerospace.enable = true;
         terminal.alacritty.enable = true;
         devenv = {
           enable = true;
