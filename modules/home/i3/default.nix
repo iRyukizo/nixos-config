@@ -3,8 +3,6 @@
 let
   inherit (builtins) genList map replaceStrings;
   inherit (lib)
-    listToAttrs
-    mapAttrs'
     mkDefault
     mkEnableOption
     mkIf
@@ -12,12 +10,9 @@ let
     toLower
     ;
 
-  inherit (lib.my) recursiveMerge;
+  inherit (lib.my) genAttrs' recursiveMerge renameAttrs;
 
   cfg = config.my.home.i3;
-
-  renameAttrs = f: mapAttrs' (name: value: nameValuePair (f name) value);
-  genAttrs' = values: f: listToAttrs (map f values);
 
   modifier = "Mod4";
   terminal = config.my.home.terminal.terminal;

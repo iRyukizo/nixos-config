@@ -2,13 +2,10 @@
 
 let
   inherit (builtins) genList map replaceStrings;
-  inherit (lib) listToAttrs literalExpression mapAttrs' mkOption mkEnableOption mkIf nameValuePair types;
-  inherit (lib.my) recursiveMerge;
+  inherit (lib) literalExpression mkOption mkEnableOption mkIf nameValuePair types;
+  inherit (lib.my) genAttrs' recursiveMerge renameAttrs;
 
   cfg = config.my.home.aerospace;
-
-  renameAttrs = f: mapAttrs' (name: value: nameValuePair (f name) value);
-  genAttrs' = values: f: listToAttrs (map f values);
 
   movementKeys = [ "left" "down" "up" "right" ];
   vimMovementKeys = [ "h" "j" "k" "l" ];
