@@ -87,6 +87,7 @@ in
           '';
         }
 
+        pain-control
         cpu
         {
           plugin = vim-tmux-navigator;
