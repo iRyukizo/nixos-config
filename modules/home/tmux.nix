@@ -60,6 +60,8 @@ in
         set -as terminal-features ",rxvt*:RGB"
       '' + optionalString alacrittyCfg.enable ''
         set -as terminal-features ",alacritty:RGB"
+      '' + optionalString (cfg.type == "darwin") ''
+        set -as terminal-features ",xterm-256color:RGB"
       '';
 
       plugins = with pkgs.tmuxPlugins; [
