@@ -68,6 +68,10 @@ in
         on-focus-changed = [ "move-mouse window-lazy-center" ];
         accordion-padding = 30;
 
+        workspace-to-monitor-force-assignment = {
+          "10" = "2";
+        };
+
         gaps = {
           inner.horizontal = 10;
           inner.vertical = 10;
