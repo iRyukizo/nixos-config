@@ -106,6 +106,9 @@ in
         {
           plugin = resurrect;
           extraConfig = ''
+            set -g @resurrect-strategy-vim 'session'
+            set -g @resurrect-processes '~vim
+
             set -g @resurrect-dir '${config.xdg.stateHome}/tmux/resurrect'
           '';
         }

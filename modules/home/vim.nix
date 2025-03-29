@@ -39,6 +39,7 @@ in
         vim-commentary
         vim-gitgutter
         vim-nix
+        vim-obsession
         vim-operator-user
         vim-snippets
         vim-surround
