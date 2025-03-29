@@ -6,6 +6,7 @@ let
 in
 {
   imports = [
+    ./fail2ban.nix
     ./ssh.nix
   ];
 
@@ -25,11 +26,13 @@ in
     (mkIf (cfg.type == "gui") {
       my.services = {
         ssh.enable = mkDefault false;
+        fail2ban.enable = mkDefault false;
       };
     })
     (mkIf (cfg.type == "standard") {
       my.services = {
         ssh.enable = mkDefault true;
+        fail2ban.enable = mkDefault true;
       };
     })
   ];
