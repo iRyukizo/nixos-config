@@ -21,6 +21,13 @@ in
 
     services.picom = {
       enable = !pkgs.stdenv.isDarwin;
+      settings = {
+        backend = "glx";
+        blur = {
+          method = "dual_kawase";
+          strength = 5;
+        };
+      };
     };
 
     programs.alacritty = {
@@ -28,8 +35,9 @@ in
 
       settings = {
         window = {
-          decorations = "None";
+          decorations = if pkgs.stdenv.isDarwin then "Buttonless" else "None";
           opacity = 0.6;
+          blur = pkgs.stdenv.isDarwin;
           option_as_alt = "OnlyLeft";
         };
 
