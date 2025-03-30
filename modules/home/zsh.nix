@@ -13,6 +13,14 @@ in
       default = "powerlevel10k";
       example = literalExpression ''powerlevel10k'';
     };
+    clearerAutosuggest = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Autosuggestion default foreground color is a little bit too bright, can
+        overwrite it if needed.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -80,6 +88,8 @@ in
         ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
         ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}"
         ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+      '' + optionalString cfg.clearerAutosuggest ''
+        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=245
       '' + ''
         ZSH_HIGHLIGHT_STYLES[arg0]=fg=4,bold
         ZLE_RPROMPT_INDENT=0
