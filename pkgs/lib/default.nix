@@ -11,13 +11,13 @@ let
     };
   };
 
-  createLichessBotWrapper = { configuration ? defaultLichessBotConfiguration, environementSubstitution ? true }:
+  createLichessBotWrapper = { configuration ? defaultLichessBotConfiguration, environmentSubstitution ? true }:
     pkgs.writeShellScriptBin "lichess-bot-wrapper" ''
       tmpConfig=$(mktemp --tmpdir lichess-bot-config-XXX.yml)
 
       echo '${builtins.toJSON configuration}' > $tmpConfig
 
-      ${if environementSubstitution then "${pkgs.envsubst}/bin/envsubst -i $tmpConfig -o $tmpConfig" else ""}
+      ${if environmentSubstitution then "${pkgs.envsubst}/bin/envsubst -i $tmpConfig -o $tmpConfig" else ""}
 
       ${pkgs.lichess-bot}/bin/lichess-bot --config $tmpConfig $@
 
@@ -30,10 +30,10 @@ let
       ];
     };
 
-  createLichessBotWrapperApp = { configuration ? defaultLichessBotConfiguration, environementSubstitution ? true }:
+  createLichessBotWrapperApp = { configuration ? defaultLichessBotConfiguration, environmentSubstitution ? true }:
     {
       type = "app";
-      program = "${createLichessBotWrapper { inherit configuration environementSubstitution; }}/bin/lichess-bot-wrapper";
+      program = "${createLichessBotWrapper { inherit configuration environmentSubstitution; }}/bin/lichess-bot-wrapper";
     };
 in
 {
