@@ -15,5 +15,6 @@ in
   "nixos/users/ryuki/hashed-password.age".publicKeys = all;
 
   "home/github/token.age".publicKeys = all;
+  "home/lichess/token.age".publicKeys = all;
   "home/nix/extra-config.age".publicKeys = all;
 }
