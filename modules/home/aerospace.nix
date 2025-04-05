@@ -66,6 +66,7 @@ in
         accordion-padding = 30;
 
         workspace-to-monitor-force-assignment = {
+          "9" = "2";
           "10" = "2";
         };
 
