@@ -6,8 +6,8 @@ final: prev:
       src = final.fetchFromGitHub {
         owner = "iRyukizo";
         repo = "snippets";
-        rev = "b7103bf46ebe7cb51a45c2ba72fd49209c4391a8";
-        sha256 = "btsmJ/0/nGe4G0Uddco/kUwPyHzcoYwdHEOsgfLjtFs=";
+        rev = "5b8310600456a5cc4729743a47da942d6830e454";
+        sha256 = "UP9DcI4nNLsNQb7bXYVJrgWK9lznws3pPvU5hOtu8ZU=";
       };
     };
     tiger-syntax = final.vimUtils.buildVimPlugin {
