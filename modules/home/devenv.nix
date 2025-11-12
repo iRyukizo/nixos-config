@@ -29,6 +29,11 @@ in
     my.home = {
       bat.enable = mkDefault true;
       direnv.enable = mkDefault true;
+
+      fonts = {
+        inherit (cfg) enable type;
+      };
+
       fzf.enable = mkDefault true;
       git.enable = mkDefault true;
       go.enable = mkDefault true;
