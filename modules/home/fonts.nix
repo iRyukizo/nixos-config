@@ -23,13 +23,12 @@ in
       font-awesome
       lxgw-wenkai-tc
       ryuki.noto-fonts-cjk-sans-tc
-    ] ++ optional (cfg.type == "standard") [
-      font-awesome_5
-      siji
-      ryuki.system-san-francisco-font
-      ryuki.san-francisco-display-regular-nerd-font
-      ryuki.san-francisco-font
-    ];
+    ] ++ optional (cfg.type == "standard") font-awesome_5
+    ++ optional (cfg.type == "standard") siji
+    ++ optional (cfg.type == "standard") font-awesome_5
+    ++ optional (cfg.type == "standard") ryuki.system-san-francisco-font
+    ++ optional (cfg.type == "standard") ryuki.san-francisco-display-regular-nerd-font
+    ++ optional (cfg.type == "standard") ryuki.san-francisco-font;
 
     fonts.fontconfig.enable = true;
   };

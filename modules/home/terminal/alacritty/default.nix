@@ -50,9 +50,10 @@ in
             family = "MesloLGS NF";
             style = "Regular";
           };
-          size = if !pkgs.stdenv.isDarwin
-          then 12
-          else 17;
+          size =
+            if !pkgs.stdenv.isDarwin
+            then 12
+            else 17;
         };
 
         colors = {
