@@ -122,6 +122,7 @@ in
         gt = "git tag";
         gpt = "git push --follow-tags";
         gprs = "git pull --recurse-submodules";
+        ls = "ls --color=auto";
       };
 
       autosuggestion.enable = true;
