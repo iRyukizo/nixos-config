@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    docker
     xclip
     gotop
     nixpkgs-fmt
