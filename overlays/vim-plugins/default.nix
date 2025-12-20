@@ -7,7 +7,7 @@ final: prev:
         owner = "iRyukizo";
         repo = "snippets";
         rev = "5b8310600456a5cc4729743a47da942d6830e454";
-        sha256 = "b4jP6se/H/K53x7VTeM0GTBD6D/Du662mJcM++U6eAE=";
+        sha256 = "sha256-UP9DcI4nNLsNQb7bXYVJrgWK9lznws3pPvU5hOtu8ZU=";
       };
     };
     tiger-syntax = final.vimUtils.buildVimPlugin {
