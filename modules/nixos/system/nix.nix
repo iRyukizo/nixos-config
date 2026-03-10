@@ -20,7 +20,7 @@ in
     nixpkgs.config.allowUnfree = true;
 
     nix = {
-      package = pkgs.nixStable;
+      package = pkgs.nixVersions.stable;
 
       gc = {
         automatic = true;
