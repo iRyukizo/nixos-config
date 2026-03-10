@@ -1,11 +1,15 @@
 { fetchFromGitHub
 , lib
 , python312Packages
+, pkgs
 }:
 
 python312Packages.buildPythonPackage rec {
   pname = "lichess-bot";
   version = "2025.3.16.3";
+  pyproject = true;
+  build-system = [ pkgs.setuptools ];
+
 
 
   src = fetchFromGitHub {
