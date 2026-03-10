@@ -58,7 +58,7 @@ in
     programs.aerospace = {
       enable = true;
 
-      userSettings = {
+      settings = {
         enable-normalization-flatten-containers = false;
         enable-normalization-opposite-orientation-for-nested-containers = false;
         on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
