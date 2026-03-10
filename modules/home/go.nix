@@ -12,8 +12,10 @@ in
   config = mkIf cfg.enable {
     programs.go = {
       enable = true;
-      goPath = "go";
-      goBin = "go/bin";
+      env = {
+        PATH = "go";
+        BIN = "go/bin";
+      };
     };
 
     home.sessionPath = [
