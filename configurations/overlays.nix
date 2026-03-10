@@ -7,7 +7,7 @@ let
     lib = _final: _prev: { inherit (self) lib; };
 
     pkgs = _final: prev: {
-      ryuki = prev.recurseIntoAttrs (import "${self}/pkgs" { pkgs = prev; });
+      ryuki = prev.lib.recurseIntoAttrs (import "${self}/pkgs" { pkgs = prev; });
     };
   };
 in
