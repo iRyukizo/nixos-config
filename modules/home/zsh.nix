@@ -47,6 +47,7 @@ in
     # Mixing zsh and oh-my-zsh plugins does not seem the best thing to do
     programs.zsh = {
       enable = true;
+      dotDir = "${config.home.homeDirectory}/.zsh";
       plugins = [
         {
           name = "zsh-nix-shell";
@@ -74,10 +75,7 @@ in
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       };
 
-      initExtraFirst = ''
-      '';
-
-      initExtra = optionalString (cfg.theme == "powerlevel10k") ''
+      initContent = optionalString (cfg.theme == "powerlevel10k") ''
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '' + optionalString (cfg.theme == "robbyrussell") ''
