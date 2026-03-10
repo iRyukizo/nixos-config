@@ -62,6 +62,8 @@ in
         set -as terminal-features ",alacritty:RGB"
       '' + optionalString (cfg.type == "darwin") ''
         set -as terminal-features ",xterm-256color:RGB"
+        # Can't set default shell as home-manager is not system level
+        set -g default-command ${pkgs.zsh}/bin/zsh
       '';
 
       plugins = with pkgs.tmuxPlugins; [
