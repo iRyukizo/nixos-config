@@ -26,10 +26,10 @@ in
   config = mkIf cfg.enable {
     nix = {
       enable = true;
-      package = mkDefault pkgs.nixStable;
+      package = mkDefault pkgs.nixVersions.stable;
       gc = {
         automatic = true;
-        frequency = "weekly";
+        dates = "weekly";
         options = "--delete-older-than " + cfg.gcCleanDuration;
         persistent = true;
       };
