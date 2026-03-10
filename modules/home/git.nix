@@ -53,10 +53,12 @@ in
     programs.git = {
       enable = true;
 
-      userEmail = "hugo.moreau@epita.fr";
-      userName = "Hugo Moreau";
 
-      extraConfig = {
+      settings = {
+        user = {
+          email = "hugo.moreau@epita.fr";
+          name = "Hugo Moreau";
+        };
         commit = {
           verbose = true;
           gpgsign = true;
