@@ -24,7 +24,7 @@ in
 
     programs.vim = {
       enable = true;
-      packageConfigurable = pkgs.vim_configurable.override {
+      packageConfigurable = pkgs.vim-full.override {
         pythonSupport = true;
         perlSupport = true;
       };
@@ -33,7 +33,7 @@ in
         nord-vim
         ryuki-snippets
         tiger-syntax
-        UltiSnips
+        ultisnips
         vim-airline
         vim-airline-themes
         vim-commentary
