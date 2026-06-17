@@ -8,6 +8,7 @@ let
     agenix.dragon
     agenix.millenium
     agenix.milano
+    agenix.NB23517B88
   ];
 in
 {
