@@ -28,6 +28,9 @@ in
   config = mkIf cfg.enable {
     my.home = {
       bat.enable = mkDefault true;
+      ctags = {
+        enable = mkDefault true;
+      };
       direnv.enable = mkDefault true;
 
       fonts = {
