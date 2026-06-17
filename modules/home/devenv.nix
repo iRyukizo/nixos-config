@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   inherit (lib)
@@ -26,6 +26,15 @@ in
   };
 
   config = mkIf cfg.enable {
+    # FIXME: create a dedicated packages config for wsl
+    home = mkIf (cfg.type == "wsl") {
+      packages = with pkgs; [
+        gnumake
+        man-pages
+        man-pages-posix
+        tree
+      ];
+    };
     my.home = {
       bat.enable = mkDefault true;
       ctags = {
