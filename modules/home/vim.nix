@@ -38,6 +38,7 @@ in
         vim-airline-themes
         vim-commentary
         vim-gitgutter
+        vim-fugitive
         vim-nix
         vim-obsession
         vim-operator-user
