@@ -13,7 +13,7 @@ let
   ] ++ (nixpkgs.lib.attrValues self.nixosModules);
 
   buildMachine = name: { system, hardwareModules }: nixosSystem {
-    stdenv.hostPlatform.system = system;
+    inherit system;
     modules = custom_modules ++ hardwareModules ++ [ (./. + "/machines/${name}") ];
     specialArgs = { inherit inputs; inherit (self) lib; };
   };
