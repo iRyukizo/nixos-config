@@ -1,7 +1,17 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf mkPackageOption optional;
+  inherit (lib)
+    literalExpresion
+    mkEnableOption
+    mkIf
+    mkOption
+    mkPackageOption
+    optional
+    types;
+
+  inherit (lib.strings)
+    concatStringsSep;
 
   cfg = config.my.home.ctags;
 in
@@ -12,6 +22,58 @@ in
     gtags = {
       enable = mkEnableOption "Home ctags with gtags support" // { default = true; };
     };
+
+    settings = {
+      recurse = mkEnableOption "ctags --recurse options" // { default = true; };
+      excludes = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = ''
+          The regexp file/directory to exclude. (Different from defaultExcludes)
+        '';
+        example = literalExpresion ''[ "*.swp" "*_generated_*" "build" ]'';
+      };
+    };
+
+    extraSettings = mkOption {
+      type = types.str;
+      default = '''';
+      description = "Extra settings";
+      example = literalExpresion ''
+        --sort
+        --maxdepth 4
+      '';
+    };
+
+    defaultExcludes = mkOption {
+      type = types.listOf types.str;
+      default = [
+        ".git"
+        ".svn"
+        "build"
+        "dist"
+        "debug"
+        "*.js"
+        "vendor/*"
+        "db/*"
+        "log/*"
+        "node_modules/*"
+        "*.vim"
+        "*.swp"
+        "*.min.*"
+        "*.bak"
+        "*.pyc"
+        "*.sln"
+        "*.class"
+        "*.csproj"
+        "*.cache"
+        "*.dll"
+        "*.pdb"
+      ];
+      description = ''
+        The default files and directories to ignore for every ctags.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -19,31 +81,25 @@ in
       cfg.package
     ] ++ optional cfg.gtags.enable pkgs.global;
 
+    home.file.".ctags.d/default.ctags".text = ''
+      # Settings
+      --recurse=${if cfg.settings.recurse then "yes" else "no"}
+      ${concatStringsSep "\n" (
+          map (str: "--exclude=${str}") cfg.settings.excludes
+        )}
+
+      # Default excludes
+      ${concatStringsSep "\n" (
+          map (str: "--exclude=${str}") cfg.defaultExcludes
+        )}
+
+      # Extra settings
+      ${cfg.extraSettings}
+    '';
+
     home.file.".ctags.d/c.ctags".text = ''
       --languages=+C
       --C-kinds=+plx
-      --recurse=yes
-      --exclude=.git
-      --exclude=.svn
-      --exclude=build
-      --exclude=dist
-      --exclude=debug
-      --exclude=*.js
-      --exclude=vendor/*
-      --exclude=db/*
-      --exclude=log/*
-      --exclude=node_modules/*
-      --exclude=*.vim
-      --exclude=*.swp
-      --exclude=*.min.*
-      --exclude=*.bak
-      --exclude=*.pyc
-      --exclude=*.sln
-      --exclude=*.class
-      --exclude=*.csproj
-      --exclude=*.cache
-      --exclude=*.dll
-      --exclude=*.pdb
     '';
   };
 }
