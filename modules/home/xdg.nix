@@ -16,6 +16,7 @@ in
       userDirs = mkIf cfg.userDirsEnable {
         enable = true;
         createDirectories = true;
+        setSessionVariables = true;
         extraConfig = {
           XDG_WORKSPACE_DIR = "$HOME/Workspace";
           XDG_PROJECTS_DIR = "$HOME/Workspace/Projects";
