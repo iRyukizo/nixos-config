@@ -45,4 +45,16 @@ mapAttrs buildHomeConfiguration {
       };
     };
   };
+  "hugo" = {
+    system = "x86_64-linux";
+    configModule = {
+      my.home = {
+        terminal.alacritty.enable = true;
+        devenv = {
+          enable = true;
+          type = "wsl";
+        };
+      };
+    };
+  };
 }

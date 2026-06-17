@@ -12,12 +12,12 @@ in
   options.my.home.tmux = {
     enable = mkEnableOption "Home tmux configuration";
     type = mkOption {
-      type = types.enum [ "standard" "darwin" "remote" ];
+      type = types.enum [ "standard" "darwin" "remote" "wsl" ];
       default = "standard";
       example = literalExpression ''standard'';
       description = ''
         Type of system (default: standard).
-        Options: standard darwin remote
+        Options: standard darwin remote wsl
       '';
     };
   };
@@ -64,12 +64,35 @@ in
         set -as terminal-features ",xterm-256color:RGB"
         # Can't set default shell as home-manager is not system level
         set -g default-command ${pkgs.zsh}/bin/zsh
+      '' + optionalString (cfg.type == "wsl") ''
+        set -g default-command ${pkgs.zsh}/bin/zsh
       '';
 
       plugins = with pkgs.tmuxPlugins; [
         {
           plugin = nord;
-          extraConfig = ''
+          extraConfig = optionalString (cfg.type == "wsl") ''
+            set -g @prefix_highlight_fg black
+            set -g @prefix_highlight_bg brightcyan
+            set -g status-interval 1
+            set -g status on
+            set -g status-justify left
+            set -g status-style bg=black,fg=white
+            set -g pane-border-style bg=default,fg=brightblack
+            set -g pane-active-border-style bg=default,fg=blue
+            set -g display-panes-colour black
+            set -g display-panes-active-colour brightblack
+            setw -g clock-mode-colour cyan
+            set -g message-style bg=brightblack,fg=cyan
+            set -g message-command-style bg=brightblack,fg=cyan
+            set -g @prefix_highlight_output_prefix "#[fg=brightcyan]#[bg=black]#[nobold]#[noitalics]#[nounderscore]#[bg=brightcyan]#[fg=black]"
+            set -g @prefix_highlight_output_suffix ""
+            set -g @prefix_highlight_copy_mode_attr "fg=brightcyan,bg=black,bold"
+            set -g status-left "#[fg=black,bg=blue,bold] #S #[fg=blue,bg=black,nobold,noitalics,nounderscore]"
+            set -g window-status-format "#[fg=black,bg=brightblack,nobold,noitalics,nounderscore] #[fg=white,bg=brightblack]#I #[fg=white,bg=brightblack,nobold,noitalics,nounderscore] #[fg=white,bg=brightblack]#W #F #[fg=brightblack,bg=black,nobold,noitalics,nounderscore]"
+            set -g window-status-current-format "#[fg=black,bg=cyan,nobold,noitalics,nounderscore] #[fg=black,bg=cyan]#I #[fg=black,bg=cyan,nobold,noitalics,nounderscore] #[fg=black,bg=cyan]#W #F #[fg=cyan,bg=black,nobold,noitalics,nounderscore]"
+            set -g window-status-separator ""
+          '' + ''
             set -g status-position top
           '';
         }

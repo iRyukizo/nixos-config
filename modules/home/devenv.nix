@@ -15,12 +15,12 @@ in
   options.my.home.devenv = {
     enable = mkEnableOption "Home dev environment configuration";
     type = mkOption {
-      type = types.enum [ "standard" "darwin" "remote" ];
+      type = types.enum [ "standard" "darwin" "remote" "wsl" ];
       default = "standard";
       example = literalExpression ''standard'';
       description = ''
         Type of system (default: standard).
-        Options: standard darwin remote
+        Options: standard darwin remote wsl
       '';
     };
   };
@@ -53,7 +53,7 @@ in
 
       zsh = {
         enable = mkDefault true;
-      } // optionalAttrs (cfg.type == "darwin") {
+      } // optionalAttrs (cfg.type == "darwin" || cfg.type == "wsl") {
         theme = "robbyrussell";
       };
     };

@@ -8,12 +8,12 @@ in
   options.my.home.fonts = {
     enable = mkEnableOption "Home fonts configuration";
     type = mkOption {
-      type = types.enum [ "standard" "darwin" "remote" ];
+      type = types.enum [ "standard" "darwin" "remote" "wsl" ];
       default = "standard";
       example = literalExpression ''standard'';
       description = ''
         Type of system (default: standard).
-        Options: standard darwin remote
+        Options: standard darwin remote wsl
       '';
     };
   };
