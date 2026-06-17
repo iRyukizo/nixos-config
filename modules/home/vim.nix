@@ -90,7 +90,10 @@ in
         set t_Co=256
         let g:airline_powerline_fonts = 1
         let g:airline_theme='nord'
-        let g:airline#extensions#whitespace#show_message = 0
+        " let g:airline#extensions#whitespace#show_message = 0
+        " let g:airline_extensions = ['wordcount', 'searchcount', 'obsession', 'tabline']
+        let g:airline#extensions#whitespace#enabled = 0
+        let g:airline#extensions#obsession#enabled = 1
         set laststatus=1
 
         " Fix visual colors
@@ -102,7 +105,8 @@ in
         " Weird bug where plugins are not loaded correctly, obliged to manually
         " update the `runtimepath`, must create an issue on home-manager.
         set runtimepath^=${pkgs.vimPlugins.vim-airline}
-        let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
+        let g:airline#extensions#obsession#indicator_text = ''
+        let g:airline_section_z = airline#section#create(['%{airline#util#wrap(airline#extensions#obsession#get_status(),0)}', "\uE0A1" . '%{line(".")}' . "\uE0A3" . '%{col(".")}'])
 
         set guifont=MesloLGL\ Nerd\ Font\ 10
 
