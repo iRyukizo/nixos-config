@@ -5,6 +5,7 @@
     ./aerospace.nix
     ./bat.nix
     ./bluetooth.nix
+    ./ctags.nix
     ./devenv.nix
     ./direnv.nix
     ./dunst.nix
