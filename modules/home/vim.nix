@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkDefault mkEnableOption mkIf optional;
+  inherit (lib) mkDefault mkEnableOption mkIf optional optionals;
   inherit (lib.strings) optionalString;
   inherit (pkgs) fetchFromGitHub vimUtils;
   inherit (vimUtils) buildVimPlugin;
@@ -13,11 +13,13 @@ in
     enable = mkEnableOption "Home vim configuration";
     clangFormatSupport = mkEnableOption "Home vim-clang-format support" // { default = true; };
     goSupport = mkEnableOption "Home vim-go support" // { default = true; };
+    ctagsSupport = mkEnableOption "Home vim ctags support" // { default = true; };
   };
 
   config = mkIf cfg.enable {
     my.home = {
       go.enable = mkDefault cfg.goSupport;
+      ctags.enable = mkDefault cfg.ctagsSupport;
     };
 
     home.packages = with pkgs; [ ] ++ optional cfg.clangFormatSupport pkgs.clang-tools;
@@ -46,7 +48,11 @@ in
         vim-surround
         vim-tmux-navigator
       ] ++ optional cfg.clangFormatSupport pkgs.vimPlugins.vim-clang-format
-      ++ optional cfg.goSupport pkgs.vimPlugins.vim-go;
+      ++ optional cfg.goSupport pkgs.vimPlugins.vim-go
+      ++ optionals cfg.ctagsSupport [
+        tagbar
+        vim-gutentags
+      ];
       settings = {
         number = true;
         expandtab = true;
@@ -132,6 +138,26 @@ in
       '' + optionalString cfg.goSupport ''
         autocmd FileType go map <Leader>x :GoFmt<CR>
         autocmd FileType go map <Leader>j :GoAddTags<CR>
+      '' + optionalString cfg.ctagsSupport ''
+        set tags=./tags;/
+        let g:tagbar_position = 'leftabove vertical'
+        nmap <C-a> :TagbarToggle<CR>
+        let g:gutentags_project_root = ['.root', '.git', '.svn']
+        let g:gutentags_cache_dir = expand('~/.cache/tags')
+        function! MyGutentagsRootFinder(path) abort
+          let l:dir = fnamemodify(a:path, ':p:h')
+
+          while l:dir !=# '/' && l:dir !=# ''''''
+            if filereadable(l:dir . '/.root')
+              return l:dir
+            endif
+
+            let l:dir = fnamemodify(l:dir, ':h')
+          endwhile
+
+          return gutentags#default_get_project_root(a:path)
+        endfunction
+        let g:gutentags_project_root_finder = 'MyGutentagsRootFinder'
       '';
     };
   };
