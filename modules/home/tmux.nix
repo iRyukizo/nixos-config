@@ -56,6 +56,11 @@ in
         # Don't need to forward but still in case
         # bind -n C-h if-shell "$should_forward" "send-keys C-h" "select-pane -L"
         # bind -n C-l if-shell "$should_forward" "send-keys C-l" "select-pane -R"
+
+        bind-key -r M-h resize-pane -L 5
+        bind-key -r M-j resize-pane -D 5
+        bind-key -r M-k resize-pane -U 5
+        bind-key -r M-l resize-pane -R 5
       '' + optionalString urxvtCfg.enable ''
         set -as terminal-features ",rxvt*:RGB"
       '' + optionalString alacrittyCfg.enable ''
