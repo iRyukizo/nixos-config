@@ -79,8 +79,14 @@ in
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '' + optionalString (cfg.theme == "robbyrussell") ''
+        prompt_nix_shell() {
+          if [[ -n "$IN_NIX_SHELL" ]]; then
+            echo "%B%F{208}$IN_NIX_SHELL%f%b "
+          fi
+        }
+
         PROMPT="%(?:%{$fg_bold[green]%}%1{➜%}:%{$fg_bold[red]%}%1{➜%}) %{$fg_bold[magenta]%}%(1j.%j .)%{$fg_bold[cyan]%}%c%{$reset_color%}"
-        PROMPT+=' $(git_prompt_info)'
+        PROMPT+=' $(prompt_nix_shell)$(git_prompt_info)'
 
         ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
         ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
@@ -104,6 +110,7 @@ in
         MANPAGER = "less -M -R -i --mouse --use-color -Dkr -Dd+b -Ds+246 -Du+C -j5";
         MANROFFOPT = "-c";
         PAGER = "less -M -R -i --mouse --use-color -Dkr -Dd+b -Ds+246 -Du+C -j5";
+        SHELL = "${pkgs.zsh}/bin/zsh";
       };
 
       history = {
