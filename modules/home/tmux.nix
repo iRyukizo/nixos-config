@@ -44,7 +44,7 @@ in
         set -g set-clipboard on
 
         # Smart pane switching with awareness of vim and fzf
-        forward_programs="view|n?vim?|fzf"
+        forward_programs="view|n?vim?|fzf|\.vim-wrapped"
 
         should_forward="ps -o state= -o comm= -t '#{pane_tty}' \
         | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?($forward_programs)(diff)?$'"
