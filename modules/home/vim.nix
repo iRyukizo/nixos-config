@@ -101,6 +101,7 @@ in
         " let g:airline_extensions = ['wordcount', 'searchcount', 'obsession', 'tabline']
         let g:airline#extensions#whitespace#enabled = 0
         let g:airline#extensions#obsession#enabled = 1
+        let g:airline#extensions#branch#enabled = 0
         set laststatus=1
 
         " Fix visual colors
@@ -127,7 +128,7 @@ in
         let g:UltiSnipsJumpForwardTrigger="<tab>"
         let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
         let g:UltiSnipsListSnippets="<c-tab>"
-        let g:snips_author="iRyukizo"
+        let g:snips_author="Hugo Moreau"
 
         " Don't use sensible, for some reason sensible is installed
         " TODO: figure out why there is sensible, may think because 
