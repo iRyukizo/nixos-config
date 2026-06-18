@@ -19,5 +19,14 @@ final: prev:
         sha256 = "IWdEYadkWOKtuE+dueV9qSbXWGE5K/d6rkMNkKvZXZU=";
       };
     };
+    gutentags-plus = final.vimUtils.buildVimPlugin {
+      name = "gutentags_plus";
+      src = final.fetchFromGitHub {
+        owner = "skywind3000";
+        repo = "gutentags_plus";
+        rev = "a0157ca0092a21f0947917945506fde3859c9cd2";
+        hash = "sha256-kUis49tTpJJ04F4MxQYIQyr6gfxAsWk3lnNrXB6K+yc=";
+      };
+    };
   };
 }
