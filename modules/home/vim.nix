@@ -158,6 +158,11 @@ in
           return gutentags#default_get_project_root(a:path)
         endfunction
         let g:gutentags_project_root_finder = 'MyGutentagsRootFinder'
+
+        nnoremap <C-W><C-[> :execute 'vert stag ' . expand('<cword>')<CR>
+        nnoremap <C-W>[ :execute 'vert stag ' . expand('<cword>')<CR>
+        nnoremap g[ :execute 'vert stselect ' . expand('<cword>')<CR>
+        nnoremap <C-W>{ :execute 'ptselect ' . expand('<cword>')<CR>
       '';
     };
   };
