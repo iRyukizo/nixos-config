@@ -79,15 +79,25 @@ in
         POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '' + optionalString (cfg.theme == "robbyrussell") ''
+        ZSH_THEME_NIX_SHELL_PROMPT_PREFIX=" %{$fg_bold[blue]%}(%B%F{208}"
+        ZSH_THEME_NIX_SHELL_PROMPT_SUFFIX="%f%b%{$fg_bold[blue]%})%{$reset_color%}"
         prompt_nix_shell() {
-          if [[ -n "$IN_NIX_SHELL" ]]; then
-            echo " %{$fg_bold[blue]%}(%B%F{208}$IN_NIX_SHELL%f%b%{$fg_bold[blue]%})%{$reset_color%}"
+          if [[ ! -z "$IN_NIX_SHELL" ]]; then
+            echo "''${ZSH_THEME_NIX_SHELL_PROMPT_PREFIX}''${IN_NIX_SHELL}''${ZSH_THEME_NIX_SHELL_PROMPT_SUFFIX}"
+          fi
+        }
+
+        ZSH_THEME_DIRENV_PROMPT_PREFIX=" %{$fg_bold[magenta]%}"
+        ZSH_THEME_DIRENV_PROMPT_SUFFIX="%{$reset_color%}"
+        prompt_direnv() {
+          if [ ! -z "$DIRENV_DIR" ]; then
+            echo "''${ZSH_THEME_DIRENV_PROMPT_PREFIX}📂''${ZSH_THEME_DIRENV_PROMPT_SUFFIX}"
           fi
         }
 
         PROMPT="%(?:%{$fg_bold[green]%}%1{➜%}:%{$fg_bold[red]%}%1{➜%}) %{$fg_bold[magenta]%}%(1j.%j .)%{$fg_bold[cyan]%}%c%{$reset_color%}"
         PROMPT+=' $(git_prompt_info)'
-        RPROMPT="\$(vi_mode_prompt_info)$(prompt_nix_shell)"
+        RPROMPT="\$(vi_mode_prompt_info)\$(prompt_nix_shell)\$(prompt_direnv)"
 
         ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
         ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
