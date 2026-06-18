@@ -81,12 +81,13 @@ in
       '' + optionalString (cfg.theme == "robbyrussell") ''
         prompt_nix_shell() {
           if [[ -n "$IN_NIX_SHELL" ]]; then
-            echo "%B%F{208}$IN_NIX_SHELL%f%b "
+            echo " %{$fg_bold[blue]%}(%B%F{208}$IN_NIX_SHELL%f%b%{$fg_bold[blue]%})%{$reset_color%}"
           fi
         }
 
         PROMPT="%(?:%{$fg_bold[green]%}%1{➜%}:%{$fg_bold[red]%}%1{➜%}) %{$fg_bold[magenta]%}%(1j.%j .)%{$fg_bold[cyan]%}%c%{$reset_color%}"
-        PROMPT+=' $(prompt_nix_shell)$(git_prompt_info)'
+        PROMPT+=' $(git_prompt_info)'
+        RPROMPT="\$(vi_mode_prompt_info)$(prompt_nix_shell)"
 
         ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
         ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
