@@ -52,6 +52,7 @@ in
       ++ optionals cfg.ctagsSupport [
         tagbar
         vim-gutentags
+        gutentags-plus
       ];
       settings = {
         number = true;
@@ -140,10 +141,15 @@ in
         autocmd FileType go map <Leader>j :GoAddTags<CR>
       '' + optionalString cfg.ctagsSupport ''
         set tags=./tags;/
+
         let g:tagbar_position = 'leftabove vertical'
         nmap <C-a> :TagbarToggle<CR>
+
+        let g:gutentags_modules = ['ctags', 'gtags_cscope']
         let g:gutentags_project_root = ['.root', '.git', '.svn']
         let g:gutentags_cache_dir = expand('~/.cache/tags')
+        let g:gutentags_plus_switch = 1
+
         function! MyGutentagsRootFinder(path) abort
           let l:dir = fnamemodify(a:path, ':p:h')
 
