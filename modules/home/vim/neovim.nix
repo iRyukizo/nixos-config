@@ -11,6 +11,8 @@ let
         dirs: builtins.listToAttrs (map configureDirectory dirs);
     in
     linkDirectories [
+      "after"
+      "ftdetect"
       "plugin"
     ];
 
@@ -55,7 +57,6 @@ in
         oil-nvim
       ];
 
-      # TODO: Add after/ftplugin setup
       initLua = builtins.readFile ./neovim/init.lua;
     };
   };
