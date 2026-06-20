@@ -35,6 +35,7 @@ in
         # TODO: Add lsp config: clangd, golang
         # TODO: Add tags configs
         # TODO: Add luasnip, nvim-cmp
+        # TODO: Customize gitsigns
         # TODO: Check tree-sitter
         # TODO: Check telescope with fzf and dressings
         # TODO: Check null-ls for formating
