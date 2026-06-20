@@ -83,7 +83,10 @@
         checks = {
           pre-commit = pre-commit-hooks.lib.${system}.run {
             src = ./.;
-            hooks.nixpkgs-fmt.enable = true;
+            hooks = {
+              nixpkgs-fmt.enable = true;
+              stylua.enable = true;
+            };
           };
         };
 

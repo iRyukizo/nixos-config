@@ -5,6 +5,7 @@
     docker
     xclip
     gotop
+    stylua
     nixpkgs-fmt
     wakeonlan
 
