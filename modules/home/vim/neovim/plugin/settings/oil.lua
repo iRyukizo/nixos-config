@@ -1,4 +1,5 @@
 local oil = require('oil')
+local wk = require('which-key')
 local detail = false
 
 oil.setup {
@@ -23,3 +24,8 @@ oil.setup {
     },
 }
 
+local keys = {
+    { "-", oil.open, desc = "Open parent directory" },
+}
+
+wk.add(keys)

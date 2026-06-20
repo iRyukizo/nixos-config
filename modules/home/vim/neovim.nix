@@ -37,12 +37,13 @@ in
         # TODO: Add luasnip, nvim-cmp
         # TODO: Check tree-sitter
         # TODO: Check telescope with fzf and dressings
-        # TODO: Check which-key
         # TODO: Check null-ls for formating
         # TODO: Check aerial.nvim
         nord-nvim
         lualine-nvim
         # TODO: lsp-progress after lsp are setup
+
+        which-key-nvim
 
         gitsigns-nvim
         git-messenger-vim
