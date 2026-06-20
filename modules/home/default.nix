@@ -33,7 +33,7 @@
   ];
 
   home = rec {
-    stateVersion = "25.05";
+    stateVersion = "26.05";
     username = lib.mkDefault "ryuki";
     homeDirectory = lib.mkDefault "/home/${username}";
   };
