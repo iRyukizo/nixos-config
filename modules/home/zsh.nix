@@ -115,8 +115,6 @@ in
       '';
 
       sessionVariables = {
-        EDITOR = "vim";
-        VISUAL = "vim";
         CLICOLOR = "1";
         MANPAGER = "less -M -R -i --mouse --use-color -Dkr -Dd+b -Ds+246 -Du+C -j5";
         MANROFFOPT = "-c";

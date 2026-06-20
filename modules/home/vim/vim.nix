@@ -17,6 +17,7 @@ in
 
     programs.vim = {
       enable = true;
+      defaultEditor = true;
       packageConfigurable = pkgs.vim-full.override {
         pythonSupport = true;
         perlSupport = true;
