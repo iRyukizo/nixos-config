@@ -27,7 +27,7 @@
     ./terminal
     ./tmux.nix
     ./token.nix
-    ./vim.nix
+    ./vim
     ./xdg.nix
     ./zsh.nix
   ];
