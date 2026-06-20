@@ -8,6 +8,7 @@ in
 {
   imports = [
     ./vim.nix
+    ./neovim.nix
   ];
 
   options.my.home.vim = {
@@ -15,6 +16,7 @@ in
 
     programs = {
       vim = mkEnableOption "Home vim vim option" // {  default = true; };
+      neovim = mkEnableOption "Home vim neovim option";
     };
 
     clangFormatSupport = mkEnableOption "Home vim-clang-format support" // { default = true; };
