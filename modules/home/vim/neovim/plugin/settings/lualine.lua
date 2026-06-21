@@ -1,5 +1,10 @@
 local oil = require('oil')
 
+local function pretty_location()
+    return string.format("%s%d%s%d",
+        "\u{E0A1}", vim.fn.line("."), "\u{E0A3}", vim.fn.col("."))
+end
+
 require('lualine').setup {
     options = {
         theme = 'nord',
@@ -29,12 +34,15 @@ require('lualine').setup {
                 end,
             },
             {
-                function()
-                    return string.format("%s%d%s%d",
-                    "\u{E0A1}", vim.fn.line("."), "\u{E0A3}", vim.fn.col("."))
-                end,
+                pretty_location,
             },
         },
+    },
+    inactive_sections = {
+        lualine_c = { 'filename' },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'encoding', 'fileformat', 'searchcount' },
+        lualine_z = { { pretty_location } },
     },
     extensions = {
         "fugitive",
