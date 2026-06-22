@@ -33,17 +33,19 @@ in
       vimdiffAlias = !vimEnabled;
 
       plugins = with pkgs.vimPlugins; [
-        # TODO: Customize gitsigns
-        # TODO: Check beancount
+        # Theme
         nord-nvim
         lualine-nvim
         lualine-lsp-progress
 
+        # Which-key
         which-key-nvim
 
+        # Git
         gitsigns-nvim
         git-messenger-vim
 
+        # Telescope
         dressing-nvim
         telescope-fzf-native-nvim
         telescope-nvim
@@ -52,6 +54,8 @@ in
         nvim-lspconfig
         lsp-format-nvim
         none-ls-nvim
+
+        # Treesitter
         nvim-treesitter.withAllGrammars
         nvim-treesitter-textobjects
 
@@ -67,13 +71,16 @@ in
         cmp-under-comparator
         cmp_luasnip
 
+        # Tmux
         vim-tmux-navigator
 
+        # Tpope basics
         vim-commentary
         vim-fugitive
         vim-obsession
         nvim-surround
 
+        # Better than NetrW
         oil-nvim
       ];
 
