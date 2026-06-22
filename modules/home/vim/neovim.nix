@@ -50,6 +50,8 @@ in
         nvim-lspconfig
         lsp-format-nvim
         none-ls-nvim
+        nvim-treesitter.withAllGrammars
+        nvim-treesitter-textobjects
 
         # Completion
         # TODO: Add custom luasnip snippets
