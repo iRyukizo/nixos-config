@@ -34,8 +34,6 @@ in
 
       plugins = with pkgs.vimPlugins; [
         # TODO: Customize gitsigns
-        # TODO: Check tree-sitter
-        # TODO: Check telescope with fzf and dressings
         # TODO: Check beancount
         nord-nvim
         lualine-nvim
@@ -45,6 +43,10 @@ in
 
         gitsigns-nvim
         git-messenger-vim
+
+        dressing-nvim
+        telescope-fzf-native-nvim
+        telescope-nvim
 
         # LSP
         nvim-lspconfig
