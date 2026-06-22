@@ -45,8 +45,34 @@ require('lualine').setup {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_diagnostic' } } },
         lualine_c = { { 'filename', file_status = true }, { list_spell_languages }},
-        lualine_x = { { list_lsp_clients }, 'lsp_progress', 'filetype' },
-        lualine_y = { 'encoding', 'fileformat', 'searchcount' },
+        lualine_x = { 
+            { 
+                list_lsp_clients,
+                separator = ''
+            },
+            {
+                'lsp_progress',
+                separator = '',
+            },
+            {
+                'filetype',
+                separator = '',
+            },
+        },
+        lualine_y = {
+            {
+                'encoding',
+                separator = '',
+            },
+            {
+                'fileformat',
+                separator = '',
+            },
+            {
+                'searchcount',
+                separator = '',
+            },
+        },
         lualine_z = {
             {
                 function()
@@ -61,9 +87,11 @@ require('lualine').setup {
 
                     return status
                 end,
+                separator = '',
             },
             {
                 pretty_location,
+                seperator = '',
             },
         },
     },
