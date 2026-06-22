@@ -72,7 +72,7 @@ cmp.setup({
 })
 
 local keys = {
-    { "<leader>c", toggle_autocomplete, desc="Toggle nvim-cmp" },
+    { "<leader>cc", toggle_autocomplete, desc="Toggle nvim-cmp" },
 }
 
 wk.add(keys)

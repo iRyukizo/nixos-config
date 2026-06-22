@@ -13,6 +13,7 @@ let
     linkDirectories [
       "after"
       "ftdetect"
+      "lua"
       "plugin"
     ];
 
@@ -41,12 +42,17 @@ in
         # TODO: Check aerial.nvim
         nord-nvim
         lualine-nvim
-        # TODO: lsp-progress after lsp are setup
+        lualine-lsp-progress
 
         which-key-nvim
 
         gitsigns-nvim
         git-messenger-vim
+
+        # LSP
+        nvim-lspconfig
+        lsp-format-nvim
+        none-ls-nvim
 
         # Completion
         # TODO: Add custom luasnip snippets
@@ -71,6 +77,14 @@ in
       ];
 
       initLua = builtins.readFile ./neovim/init.lua;
+
+      extraPackages = with pkgs; [
+        clang-tools
+        nixpkgs-fmt
+        gopls
+        bash-language-server
+        typos-lsp
+      ];
     };
   };
 }
