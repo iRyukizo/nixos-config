@@ -33,13 +33,10 @@ in
       vimdiffAlias = !vimEnabled;
 
       plugins = with pkgs.vimPlugins; [
-        # TODO: Add lsp config: clangd, golang
-        # TODO: Add tags configs
         # TODO: Customize gitsigns
         # TODO: Check tree-sitter
         # TODO: Check telescope with fzf and dressings
-        # TODO: Check null-ls for formating
-        # TODO: Check aerial.nvim
+        # TODO: Check beancount
         nord-nvim
         lualine-nvim
         lualine-lsp-progress
