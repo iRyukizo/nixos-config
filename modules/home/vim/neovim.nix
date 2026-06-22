@@ -34,7 +34,6 @@ in
       plugins = with pkgs.vimPlugins; [
         # TODO: Add lsp config: clangd, golang
         # TODO: Add tags configs
-        # TODO: Add luasnip, nvim-cmp
         # TODO: Customize gitsigns
         # TODO: Check tree-sitter
         # TODO: Check telescope with fzf and dressings
@@ -48,6 +47,18 @@ in
 
         gitsigns-nvim
         git-messenger-vim
+
+        # Completion
+        # TODO: Add custom luasnip snippets
+        luasnip
+        nvim-cmp
+        cmp-async-path
+        cmp-buffer
+        cmp-nvim-lsp
+        cmp-nvim-lua
+        cmp-nvim-tags
+        cmp-under-comparator
+        cmp_luasnip
 
         vim-tmux-navigator
 
