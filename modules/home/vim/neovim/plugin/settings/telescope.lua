@@ -29,7 +29,13 @@ local keys = {
     { "<leader>fF", telescope_builtin.find_files, desc = "Files" },
     { "<leader>fg", telescope_builtin.live_grep, desc = "Grep string" },
     { "<leader>fG", telescope_builtin.grep_string, desc = "Grep string under cursor" },
-    { "<leader>fm", telescope_builtin.man_pages, desc = "Man pages" },
+    {
+        "<leader>fm",
+        function()
+            telescope_builtin.man_pages({ sections = { "1", "2", "3" } })
+        end,
+        desc = "Man pages",
+    },
     { "<leader>fr", telescope_builtin.lsp_references, desc = "LSP References" },
     { "<leader>fd", telescope_builtin.lsp_definitions, desc = "LSP Definitions" },
     { "<leader>fc", telescope_builtin.lsp_incoming_calls, desc = "LSP Incoming Calls" },
