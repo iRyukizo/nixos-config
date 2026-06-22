@@ -37,9 +37,15 @@ local keys = {
         desc = "Man pages",
     },
     { "<leader>fr", telescope_builtin.lsp_references, desc = "LSP References" },
-    { "<leader>fd", telescope_builtin.lsp_definitions, desc = "LSP Definitions" },
     { "<leader>fc", telescope_builtin.lsp_incoming_calls, desc = "LSP Incoming Calls" },
     { "<leader>fC", telescope_builtin.lsp_outgoing_calls, desc = "LSP Outgoing Calls" },
+    {
+        "<leader>fd",
+        function()
+            telescope_builtin.diagnostics({ bufnr = 0 })
+        end
+        , desc = "LSP Diagnostics buffer",
+    },
     { "<leader>fD", telescope_builtin.diagnostics, desc = "LSP Diagnostics" },
     { "<leader>fc", telescope_builtin.git_bcommits, desc = "Git buffercommits" },
     { "<leader>fC", telescope_builtin.git_commits, desc = "Git commits" },
