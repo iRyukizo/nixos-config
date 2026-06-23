@@ -117,5 +117,12 @@ require('lualine').setup {
             },
             filetypes = { "oil" },
         },
+        {
+            sections = {
+                lualine_a = { 'mode' },
+                lualine_b = { 'branch' },
+            },
+            filetypes = { 'gitsigns-blame' },
+        },
     },
 }
