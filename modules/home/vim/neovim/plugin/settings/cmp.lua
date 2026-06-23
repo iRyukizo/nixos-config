@@ -75,6 +75,10 @@ cmp.setup({
     },
 })
 
+for _, lang in pairs({ "c" }) do
+    luasnip.add_snippets(lang, require("ryuki.snippets." .. lang))
+end
+
 local keys = {
     { "<leader>cc", toggle_autocomplete, desc="Toggle nvim-cmp" },
 }
