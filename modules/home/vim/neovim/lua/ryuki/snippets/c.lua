@@ -356,7 +356,7 @@ return {
 
                         return sn(nil, {})
                     end,
-                    {1}
+                    {2}
                 ),
             }
         )
