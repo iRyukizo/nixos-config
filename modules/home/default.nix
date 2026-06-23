@@ -17,6 +17,7 @@
     ./gpg.nix
     ./gtk.nix
     ./i3
+    ./man.nix
     ./nix.nix
     ./programs.nix
     ./ranger.nix

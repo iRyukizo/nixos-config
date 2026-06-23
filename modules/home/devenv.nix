@@ -50,6 +50,7 @@ in
       git.enable = mkDefault true;
       go.enable = mkDefault true;
       gpg.enable = mkDefault true;
+      man.enable = mkDefault true;
       nix.enable = mkDefault true;
       ssh.enable = mkDefault true;
       tmux = {
