@@ -14,6 +14,22 @@ local function toggle_autocomplete()
   end
 end
 
+local function tab_expand(fallback)
+    if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+    else
+        fallback()
+    end
+end
+
+local function stab_expand(fallback)
+    if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+    else
+        fallback()
+    end
+end
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -21,20 +37,8 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<Tab>"] = function(fallback)
-            if luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end,
-        ["<S-Tab>"] = function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end,
+        ["<Tab>"] = cmp.mapping(tab_expand, { 'i', 's' }),
+        ["<S-Tab>"] = cmp.mapping(stab_expand, { 'i', 's' }),
         ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { "i", "c" }),
         ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { "i", "c" }),
         ["<C-d>"] = cmp.mapping.scroll_docs(-5),
