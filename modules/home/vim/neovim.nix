@@ -92,6 +92,7 @@ in
         gopls
         bash-language-server
         typos-lsp
+        ripgrep
       ];
     };
   };
