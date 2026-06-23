@@ -53,7 +53,6 @@ in
     programs.git = {
       enable = true;
 
-
       settings = {
         user = {
           email = "hugo.moreau@epita.fr";
@@ -92,6 +91,20 @@ in
           };
         }
       ] ++ makeConditions cfg.emailConditions;
+
+      ignores = [
+        "*.so"
+        "*.o"
+        "*.a"
+        "*.out"
+        ".venv/"
+        ".clangd/"
+        "compile_commands.json"
+        "Session.vim"
+        ".direnv"
+        "*~"
+        "~.swp"
+      ];
     };
   };
 }
