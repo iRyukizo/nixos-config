@@ -15,8 +15,8 @@ in
     enable = mkEnableOption "Home vim configuration";
 
     programs = {
-      vim = mkEnableOption "Home vim vim option" // {  default = true; };
-      neovim = mkEnableOption "Home vim neovim option";
+      vim = mkEnableOption "Home vim vim option";
+      neovim = mkEnableOption "Home vim neovim option" // { default = true; };
     };
 
     clangFormatSupport = mkEnableOption "Home vim-clang-format support" // { default = true; };
