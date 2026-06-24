@@ -90,7 +90,7 @@ in
       pamixer
       pavucontrol
       playerctl
-      xfce.thunar
+      thunar
     ];
 
     home.file = {
