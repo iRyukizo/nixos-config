@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkForce mkIf;
   cfg = config.my.home.dunst;
 
   faba-path = "${pkgs.faba-icon-theme}/share/icons/Faba";
@@ -40,7 +40,7 @@ in
           idle_threshhold = 120;
           line_height = 0;
           font = "SanFranciscoDisplay Nerd Font 10";
-          icon_path = "${faba-path}/48x48/notifications/:${faba-path}/24x24/panel/:${faba-path}/16x16/status/:${faba-path}/symbolic/status/:${faba-path}/16x16/devices/:${faba-path}/16x16/mimetypes/:${faba-path}/16x16/notifications/:${faba-path}/16x16/emblems:${gnome-path}/16x16/status/:${gnome-path}/16x16/devices/";
+          icon_path = mkForce "${faba-path}/48x48/notifications/:${faba-path}/24x24/panel/:${faba-path}/16x16/status/:${faba-path}/symbolic/status/:${faba-path}/16x16/devices/:${faba-path}/16x16/mimetypes/:${faba-path}/16x16/notifications/:${faba-path}/16x16/emblems:${gnome-path}/16x16/status/:${gnome-path}/16x16/devices/";
           sticky_history = "yes";
           history_length = 20;
           dmenu = "rofi -show run";
