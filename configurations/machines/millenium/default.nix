@@ -58,7 +58,7 @@ in
     };
   };
 
-  services.logind.lidSwitch = "ignore";
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
 
   system.stateVersion = "23.05";
 
