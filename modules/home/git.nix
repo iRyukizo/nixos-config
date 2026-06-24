@@ -104,6 +104,7 @@ in
         ".direnv"
         "*~"
         "~.swp"
+        ".typos.toml"
       ];
     };
   };
