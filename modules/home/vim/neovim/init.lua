@@ -38,6 +38,8 @@ vim.opt.splitright = true
 
 vim.opt.completeopt = { "menu", "menuone", "preview", "noselect" }
 
+vim.opt.clipboard = "unnamedplus"
+
 -- Theme
 vim.opt.termguicolors = true
 
