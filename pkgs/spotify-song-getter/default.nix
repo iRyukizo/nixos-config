@@ -12,7 +12,7 @@ pkgs.stdenvNoCC.mkDerivation {
   };
 
   propagatedBuildInputs = with pkgs; [
-    (python39.withPackages (pythonPackages: with pythonPackages; [
+    (python312.withPackages (pythonPackages: with pythonPackages; [
       dbus-python
     ]))
   ];
