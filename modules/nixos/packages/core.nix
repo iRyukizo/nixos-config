@@ -28,7 +28,7 @@ in
       wget
       zip
 
-      inputs.agenix.packages."${system}".default
+      inputs.agenix.packages."${stdenv.hostPlatform.system}".default
     ];
   };
 }
