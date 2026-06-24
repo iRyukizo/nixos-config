@@ -2,6 +2,7 @@
 
 let
   inherit (lib) mkIf nameValuePair;
+  inherit (lib.strings) optionalString;
 
   neovimConfigFiles =
     let
@@ -84,7 +85,22 @@ in
         oil-nvim
       ];
 
-      initLua = builtins.readFile ./neovim/init.lua;
+      initLua = builtins.readFile ./neovim/init.lua + optionalString
+        (cfg.type == "wsl"
+          && cfg.options.wslClipboard) ''
+        vim.g.clipboard = {
+            name = 'WslClipboard',
+            copy = {
+                ['+'] = 'clip.exe',
+                ['*'] = 'clip.exe',
+            },
+            paste = {
+                ['+'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+                ['*'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            },
+            cache_enabled = 0,
+        }
+      '';
 
       extraPackages = with pkgs; [
         clang-tools

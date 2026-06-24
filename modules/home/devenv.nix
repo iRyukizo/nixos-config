@@ -57,7 +57,11 @@ in
         inherit (cfg) type;
         enable = mkDefault true;
       };
-      vim.enable = mkDefault true;
+      vim = {
+        inherit (cfg) type;
+
+        enable = mkDefault true;
+      };
 
       xdg = {
         enable = true;
