@@ -22,6 +22,8 @@ vim.lsp.config("*", {
 local servers = {
     clangd = {},
     nil_ls = {},
+    pyright = {},
+    ruff = {},
     bashls = {
         filetypes = { "bash", "sh", "zsh" },
         settings = {
