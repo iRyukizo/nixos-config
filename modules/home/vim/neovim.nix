@@ -103,12 +103,19 @@ in
       '';
 
       extraPackages = with pkgs; [
-        clang-tools
         nixpkgs-fmt
-        gopls
-        bash-language-server
-        typos-lsp
+
         ripgrep
+
+        # LSP
+        bash-language-server
+        clang-tools
+        gopls
+        harper
+        nil
+        pyright
+        ruff
+        typos-lsp
       ];
     };
   };

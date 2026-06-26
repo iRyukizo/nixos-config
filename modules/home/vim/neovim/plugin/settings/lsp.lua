@@ -22,8 +22,35 @@ vim.lsp.config("*", {
 local servers = {
     clangd = {},
     nil_ls = {},
-    pyright = {},
-    ruff = {},
+    pyright = {
+        settings = {
+            pyright = {
+                disableOrganizeImports = true,
+                python = {
+                    analysis = {
+                        typeCheckingMode = "standard",
+                        autoImportCompletion = true,
+                        reportUnusedImport = "none",
+                        reportUnusedVariable = "none",
+                    },
+                },
+            },
+        },
+    },
+    ruff = {
+        init_options = {
+            settings = {
+                organizeImports = true,
+                showSyntaxErrors = true,
+                lint = {
+                    enable = true,
+                },
+                format = {
+                    enable = true,
+                },
+            },
+        },
+    },
     bashls = {
         filetypes = { "bash", "sh", "zsh" },
         settings = {
@@ -45,7 +72,37 @@ local servers = {
             },
         },
     },
-    harper_ls = {},
+    harper_ls = {
+        settings = {
+            ["harper-ls"] = {
+                userDictPath = vim.fn.expand("~/.config/nvim/harper_dict.txt"),
+                workspaceDictPath = ".harper_dict.txt",
+                linters = {
+                    SpellCheck = false,
+                    SpelledNumbers = true,
+                    AnA = true,
+                    SentenceCapitalization = false,
+                    UnclosedQuotes = true,
+                    WrongQuotes = true,
+                    LongSentences = false,
+                    RepeatedWords = true,
+                    Spaces = true,
+                    Matcher = true,
+                    CorrectNumberSuffix = false,
+                    NumberSuffixCapitalization = false,
+                    MultipleSequentialPronouns = true,
+                    LinkingVerbs = true,
+                    AvoidCurses = false,
+                    TerminatingCunjuctions = true,
+                },
+
+                diagnosticSeverity = "hint",
+                codeActions = {
+                    forceStable = true,
+                },
+            },
+        },
+    },
     typos_lsp = {},
 }
 
