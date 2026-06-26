@@ -108,6 +108,10 @@ in
 
         ripgrep
 
+        #Formatter
+        black
+        stylua
+
         # LSP
         bash-language-server
         clang-tools
@@ -117,6 +121,7 @@ in
         pyright
         ruff
         typos-lsp
+        lua-language-server
       ];
     };
   };

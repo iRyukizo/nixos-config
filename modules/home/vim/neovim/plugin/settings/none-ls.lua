@@ -30,3 +30,16 @@ null_ls.register({
         condition = partial(is_executable, "nixpkgs-fmt"),
     }),
 })
+
+null_ls.register({
+    null_ls.builtins.formatting.stylua.with({
+        condition = partial(is_executable, "stylua"),
+    }),
+})
+
+null_ls.register({
+    null_ls.builtins.formatting.black.with({
+        extra_args = { "--fast" },
+        condition = partial(is_executable, "black"),
+    }),
+})

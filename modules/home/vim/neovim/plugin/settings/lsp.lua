@@ -104,6 +104,15 @@ local servers = {
         },
     },
     typos_lsp = {},
+    lua_ls = {
+        settings = {
+            Lua = {
+                runtime = { version = "LuaJIT" },
+                workspace = { checkThirdParty = false },
+                telemetry = { enable = false },
+            },
+        },
+    },
 }
 
 for server, config in pairs(servers) do
