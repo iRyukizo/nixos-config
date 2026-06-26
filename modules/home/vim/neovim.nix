@@ -111,6 +111,7 @@ in
         #Formatter
         black
         stylua
+        prettier
 
         # LSP
         bash-language-server

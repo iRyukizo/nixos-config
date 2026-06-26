@@ -43,3 +43,9 @@ null_ls.register({
         condition = partial(is_executable, "black"),
     }),
 })
+
+null_ls.register({
+    null_ls.builtins.formatting.prettier.with({
+        condition = partial(is_executable, "prettier"),
+    })
+})
