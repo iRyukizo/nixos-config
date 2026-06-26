@@ -1,4 +1,5 @@
 local oil = require('oil')
+local wk = require("which-key")
 
 local function pretty_location()
     return string.format("%s%d%s%d",
@@ -36,6 +37,16 @@ local function list_spell_languages()
     return table.concat(vim.opt.spelllang:get(), ", ")
 end
 
+local display_lsp_clients = true
+
+local function toggle_lsp_display()
+    display_lsp_clients = not display_lsp_clients
+
+    require("lualine").refresh()
+
+    vim.notify("LSP Clients Display " .. (display_lsp_clients and "on" or "off"))
+end
+
 local function list_lsp_clients()
     local client_names = list_clients(0)
 
@@ -43,14 +54,12 @@ local function list_lsp_clients()
         return ""
     end
 
+    if not display_lsp_clients then
+        return tostring(#client_names)
+    end
+
     return table.concat(client_names, " ")
 end
-
-vim.api.nvim_create_autocmd({ "CmdlineChanged" }, {
-  callback = function()
-    require('lualine').refresh({ throw = false })
-  end,
-})
 
 require('lualine').setup {
     options = {
@@ -143,3 +152,9 @@ require('lualine').setup {
         },
     },
 }
+
+local keys = {
+    { "<leader>ci", toggle_lsp_display, desc = "Toggle LSP clients" },
+}
+
+wk.add(keys)
