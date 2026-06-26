@@ -1,24 +1,17 @@
 local null_ls = require('null-ls')
 local lsp = require('ryuki.lsp')
+local fmt = null_ls.builtins.formatting
 
 local function is_executable(cmd)
     return cmd and vim.fn.executable(cmd) == 1
 end
 
-local function partial(f, ...)
-    local a = { ... }
-    local a_len = select("#", ...)
-
-    return function(...)
-        local tmp = { ... }
-        local tmp_len = select("#", ...)
-
-        for i = 1, tmp_len do
-            a[a_len + i] = tmp[i]
-        end
-
-        return f(unpack(a, 1, a_len + tmp_len))
+local function fmt_source(source, bin, opts)
+    opts = opts or {}
+    opts.condition = function()
+        return is_executable(bin)
     end
+    return source.with(opts)
 end
 
 null_ls.setup({
@@ -26,26 +19,8 @@ null_ls.setup({
 })
 
 null_ls.register({
-    null_ls.builtins.formatting.nixpkgs_fmt.with({
-        condition = partial(is_executable, "nixpkgs-fmt"),
-    }),
-})
-
-null_ls.register({
-    null_ls.builtins.formatting.stylua.with({
-        condition = partial(is_executable, "stylua"),
-    }),
-})
-
-null_ls.register({
-    null_ls.builtins.formatting.black.with({
-        extra_args = { "--fast" },
-        condition = partial(is_executable, "black"),
-    }),
-})
-
-null_ls.register({
-    null_ls.builtins.formatting.prettier.with({
-        condition = partial(is_executable, "prettier"),
-    })
+    fmt_source(fmt.nixpkgs_fmt, "nixpkgs-fmt"),
+    fmt_source(fmt.stylua, "stylua"),
+    fmt_source(fmt.black, "black", { extra_args = { "--fast" } }),
+    fmt_source(fmt.prettier, "prettier"),
 })
