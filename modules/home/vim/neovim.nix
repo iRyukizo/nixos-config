@@ -80,6 +80,7 @@ in
         vim-fugitive
         vim-obsession
         nvim-surround
+        vim-endwise
 
         # Better than NetrW
         oil-nvim
