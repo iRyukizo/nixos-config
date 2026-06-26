@@ -105,6 +105,8 @@ in
         "*~"
         "~.swp"
         ".typos.toml"
+        ".luarc.json"
+        ".harper_dict.txt"
       ];
     };
   };
