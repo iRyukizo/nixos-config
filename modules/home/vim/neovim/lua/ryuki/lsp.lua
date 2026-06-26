@@ -50,7 +50,7 @@ M.on_attach = function(client, bufnr)
         -- Code
         { "<leader>c", group = "Code" },
         { "<leader>ca", vim.lsp.buf.code_action, desc = "Code actions" },
-        { "<leader>cf", vim.lsp.buf.format, desc = "Format code" },
+        { "<leader>cf", vim.lsp.buf.format, desc = "Format code", mode = { "n", "x" } },
         { "<leader>cd", cycle_diagnostics_display, desc = "Cycle diagnostics display" },
         { "<leader>cD", show_buffer_diagnostics, desc = "Show buffer diagnostics" },
         { "<leader>ch", toggle_inlay_hints, desc = "Toggle inlay hints" },
