@@ -9,8 +9,20 @@ local function list_clients(bufnr)
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
     local names = {}
 
+    local clients_suffixes = {
+        "_ls",
+        "_lsp",
+    }
+
     for _, client in ipairs(clients) do
-        table.insert(names, client.name)
+        local client_name = client.name
+        for _, suffix in ipairs(clients_suffixes) do
+            if client_name:sub(-#suffix) == suffix then
+                client_name = client_name:sub(1, -(#suffix+1))
+                break
+            end
+        end
+        table.insert(names, client_name)
     end
 
     return names
@@ -31,8 +43,14 @@ local function list_lsp_clients()
         return ""
     end
 
-    return "[ " .. table.concat(client_names, " ") .. " ]"
+    return table.concat(client_names, " ")
 end
+
+vim.api.nvim_create_autocmd({ "CmdlineChanged" }, {
+  callback = function()
+    require('lualine').refresh({ throw = false })
+  end,
+})
 
 require('lualine').setup {
     options = {
@@ -46,9 +64,8 @@ require('lualine').setup {
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_diagnostic' } } },
         lualine_c = { { 'filename', file_status = true }, { list_spell_languages }},
         lualine_x = { 
-            { 
+            {
                 list_lsp_clients,
-                separator = ''
             },
             {
                 'lsp_progress',
@@ -91,7 +108,7 @@ require('lualine').setup {
             },
             {
                 pretty_location,
-                seperator = '',
+                separator = '',
             },
         },
     },
