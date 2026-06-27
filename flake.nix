@@ -77,7 +77,7 @@
     eachDefaultSystem
       (system:
       let
-        pkgs = nixpkgs.legacyPackages.stdenv.hostPlatform.${system};
+        pkgs = nixpkgs.legacyPackages.${system};
       in
       rec {
         checks = {
