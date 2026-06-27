@@ -1,5 +1,5 @@
-local null_ls = require('null-ls')
-local lsp = require('ryuki.lsp')
+local null_ls = require("null-ls")
+local lsp = require("ryuki.lsp")
 local fmt = null_ls.builtins.formatting
 
 local function is_executable(cmd)

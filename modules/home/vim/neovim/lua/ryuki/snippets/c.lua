@@ -30,21 +30,15 @@ return {
     -- Include directives
     s(
         "inc",
-        fmt(
-            [[#include "{header}"]],
-            {
-                    header = i(1, buffer_basename_noext(0) .. ".h"),
-            }
-        )
+        fmt([[#include "{header}"]], {
+            header = i(1, buffer_basename_noext(0) .. ".h"),
+        })
     ),
     s(
         "Inc",
-        fmt(
-            [[#include <{header}>]],
-            {
-                header = i(1, "stdio.h"),
-            }
-        )
+        fmt([[#include <{header}>]], {
+            header = i(1, "stdio.h"),
+        })
     ),
     -- Header guards
     s(
@@ -61,20 +55,17 @@ return {
             {
                 value = i(1, buffer_headerguard_value(0)),
                 rep_value = rep(1),
-                code = i(2)
+                code = i(2),
             }
         )
     ),
     -- #define
     s(
         "def",
-        fmt(
-            [[$define {symbol} {value}]],
-            {
-                symbol = i(1, "SYMBOL"),
-                value = i(2, "value"),
-            }
-        )
+        fmt([[#define {symbol} {value}]], {
+            symbol = i(1, "SYMBOL"),
+            value = i(2, "value"),
+        })
     ),
     s(
         "#if",
@@ -103,7 +94,7 @@ return {
                 }}
             ]],
             {
-                statement = i(1, "/* code */")
+                statement = i(1, "/* code */"),
             }
         )
     ),
@@ -118,7 +109,7 @@ return {
                 }}
             ]],
             {
-                statement = i(1, "/* code */")
+                statement = i(1, "/* code */"),
             }
         )
     ),
@@ -288,13 +279,10 @@ return {
     ),
     s(
         "td",
-        fmt(
-            [[typedef {type} {name};]],
-            {
-                type = i(1, "int"),
-                name = i(2, "MyCustomType"),
-            }
-        )
+        fmt([[typedef {type} {name};]], {
+            type = i(1, "int"),
+            name = i(2, "MyCustomType"),
+        })
     ),
     s(
         "tds",
@@ -314,52 +302,40 @@ return {
     -- Printf
     s(
         "printf",
-        fmt(
-            [[printf("{string}"{format});]],
-            {
-                string = i(1, "%s"),
-                format = d(2,
-                    function(args)
-                        local fmt = args[1][1]
+        fmt([[printf("{string}"{format});]], {
+            string = i(1, "%s"),
+            format = d(2, function(args)
+                local fmt = args[1][1]
 
-                        if fmt:match("%%[%w]") then
-                            return sn(nil, {
-                                t(", "),
-                                i(1, "var"),
-                            })
-                        end
+                if fmt:match("%%[%w]") then
+                    return sn(nil, {
+                        t(", "),
+                        i(1, "var"),
+                    })
+                end
 
-                        return sn(nil, {})
-                    end,
-                    {1}
-                ),
-            }
-        )
+                return sn(nil, {})
+            end, { 1 }),
+        })
     ),
     s(
         "fprintf",
-        fmt(
-            [[fprintf({file}, "{string}"{format});]],
-            {
-                file = i(1, "stderr"),
-                string = i(2, "%s"),
-                format = d(3,
-                    function(args)
-                        local fmt = args[1][1]
+        fmt([[fprintf({file}, "{string}"{format});]], {
+            file = i(1, "stderr"),
+            string = i(2, "%s"),
+            format = d(3, function(args)
+                local fmt = args[1][1]
 
-                        if fmt:match("%%[%w]") then
-                            return sn(nil, {
-                                t(", "),
-                                i(1, "var"),
-                            })
-                        end
+                if fmt:match("%%[%w]") then
+                    return sn(nil, {
+                        t(", "),
+                        i(1, "var"),
+                    })
+                end
 
-                        return sn(nil, {})
-                    end,
-                    {2}
-                ),
-            }
-        )
+                return sn(nil, {})
+            end, { 2 }),
+        })
     ),
     -- switch
     s(

@@ -1,5 +1,5 @@
-local lsp_format = require('lsp-format')
-local wk = require('which-key')
+local lsp_format = require("lsp-format")
+local wk = require("which-key")
 
 lsp_format.setup({})
 
@@ -20,7 +20,12 @@ lsp_format.disable({ args = "c" })
 local function toggle_buffer_format_on_save()
     local ft = vim.bo.filetype
     lsp_format.toggle({ args = ft })
-    vim.notify("LSP Format on save for `" .. ft .. "` filetype " .. (lsp_format.disabled_filetypes[ft] and "disabled" or "enabled"))
+    vim.notify(
+        "LSP Format on save for `"
+            .. ft
+            .. "` filetype "
+            .. (lsp_format.disabled_filetypes[ft] and "disabled" or "enabled")
+    )
 end
 
 local keys = {

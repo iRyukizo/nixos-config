@@ -43,8 +43,8 @@ local keys = {
         "<leader>fd",
         function()
             telescope_builtin.diagnostics({ bufnr = 0 })
-        end
-        , desc = "LSP Diagnostics buffer",
+        end,
+        desc = "LSP Diagnostics buffer",
     },
     { "<leader>fD", telescope_builtin.diagnostics, desc = "LSP Diagnostics" },
     { "<leader>fc", telescope_builtin.git_bcommits, desc = "Git buffercommits" },

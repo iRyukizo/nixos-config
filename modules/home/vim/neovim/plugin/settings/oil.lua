@@ -1,11 +1,11 @@
-local oil = require('oil')
-local wk = require('which-key')
+local oil = require("oil")
+local wk = require("which-key")
 local detail = false
 
-oil.setup {
+oil.setup({
     view_options = {
         show_hidden = true,
-        is_always_hidden = function(name, bufnr) 
+        is_always_hidden = function(name, bufnr)
             return name == ".."
         end,
     },
@@ -22,7 +22,7 @@ oil.setup {
             end,
         },
     },
-}
+})
 
 local keys = {
     { "-", oil.open, desc = "Open parent directory" },

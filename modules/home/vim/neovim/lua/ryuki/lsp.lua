@@ -61,7 +61,11 @@ M.on_attach = function(client, bufnr)
         { "<leader>cw", group = "Workspace" },
         { "<leader>cwa", vim.lsp.buf.add_workspace_folder, desc = "Add folder to workspace" },
         { "<leader>cwl", list_workspace_folders, desc = "List folders in workspace" },
-        { "<leader>cwr", vim.lsp.buf.remove_workspace_folder, desc = "Remove folder from workspace" },
+        {
+            "<leader>cwr",
+            vim.lsp.buf.remove_workspace_folder,
+            desc = "Remove folder from workspace",
+        },
     }
 
     wk.add(keys)

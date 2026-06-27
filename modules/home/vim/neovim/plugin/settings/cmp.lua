@@ -1,17 +1,17 @@
-local cmp = require('cmp')
-local cmp_under_comparator = require('cmp-under-comparator')
-local luasnip = require('luasnip')
-local wk = require('which-key')
+local cmp = require("cmp")
+local cmp_under_comparator = require("cmp-under-comparator")
+local luasnip = require("luasnip")
+local wk = require("which-key")
 
 local function toggle_autocomplete()
-  local current_setting = cmp.get_config().completion.autocomplete
-  if current_setting and #current_setting > 0 then
-    cmp.setup({ completion = { autocomplete = false } })
-    vim.notify('cmp autocomplete disabled')
-  else
-    cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
-    vim.notify('cmp autocomplete enabled')
-  end
+    local current_setting = cmp.get_config().completion.autocomplete
+    if current_setting and #current_setting > 0 then
+        cmp.setup({ completion = { autocomplete = false } })
+        vim.notify("cmp autocomplete disabled")
+    else
+        cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
+        vim.notify("cmp autocomplete enabled")
+    end
 end
 
 local function tab_expand(fallback)
@@ -37,10 +37,16 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<Tab>"] = cmp.mapping(tab_expand, { 'i', 's' }),
-        ["<S-Tab>"] = cmp.mapping(stab_expand, { 'i', 's' }),
-        ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }), { "i", "c" }),
-        ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }), { "i", "c" }),
+        ["<Tab>"] = cmp.mapping(tab_expand, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(stab_expand, { "i", "s" }),
+        ["<C-n>"] = cmp.mapping(
+            cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+            { "i", "c" }
+        ),
+        ["<C-p>"] = cmp.mapping(
+            cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            { "i", "c" }
+        ),
         ["<C-d>"] = cmp.mapping.scroll_docs(-5),
         ["<C-f>"] = cmp.mapping.scroll_docs(5),
         ["<C-e>"] = cmp.mapping.abort(),
@@ -80,7 +86,7 @@ for _, lang in pairs({ "c", "nix" }) do
 end
 
 local keys = {
-    { "<leader>cc", toggle_autocomplete, desc="Toggle nvim-cmp" },
+    { "<leader>cc", toggle_autocomplete, desc = "Toggle nvim-cmp" },
 }
 
 wk.add(keys)
