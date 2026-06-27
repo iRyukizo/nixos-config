@@ -42,10 +42,10 @@
       ref = "master";
     };
 
-    pre-commit-hooks = {
+    git-hooks = {
       type = "github";
       owner = "cachix";
-      repo = "pre-commit-hooks.nix";
+      repo = "git-hooks.nix";
       ref = "master";
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -66,7 +66,7 @@
     , flake-utils
     , home-manager
     , nixpkgs
-    , pre-commit-hooks
+    , git-hooks
     , mac-app-util
     , ...
     }@inputs:
@@ -81,7 +81,7 @@
       in
       rec {
         checks = {
-          pre-commit = pre-commit-hooks.lib.${system}.run {
+          pre-commit = git-hooks.lib.${system}.run {
             src = ./.;
             hooks = {
               nixpkgs-fmt.enable = true;
