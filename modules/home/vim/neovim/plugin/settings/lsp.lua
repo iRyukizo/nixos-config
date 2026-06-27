@@ -107,6 +107,9 @@ local servers = {
     lua_ls = {
         settings = {
             Lua = {
+                format = {
+                    enable = false,
+                },
                 runtime = { version = "LuaJIT" },
                 workspace = { checkThirdParty = false },
                 telemetry = { enable = false },
