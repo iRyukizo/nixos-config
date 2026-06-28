@@ -21,7 +21,12 @@ vim.lsp.config("*", {
 
 local servers = {
     clangd = {},
-    nil_ls = {},
+    nil_ls = {
+        on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+    },
     pyright = {
         settings = {
             pyright = {
