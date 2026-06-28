@@ -6,7 +6,9 @@ pkgs.mkShell {
 
     gnumake
     cmake
+    bear
 
+    clang
     clang-tools
     ctags
 

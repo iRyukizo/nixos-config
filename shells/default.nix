@@ -5,6 +5,9 @@ let
 
   toImport = [
     "cc"
+    "lua"
+    "nix"
+    "rust"
   ];
 
   importFunc = name: {

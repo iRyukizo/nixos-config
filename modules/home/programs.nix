@@ -5,7 +5,6 @@
     docker
     xclip
     gotop
-    nixpkgs-fmt
     wakeonlan
 
     inputs.agenix.packages."${stdenv.hostPlatform.system}".default
