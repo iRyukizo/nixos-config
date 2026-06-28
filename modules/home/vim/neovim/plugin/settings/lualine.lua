@@ -76,11 +76,9 @@ require("lualine").setup({
             },
             {
                 "lsp_progress",
-                separator = "",
             },
             {
                 "filetype",
-                separator = "",
             },
         },
         lualine_y = {
