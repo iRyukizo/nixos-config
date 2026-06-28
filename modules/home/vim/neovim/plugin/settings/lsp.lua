@@ -116,7 +116,14 @@ local servers = {
                     enable = false,
                 },
                 runtime = { version = "LuaJIT" },
-                workspace = { checkThirdParty = false },
+                workspace = {
+                    ignoreDir = {
+                        ".git",
+                        ".direnv",
+                        "result*",
+                    },
+                    checkThirdParty = false,
+                },
                 telemetry = { enable = false },
             },
         },
