@@ -8,6 +8,7 @@
     ./ctags.nix
     ./devenv.nix
     ./direnv.nix
+    ./dircolors.nix
     ./dunst.nix
     ./flameshot.nix
     ./fonts.nix
