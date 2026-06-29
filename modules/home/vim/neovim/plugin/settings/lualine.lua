@@ -24,7 +24,7 @@ lsp_progress.setup({
 
         local sign = "" -- nf-fa-gear \uf013
 
-        local lsp_clients = vim.lsp.get_clients()
+        local lsp_clients = vim.lsp.get_clients({ bufnr = 0})
         local messages_map = {}
         local clients_suffixes = {
             "_ls",
