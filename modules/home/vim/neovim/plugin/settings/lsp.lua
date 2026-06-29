@@ -78,6 +78,7 @@ local servers = {
         },
     },
     harper_ls = {
+        root_markers = { ".harper_dict.txt", ".harper_dictionary.txt", ".git" },
         settings = {
             ["harper-ls"] = {
                 userDictPath = vim.fn.expand("~/.config/nvim/harper_dict.txt"),
