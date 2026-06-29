@@ -1,32 +1,82 @@
 local oil = require("oil")
 local wk = require("which-key")
 
+local lsp_progress = require("lsp-progress")
+local display_lsp_clients = true
+
+lsp_progress.setup({
+    client_format = function(client_name, spinner, series_messages)
+        if #series_messages == 0 then
+            return nil
+        end
+        return {
+            name = client_name,
+            body = spinner .. " " .. table.concat(series_messages, ", "),
+        }
+    end,
+    format = function(client_messages)
+        --- @param name string
+        --- @param msg string?
+        --- @return string
+        local function stringify(name, msg)
+            return msg and string.format("%s: %s", name, msg) or name
+        end
+
+        local sign = "" -- nf-fa-gear \uf013
+
+        local lsp_clients = vim.lsp.get_clients()
+        local messages_map = {}
+        local clients_suffixes = {
+            "_ls",
+            "-ls",
+            "_lsp",
+        }
+        for _, climsg in ipairs(client_messages) do
+            messages_map[climsg.name] = climsg.body
+        end
+
+        if #lsp_clients > 0 then
+            table.sort(lsp_clients, function(a, b)
+                return a.name < b.name
+            end)
+            local builder = {}
+            for _, cli in ipairs(lsp_clients) do
+                local cli_name = cli.name
+                for _, suffix in ipairs(clients_suffixes) do
+                    if cli_name:sub(-#suffix) == suffix then
+                        cli_name = cli_name:sub(1, -(#suffix + 1))
+                        break
+                    end
+                end
+
+                if
+                    type(cli) == "table"
+                    and type(cli.name) == "string"
+                    and string.len(cli.name) > 0
+                then
+                    if messages_map[cli.name] then
+                        table.insert(builder, stringify(cli_name, messages_map[cli.name]))
+                    else
+                        table.insert(builder, stringify(cli_name))
+                    end
+                end
+            end
+            if #builder > 0 then
+                if display_lsp_clients then
+                    return sign .. " " .. table.concat(builder, " ")
+                else
+                    return sign .. " " .. tostring(#builder)
+                end
+            end
+        end
+        return ""
+    end,
+})
+
 local function pretty_location()
     return string.format("%s%d%s%d", "\u{E0A1}", vim.fn.line("."), "\u{E0A3}", vim.fn.col("."))
 end
 
-local function list_clients(bufnr)
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
-    local names = {}
-
-    local clients_suffixes = {
-        "_ls",
-        "_lsp",
-    }
-
-    for _, client in ipairs(clients) do
-        local client_name = client.name
-        for _, suffix in ipairs(clients_suffixes) do
-            if client_name:sub(-#suffix) == suffix then
-                client_name = client_name:sub(1, -(#suffix + 1))
-                break
-            end
-        end
-        table.insert(names, client_name)
-    end
-
-    return names
-end
 local function list_spell_languages()
     if not vim.opt.spell:get() then
         return ""
@@ -35,28 +85,12 @@ local function list_spell_languages()
     return table.concat(vim.opt.spelllang:get(), ", ")
 end
 
-local display_lsp_clients = true
-
 local function toggle_lsp_display()
     display_lsp_clients = not display_lsp_clients
 
     require("lualine").refresh()
 
     vim.notify("LSP Clients Display " .. (display_lsp_clients and "on" or "off"))
-end
-
-local function list_lsp_clients()
-    local client_names = list_clients(0)
-
-    if #client_names == 0 then
-        return ""
-    end
-
-    if not display_lsp_clients then
-        return tostring(#client_names)
-    end
-
-    return table.concat(client_names, " ")
 end
 
 require("lualine").setup({
@@ -72,10 +106,9 @@ require("lualine").setup({
         lualine_c = { { "filename", file_status = true }, { list_spell_languages } },
         lualine_x = {
             {
-                list_lsp_clients,
-            },
-            {
-                "lsp_progress",
+                function()
+                    return lsp_progress.progress()
+                end,
             },
             {
                 "filetype",
@@ -147,6 +180,13 @@ require("lualine").setup({
             filetypes = { "gitsigns-blame" },
         },
     },
+})
+
+vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+    group = "lualine_augroup",
+    pattern = "LspProgressStatusUpdated",
+    callback = require("lualine").refresh,
 })
 
 local keys = {

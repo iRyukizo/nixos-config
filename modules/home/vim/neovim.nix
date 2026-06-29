@@ -37,7 +37,7 @@ in
         # Theme
         nord-nvim
         lualine-nvim
-        lualine-lsp-progress
+        lsp-progress-nvim
 
         # Which-key
         which-key-nvim
