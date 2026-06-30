@@ -22,5 +22,15 @@ null_ls.register({
     fmt_source(fmt.nixpkgs_fmt, "nixpkgs-fmt"),
     fmt_source(fmt.stylua, "stylua"),
     fmt_source(fmt.black, "black", { extra_args = { "--fast" } }),
-    fmt_source(fmt.prettier, "prettier"),
+    fmt_source(fmt.prettier, "prettier", {
+        filetypes = {
+            "javascript",
+            "typescript",
+            "css",
+            "html",
+            "json",
+            "jsonc",
+            "yaml",
+        },
+    }),
 })
