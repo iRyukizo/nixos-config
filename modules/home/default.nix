@@ -6,6 +6,7 @@
     ./bat.nix
     ./bluetooth.nix
     ./ctags.nix
+    ./delta.nix
     ./devenv.nix
     ./direnv.nix
     ./dircolors.nix

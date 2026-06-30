@@ -40,6 +40,7 @@ in
       ctags = {
         enable = mkDefault true;
       };
+      delta.enable = mkDefault true;
       direnv.enable = mkDefault true;
 
       fonts = {
