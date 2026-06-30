@@ -15,7 +15,7 @@ in
       theme = "Nord";
       color = "always";
 
-      pager = with config.programs.zsh.sessionVariables; "${PAGER}";
+      pager = with config.home.sessionVariables; "${PAGER} ${LESS}";
     };
   };
 }

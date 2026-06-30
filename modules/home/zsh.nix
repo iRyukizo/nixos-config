@@ -116,9 +116,6 @@ in
 
       sessionVariables = {
         CLICOLOR = "1";
-        MANPAGER = "less -M -R -i --mouse --use-color -Dkr -Dd+b -Ds+246 -Du+C -j5";
-        MANROFFOPT = "-c";
-        PAGER = "less -M -R -i --mouse --use-color -Dkr -Dd+b -Ds+246 -Du+C -j5";
         SHELL = "${pkgs.zsh}/bin/zsh";
       };
 

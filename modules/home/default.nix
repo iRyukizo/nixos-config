@@ -18,6 +18,7 @@
     ./gpg.nix
     ./gtk.nix
     ./i3
+    ./less.nix
     ./man.nix
     ./nix.nix
     ./programs.nix
