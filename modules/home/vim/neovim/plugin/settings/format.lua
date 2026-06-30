@@ -3,20 +3,6 @@ local wk = require("which-key")
 
 lsp_format.setup({})
 
-local format = vim.api.nvim_create_augroup("ryuki.format", { clear = true })
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = format,
-    callback = function(args)
-        local buf, data = args.buf, args.data
-
-        local client = assert(vim.lsp.get_client_by_id(data.client_id))
-        lsp_format.on_attach(client, buf)
-    end,
-})
-
--- By default disable formatting on save for c language
-lsp_format.disable({ args = "c" })
-
 local function toggle_buffer_format_on_save()
     local ft = vim.bo.filetype
     lsp_format.toggle({ args = ft })
@@ -28,8 +14,23 @@ local function toggle_buffer_format_on_save()
     )
 end
 
-local keys = {
-    { "<leader>cF", toggle_buffer_format_on_save, desc = "Toggle format code" },
-}
+local format = vim.api.nvim_create_augroup("ryuki.format", { clear = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = format,
+    callback = function(args)
+        local buf, data = args.buf, args.data
 
-wk.add(keys)
+        local client = assert(vim.lsp.get_client_by_id(data.client_id))
+        lsp_format.on_attach(client, buf)
+        local keys = {
+            buffer = 0,
+
+            { "<leader>cF", toggle_buffer_format_on_save, desc = "Toggle format code" },
+        }
+
+        wk.add(keys)
+    end,
+})
+
+-- By default disable formatting on save for c language
+lsp_format.disable({ args = "c" })

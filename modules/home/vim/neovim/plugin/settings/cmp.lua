@@ -86,6 +86,7 @@ for _, lang in pairs({ "c", "nix", "json" }) do
 end
 
 local keys = {
+    { "<leader>c", group = "Code" },
     { "<leader>cc", toggle_autocomplete, desc = "Toggle nvim-cmp" },
 }
 
