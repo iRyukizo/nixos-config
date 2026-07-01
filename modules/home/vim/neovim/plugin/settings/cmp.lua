@@ -47,6 +47,14 @@ local function prev_choice(fallback)
     end
 end
 
+local function sel_choice(fallback)
+    if luasnip.choice_active then
+        select_choice()
+    else
+        fallback()
+    end
+end
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -56,7 +64,7 @@ cmp.setup({
     mapping = {
         ["<Tab>"] = cmp.mapping(tab_expand, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(stab_expand, { "i", "s" }),
-        ["<C-u>"] = cmp.mapping(select_choice, { "i", "s" }),
+        ["<C-u>"] = cmp.mapping(sel_choice, { "i", "s" }),
         ["<C-l>"] = cmp.mapping(next_choice, { "i", "s" }),
         ["<C-h>"] = cmp.mapping(prev_choice, { "i", "s" }),
         ["<C-n>"] = cmp.mapping(
