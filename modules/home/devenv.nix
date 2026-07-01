@@ -53,6 +53,7 @@ in
       gpg.enable = mkDefault true;
       man.enable = mkDefault true;
       nix.enable = mkDefault true;
+      nix-index.enable = mkDefault true;
       ssh.enable = mkDefault true;
       tmux = {
         inherit (cfg) type;

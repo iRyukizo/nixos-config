@@ -21,6 +21,7 @@
     ./i3
     ./less.nix
     ./man.nix
+    ./nix-index.nix
     ./nix.nix
     ./programs.nix
     ./ranger.nix
