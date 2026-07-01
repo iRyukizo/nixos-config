@@ -2,6 +2,7 @@ local cmp = require("cmp")
 local cmp_under_comparator = require("cmp-under-comparator")
 local luasnip = require("luasnip")
 local wk = require("which-key")
+local select_choice = require("luasnip.extras.select_choice")
 
 local function toggle_autocomplete()
     local current_setting = cmp.get_config().completion.autocomplete
@@ -30,6 +31,22 @@ local function stab_expand(fallback)
     end
 end
 
+local function next_choice(fallback)
+    if luasnip.choice_active then
+        luasnip.change_choice(1)
+    else
+        fallback()
+    end
+end
+
+local function prev_choice(fallback)
+    if luasnip.choice_active then
+        luasnip.change_choice(-1)
+    else
+        fallback()
+    end
+end
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -39,6 +56,9 @@ cmp.setup({
     mapping = {
         ["<Tab>"] = cmp.mapping(tab_expand, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(stab_expand, { "i", "s" }),
+        ["<C-u>"] = cmp.mapping(select_choice, { "i", "s" }),
+        ["<C-l>"] = cmp.mapping(next_choice, { "i", "s" }),
+        ["<C-h>"] = cmp.mapping(prev_choice, { "i", "s" }),
         ["<C-n>"] = cmp.mapping(
             cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
             { "i", "c" }
@@ -81,7 +101,7 @@ cmp.setup({
     },
 })
 
-for _, lang in pairs({ "c", "nix", "json" }) do
+for _, lang in pairs({ "c", "nix", "json", "gitcommit" }) do
     luasnip.add_snippets(lang, require("ryuki.snippets." .. lang))
 end
 
