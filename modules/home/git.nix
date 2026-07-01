@@ -99,6 +99,7 @@ in
         "*.out"
         ".venv/"
         ".clangd/"
+        ".cache/"
         "compile_commands.json"
         "Session.vim"
         ".direnv"
