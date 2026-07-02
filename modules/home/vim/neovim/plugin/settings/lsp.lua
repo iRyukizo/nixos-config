@@ -1,4 +1,5 @@
 local lsp = require("ryuki.lsp")
+local xc8_clangd = require("ryuki.lsp.xc8_clangd")
 
 vim.diagnostic.config({
     virtual_text = false,
@@ -20,7 +21,29 @@ vim.lsp.config("*", {
 })
 
 local servers = {
-    clangd = {},
+    clangd = {
+        -- We need to avoid xc8-clangd and clangd to clash
+        root_dir = function(bufnr, on_dir)
+            local root_markers = {
+                ".clangd",
+                ".clang-tidy",
+                ".clang-format",
+                "compile_commands.json",
+                "compile_flags.txt",
+                "configure.ac",
+                ".git",
+            }
+            local root = vim.fs.root(bufnr, root_markers)
+            local xc8 = vim.fs.root(bufnr, { ".xc8", "nbproject" })
+
+            if xc8 then
+                return nil
+            end
+
+            return on_dir(root)
+        end,
+    },
+    xc8_clangd = xc8_clangd,
     nil_ls = {
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false

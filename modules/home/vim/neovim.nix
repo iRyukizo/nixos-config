@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  inherit (lib) mkIf nameValuePair;
+  inherit (lib) mkIf nameValuePair optional;
   inherit (lib.strings) optionalString;
 
   neovimConfigFiles =
@@ -123,7 +123,7 @@ in
         ruff
         typos-lsp
         lua-language-server
-      ];
+      ] ++ optional cfg.options.xc8Support pkgs.ryuki.microchip-xc8;
     };
   };
 }
