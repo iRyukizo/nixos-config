@@ -109,7 +109,7 @@ cmp.setup({
     },
 })
 
-for _, lang in pairs({ "c", "nix", "json", "gitcommit" }) do
+for _, lang in pairs({ "c", "nix", "json", "gitcommit", "markdown" }) do
     luasnip.add_snippets(lang, require("ryuki.snippets." .. lang))
 end
 
