@@ -14,6 +14,7 @@
       extraSpecialArgs = {
         inherit inputs useGlobalPkgs;
         lib = self.lib.extend (_: _: home-manager.lib);
+        standaloneHome = false;
       };
     };
   };

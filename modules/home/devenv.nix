@@ -30,8 +30,6 @@ in
     home = mkIf (cfg.type == "wsl") {
       packages = with pkgs; [
         gnumake
-        man-pages
-        man-pages-posix
         tree
       ];
     };
