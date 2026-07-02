@@ -50,6 +50,7 @@ mapAttrs buildHomeConfiguration {
     configModule = {
       my.home = {
         terminal.alacritty.enable = true;
+        vim.options.xc8Support = true;
         devenv = {
           enable = true;
           type = "wsl";
