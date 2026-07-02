@@ -26,13 +26,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # FIXME: create a dedicated packages config for wsl
-    home = mkIf (cfg.type == "wsl") {
-      packages = with pkgs; [
-        gnumake
-        tree
-      ];
-    };
     my.home = {
       bat.enable = mkDefault true;
       ctags = {
@@ -62,6 +55,8 @@ in
 
         enable = mkDefault true;
       };
+
+      wsl.enable = mkDefault (cfg.type == "wsl");
 
       xdg = {
         enable = true;

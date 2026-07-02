@@ -33,6 +33,7 @@
     ./tmux.nix
     ./token.nix
     ./vim
+    ./wsl.nix
     ./xdg.nix
     ./zsh.nix
   ];
