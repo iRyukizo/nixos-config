@@ -98,7 +98,7 @@ in
         "*.a"
         "*.out"
         ".venv/"
-        ".clangd/"
+        ".clangd"
         ".cache/"
         "compile_commands.json"
         "Session.vim"
