@@ -8,6 +8,7 @@ with pkgs;
   system-san-francisco-font = callPackage ./system-san-francisco-font { };
   san-francisco-display-regular-nerd-font = callPackage ./san-francisco-display-regular-nerd-font { };
   san-francisco-font = callPackage ./san-francisco-font { };
+} // lib.optionalAttrs (stdenv.isx86_64 && stdenv.isLinux) {
   microchip-xc8 = callPackage ./microchip-xc8 { };
 } // lib.optionalAttrs (!stdenv.isDarwin) {
   spotify-song-getter = callPackage ./spotify-song-getter { };
