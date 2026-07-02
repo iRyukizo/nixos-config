@@ -10,7 +10,7 @@ let
     { system, configModule, homePrefix ? "/home" }:
     homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."${system}";
-      extraSpecialArgs = { 
+      extraSpecialArgs = {
         inherit inputs;
         lib = self.lib.extend (_: _: home-manager.lib);
         useGlobalPkgs = false;
