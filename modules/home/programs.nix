@@ -1,14 +1,33 @@
-{ inputs, pkgs, ... }:
+{ config
+, inputs
+, pkgs
+, lib
+, useGlobalPkgs
+, ...
+}:
 
+let
+  inherit (lib) mkEnableOption mkIf;
+
+  cfg = config.my.home.programs;
+in
 {
-  nixpkgs.config.allowUnfree = true;
+  options.my.home.programs = {
+    allowUnfree = mkEnableOption "allowUnfree";
+  };
 
-  home.packages = with pkgs; [
-    docker
-    xclip
-    gotop
-    wakeonlan
+  config = {
+    nixpkgs.config = mkIf (!useGlobalPkgs) {
+      inherit (cfg) allowUnfree;
+    };
 
-    inputs.agenix.packages."${stdenv.hostPlatform.system}".default
-  ];
+    home.packages = with pkgs; [
+      docker
+      xclip
+      gotop
+      wakeonlan
+
+      inputs.agenix.packages."${stdenv.hostPlatform.system}".default
+    ];
+  };
 }

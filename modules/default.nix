@@ -4,14 +4,17 @@
   nixos = import ./nixos;
 
   home = {
-    home-manager = {
+    home-manager = rec {
       useUserPackages = true;
       useGlobalPkgs = true;
       verbose = true;
       users = {
         ryuki = import ./home;
       };
-      extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
+      extraSpecialArgs = {
+        inherit inputs useGlobalPkgs;
+        lib = self.lib.extend (_: _: home-manager.lib);
+      };
     };
   };
 }

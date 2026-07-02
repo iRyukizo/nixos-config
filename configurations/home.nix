@@ -10,7 +10,7 @@ let
     { system, configModule, homePrefix ? "/home" }:
     homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages."${system}";
-      extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); };
+      extraSpecialArgs = { inherit inputs; lib = self.lib.extend (_: _: home-manager.lib); useGlobalPkgs = false; };
       modules = [
         # Mac App util on darwin will automatically creates trampoline apps,
         # but be careful as updating apps will create doubles. Then when
