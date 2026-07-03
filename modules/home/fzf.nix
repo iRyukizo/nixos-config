@@ -28,11 +28,11 @@ in
       header = "#a3be8b";
     };
 
-    fileWidgetOptions = [
+    fileWidget.options = [
       "--preview 'bat -n {}'"
       "--reverse"
     ];
-    historyWidgetOptions = [
+    historyWidget.options = [
       "--reverse"
     ];
   };
