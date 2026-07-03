@@ -65,6 +65,16 @@
       repo = "NixOS-WSL";
       ref = "main";
     };
+
+    nix-index-database = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nix-index-database";
+      ref = "main";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
@@ -75,6 +85,8 @@
     , nixpkgs
     , git-hooks
     , mac-app-util
+    , nixos-wsl
+    , nix-index-database
     , ...
     }@inputs:
     let

@@ -1,7 +1,13 @@
 { inputs, self, ... }:
 
 let
-  inherit (inputs) agenix home-manager nixpkgs nixos-wsl;
+  inherit (inputs)
+    agenix
+    home-manager
+    nix-index-database
+    nixos-wsl
+    nixpkgs;
+
   inherit (nixpkgs.lib) attrValues mapAttrs nixosSystem optional;
 
   system = "x86_64-linux";
@@ -9,6 +15,7 @@ let
     { system.configurationRevision = self.rev or "dirty"; }
     home-manager.nixosModules.default
     { nixpkgs.overlays = (attrValues self.overlays) ++ [ agenix.overlays.default ]; }
+    nix-index-database.nixosModules.default
   ] ++ (nixpkgs.lib.attrValues self.nixosModules);
 
   buildMachine = name: { system, hardwareModules, isWsl ? false }: nixosSystem {

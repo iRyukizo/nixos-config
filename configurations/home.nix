@@ -1,7 +1,13 @@
 { inputs, self, ... }:
 
 let
-  inherit (inputs) agenix home-manager mac-app-util nixpkgs;
+  inherit (inputs)
+    agenix
+    home-manager
+    mac-app-util
+    nix-index-database
+    nixpkgs;
+
   inherit (nixpkgs.lib) attrValues mapAttrs;
   inherit (home-manager.lib) homeManagerConfiguration;
 
@@ -21,6 +27,7 @@ let
         # but be careful as updating apps will create doubles. Then when
         # updating, try to sync apps accordingly.
         mac-app-util.homeManagerModules.default
+        nix-index-database.homeModules.default
         "${self}/modules/home"
         {
           nixpkgs.overlays = (attrValues self.overlays) ++ [ agenix.overlays.default ];
