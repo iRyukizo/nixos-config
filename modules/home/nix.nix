@@ -2,7 +2,6 @@
 
 let
   inherit (lib)
-    literalExpression
     mkDefault
     mkEnableOption
     mkOption

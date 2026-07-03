@@ -1,9 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
 
 let
   inherit (lib) literalExpression mkEnableOption mkOption types;
-
-  cfg = config.my.home.vim;
 in
 {
   imports = [

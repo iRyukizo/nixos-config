@@ -2,7 +2,7 @@
 
 with lib;
 let
-  inherit (builtins) map genList length listToAttrs toString;
+  inherit (builtins) listToAttrs toString;
   inherit (lib.strings) optionalString;
 
   cfg = config.my.home.polybar;

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  inherit (builtins) genList map replaceStrings;
+  inherit (builtins) genList replaceStrings;
   inherit (lib)
     mkDefault
     mkEnableOption

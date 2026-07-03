@@ -77,7 +77,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = [
       cfg.package
     ] ++ optional cfg.gtags.enable pkgs.global;
 

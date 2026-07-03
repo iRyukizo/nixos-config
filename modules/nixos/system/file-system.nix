@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  inherit (lib) mkEnableOption mkIf optional;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.system.fileSystem;
 in
 {

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkEnableOption mkOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.home.xresources;
 
   nord-xresources = pkgs.fetchFromGitHub {

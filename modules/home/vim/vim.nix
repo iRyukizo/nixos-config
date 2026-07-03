@@ -13,7 +13,7 @@ in
       ctags.enable = mkDefault cfg.ctagsSupport;
     };
 
-    home.packages = with pkgs; [ ] ++ optional cfg.clangFormatSupport pkgs.clang-tools;
+    home.packages = [ ] ++ (optional cfg.clangFormatSupport pkgs.clang-tools);
 
     programs.vim = {
       enable = true;

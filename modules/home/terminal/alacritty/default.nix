@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  inherit (lib) mkDefault mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.my.home.terminal.alacritty;
 in
 {

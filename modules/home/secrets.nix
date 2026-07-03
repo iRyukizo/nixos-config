@@ -1,4 +1,4 @@
-{ config, options, inputs, lib, pkgs, ... }:
+{ config, options, inputs, ... }:
 
 let
   xdgCfg = config.my.home.xdg;

@@ -1,7 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 
 let
-  inherit (builtins) genList map replaceStrings;
+  inherit (builtins) genList replaceStrings;
   inherit (lib) literalExpression mkOption mkEnableOption mkIf nameValuePair types;
   inherit (lib.my) genAttrs' recursiveMerge renameAttrs;
 

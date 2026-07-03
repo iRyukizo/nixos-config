@@ -86,7 +86,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      rec {
+      {
         checks = {
           pre-commit = git-hooks.lib.${system}.run {
             src = ./.;

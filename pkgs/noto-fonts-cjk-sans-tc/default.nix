@@ -3,7 +3,7 @@
 , fetchFromGitHub
 }:
 
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation {
   pname = "noto-fonts-cjk-sans-tc";
   version = "20251015";
 

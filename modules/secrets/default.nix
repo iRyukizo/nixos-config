@@ -1,7 +1,7 @@
-{ config, inputs, lib, ... }:
+{ config, lib, ... }:
 
 let
-  inherit (lib) any filterAttrs literalExpression mkEnableOption mkIf mkOption types;
+  inherit (lib) any filterAttrs literalExpression mkEnableOption mkOption types;
   inherit (lib.strings) hasPrefix;
 
   prefixModule = types.submodule {
