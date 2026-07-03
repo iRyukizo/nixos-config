@@ -26,6 +26,7 @@ in
       xclip
       gotop
       wakeonlan
+      fd
 
       inputs.agenix.packages."${stdenv.hostPlatform.system}".default
     ];
