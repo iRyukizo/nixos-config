@@ -16,6 +16,13 @@ in
         username (default: ryuki)
       '';
     };
+    uid = mkOption {
+      type = with types; nullOr int;
+      default = null;
+      description = ''
+        The account UID. If the UID is null, a free UID is picked on activation.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -26,6 +33,8 @@ in
         root.hashedPasswordFile = secrets."nixos/users/root/hashed-password".path;
 
         "${cfg.name}" = {
+          inherit (cfg) uid;
+
           hashedPasswordFile = secrets."nixos/users/ryuki/hashed-password".path;
           shell = pkgs.zsh;
           ignoreShellProgramCheck = true;

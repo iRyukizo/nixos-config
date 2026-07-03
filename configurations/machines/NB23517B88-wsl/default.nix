@@ -15,10 +15,6 @@ in
     };
   };
 
-  # Set a different uid for user in case of multiple distribution on WSL.
-  # https://github.com/microsoft/WSL/issues/13985
-  # uid = 1100;
-  # users.users.ryuki.uid = 1100;
 
   wsl = {
     enable = true;
@@ -46,6 +42,10 @@ in
 
     system = {
       inherit type;
+
+      # Set a different uid for user in case of multiple distribution on WSL.
+      # https://github.com/microsoft/WSL/issues/13985
+      # users.uid = 1100;
     };
 
     services = {
