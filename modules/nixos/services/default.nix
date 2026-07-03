@@ -12,12 +12,12 @@ in
 
   options.my.services = {
     type = mkOption {
-      type = types.enum [ "gui" "standard" ];
+      type = types.enum [ "gui" "standard" "wsl" ];
       default = "gui";
       example = literalExpression ''gui'';
       description = ''
         Type of service (default: gui).
-        Options: gui standard
+        Options: gui standard wsl
       '';
     };
   };
@@ -33,6 +33,12 @@ in
       my.services = {
         ssh.enable = mkDefault true;
         fail2ban.enable = mkDefault true;
+      };
+    })
+    (mkIf (cfg.type == "wsl") {
+      my.services = {
+        ssh.enable = mkDefault false;
+        fail2ban.enable = mkDefault false;
       };
     })
   ];

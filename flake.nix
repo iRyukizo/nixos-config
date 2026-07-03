@@ -58,6 +58,13 @@
       repo = "mac-app-util";
       ref = "master";
     };
+
+    nixos-wsl = {
+      type = "github";
+      owner = "nix-community";
+      repo = "NixOS-WSL";
+      ref = "main";
+    };
   };
 
   outputs =

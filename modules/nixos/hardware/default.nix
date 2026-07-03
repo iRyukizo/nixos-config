@@ -12,12 +12,12 @@ in
 
   options.my.hardware = {
     type = mkOption {
-      type = types.enum [ "gui" "standard" ];
+      type = types.enum [ "gui" "standard" "wsl" ];
       default = "gui";
       example = literalExpression ''gui'';
       description = ''
         Type of hardware (default: gui).
-        Options: gui standard
+        Options: gui standard wsl
       '';
     };
   };
@@ -31,6 +31,12 @@ in
     })
 
     (mkIf (cfg.type == "standard") {
+      my.hardware = {
+        networking.enable = mkDefault true;
+      };
+    })
+
+    (mkIf (cfg.type == "wsl") {
       my.hardware = {
         networking.enable = mkDefault true;
       };

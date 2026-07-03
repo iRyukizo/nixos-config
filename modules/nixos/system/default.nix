@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  inherit (lib) literalExpression mkDefault mkIf mkMerge mkOption types;
+  inherit (lib) literalExpression mkDefault mkForce mkIf mkMerge mkOption types;
   cfg = config.my.system;
 in
 {
@@ -19,12 +19,12 @@ in
 
   options.my.system = {
     type = mkOption {
-      type = types.enum [ "gui" "standard" ];
+      type = types.enum [ "gui" "standard" "wsl" ];
       default = "gui";
       example = literalExpression ''gui'';
       description = ''
         Type of system (default: gui).
-        Options: gui standard
+        Options: gui standard wsl
       '';
     };
   };
@@ -49,6 +49,19 @@ in
         fileSystem = {
           enable = mkDefault true;
           crypt = mkDefault false;
+        };
+        locales.enable = mkDefault true;
+        nix.enable = mkDefault true;
+        users.enable = mkDefault true;
+      };
+    })
+
+    (mkIf (cfg.type == "wsl") {
+      my.system = {
+        docker.enable = mkDefault true;
+        fileSystem = {
+          enable = mkForce false;
+          crypt = mkForce false;
         };
         locales.enable = mkDefault true;
         nix.enable = mkDefault true;
