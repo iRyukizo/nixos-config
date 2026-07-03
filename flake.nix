@@ -32,7 +32,13 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-unstable";
+      ref = "nixos-unstable-small";
+    };
+    nixpkgs-master = {
+      type = "github";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      ref = "master";
     };
 
     nixos-hardware = {
@@ -73,6 +79,7 @@
     , flake-utils
     , home-manager
     , nixpkgs
+    , nixpkgs-master
     , git-hooks
     , mac-app-util
     , ...
