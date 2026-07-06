@@ -67,6 +67,7 @@ mapAttrs buildHomeConfiguration {
           enable = true;
           type = "wsl";
         };
+        programs.allowUnfree = true;
       };
     };
   };
