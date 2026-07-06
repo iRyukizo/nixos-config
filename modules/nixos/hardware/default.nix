@@ -37,9 +37,7 @@ in
     })
 
     (mkIf (cfg.type == "wsl") {
-      my.hardware = {
-        networking.enable = mkDefault true;
-      };
+      my.hardware = { };
     })
   ];
 }
