@@ -27,6 +27,7 @@ in
   networking = {
     hostName = "NB23517B88-wsl";
   };
+  time.timeZone = "Asia/Taipei";
 
   my = {
     packages = {
@@ -35,10 +36,6 @@ in
 
     hardware = {
       inherit type;
-      networking = {
-        hostname = "NB23517B88-wsl";
-        timeZone = "Asia/Taipei";
-      };
     };
 
     system = {
