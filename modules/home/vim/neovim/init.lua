@@ -40,6 +40,8 @@ vim.opt.completeopt = { "menu", "menuone", "preview", "noselect" }
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.modeline = false
+
 -- Theme
 vim.opt.termguicolors = true
 
