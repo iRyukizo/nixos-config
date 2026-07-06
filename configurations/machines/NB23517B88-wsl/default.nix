@@ -23,6 +23,7 @@ in
   };
 
   boot.isContainer = true;
+  security.sudo.wheelNeedsPassword = true;
 
   networking = {
     hostName = "NB23517B88-wsl";
