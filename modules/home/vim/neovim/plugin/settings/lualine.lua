@@ -93,6 +93,16 @@ local function toggle_lsp_display()
     vim.notify("LSP Clients Display " .. (display_lsp_clients and "on" or "off"))
 end
 
+local diagnostics_enabled = true
+
+local function toggle_diagnostics_display()
+    diagnostics_enabled = not diagnostics_enabled
+
+    require("lualine").refresh()
+
+    vim.notify("Diagnostics Display " .. (diagnostics_enabled and "on" or "off"))
+end
+
 require("lualine").setup({
     options = {
         theme = "nord",
@@ -102,7 +112,17 @@ require("lualine").setup({
 
     sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
+        lualine_b = {
+            "branch",
+            "diff",
+            {
+                "diagnostics",
+                sources = { "nvim_diagnostic" },
+                cond = function()
+                    return diagnostics_enabled
+                end,
+            },
+        },
         lualine_c = { { "filename", file_status = true }, { list_spell_languages }, { "aerial" } },
         lualine_x = {
             {
@@ -192,6 +212,7 @@ vim.api.nvim_create_autocmd("User", {
 
 local keys = {
     { "<leader>ci", toggle_lsp_display, desc = "Toggle LSP clients" },
+    { "<leader>cI", toggle_diagnostics_display, desc = "Toggle Diagnostics display" },
 }
 
 wk.add(keys)
