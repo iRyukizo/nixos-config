@@ -18,6 +18,11 @@ end
 local function tab_expand(fallback)
     if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
+    elseif cmp.visible() then
+        cmp.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = false,
+        })
     else
         fallback()
     end
