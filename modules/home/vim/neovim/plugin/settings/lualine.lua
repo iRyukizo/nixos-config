@@ -103,6 +103,17 @@ local function toggle_diagnostics_display()
     vim.notify("Diagnostics Display " .. (diagnostics_enabled and "on" or "off"))
 end
 
+local gitinfo_display = true
+
+local function toggle_gitinfo_display()
+    gitinfo_display = not gitinfo_display
+
+    require("lualine").refresh()
+
+    vim.notify("Git Info Display " .. (gitinfo_display and "on" or "off"))
+end
+
+
 require("lualine").setup({
     options = {
         theme = "nord",
@@ -113,8 +124,18 @@ require("lualine").setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = {
-            "branch",
-            "diff",
+            {
+                "branch",
+                cond = function()
+                    return gitinfo_display
+                end,
+            },
+            {
+                "diff",
+                cond = function()
+                    return gitinfo_display
+                end,
+            },
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
@@ -213,6 +234,7 @@ vim.api.nvim_create_autocmd("User", {
 local keys = {
     { "<leader>ci", toggle_lsp_display, desc = "Toggle LSP clients" },
     { "<leader>cI", toggle_diagnostics_display, desc = "Toggle Diagnostics display" },
+    { "<leader>gi", toggle_gitinfo_display, desc = "Toggle git info display" },
 }
 
 wk.add(keys)
