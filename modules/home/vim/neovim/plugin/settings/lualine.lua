@@ -103,7 +103,7 @@ require("lualine").setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
-        lualine_c = { { "filename", file_status = true }, { list_spell_languages } },
+        lualine_c = { { "filename", file_status = true }, { list_spell_languages }, { "aerial" } },
         lualine_x = {
             {
                 function()
@@ -160,6 +160,7 @@ require("lualine").setup({
         "fugitive",
         "man",
         "quickfix",
+        "aerial",
         {
             sections = {
                 lualine_a = { "mode" },
