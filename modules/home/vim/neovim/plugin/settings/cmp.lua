@@ -37,7 +37,7 @@ local function stab_expand(fallback)
 end
 
 local function next_choice(fallback)
-    if luasnip.choice_active then
+    if luasnip.choice_active() then
         luasnip.change_choice(1)
     else
         fallback()
@@ -45,7 +45,7 @@ local function next_choice(fallback)
 end
 
 local function prev_choice(fallback)
-    if luasnip.choice_active then
+    if luasnip.choice_active() then
         luasnip.change_choice(-1)
     else
         fallback()
@@ -53,12 +53,13 @@ local function prev_choice(fallback)
 end
 
 local function sel_choice(fallback)
-    if luasnip.choice_active then
+    if luasnip.choice_active() then
         select_choice()
     else
         fallback()
     end
 end
+
 
 cmp.setup({
     snippet = {
