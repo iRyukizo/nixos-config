@@ -16,8 +16,6 @@ in
       file
       git
       htop
-      man-pages
-      man-pages-posix
       tmux
       tree
       usbutils

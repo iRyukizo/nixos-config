@@ -8,6 +8,7 @@ in
   imports = [
     ./file-system.nix
     ./docker.nix
+    ./documentation.nix
     ./gui.nix
     ./locales.nix
     ./nix.nix
@@ -33,6 +34,7 @@ in
     (mkIf (cfg.type == "gui") {
       my.system = {
         docker.enable = mkDefault true;
+        documentation.enable = mkDefault true;
         fileSystem.enable = mkDefault true;
         gui.enable = mkDefault true;
         locales.enable = mkDefault true;
@@ -46,6 +48,7 @@ in
     (mkIf (cfg.type == "standard") {
       my.system = {
         docker.enable = mkDefault true;
+        documentation.enable = mkDefault true;
         fileSystem = {
           enable = mkDefault true;
           crypt = mkDefault false;
@@ -59,6 +62,7 @@ in
     (mkIf (cfg.type == "wsl") {
       my.system = {
         docker.enable = mkDefault true;
+        documentation.enable = mkDefault true;
         fileSystem = {
           enable = mkForce false;
           crypt = mkForce false;
