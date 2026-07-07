@@ -90,6 +90,9 @@ in
             };
           };
         }
+        {
+          path = "config.local";
+        }
       ] ++ makeConditions cfg.emailConditions;
 
       ignores = [
