@@ -13,6 +13,10 @@ vim.diagnostic.config({
     },
 })
 
+vim.api.nvim_set_hl(0, "LspInlayHint", {
+    link = "Comment",
+})
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 vim.lsp.config("*", {
