@@ -113,7 +113,6 @@ local function toggle_gitinfo_display()
     vim.notify("Git Info Display " .. (gitinfo_display and "on" or "off"))
 end
 
-
 require("lualine").setup({
     options = {
         theme = "nord",
@@ -144,7 +143,23 @@ require("lualine").setup({
                 end,
             },
         },
-        lualine_c = { { "filename", file_status = true }, { list_spell_languages }, { "aerial" } },
+        lualine_c = {
+            {
+                "filename",
+                file_status = true,
+            },
+            {
+                list_spell_languages,
+            },
+            {
+                "aerial",
+                dense = true,
+                dense_sep = ".",
+                sep_highlight = "",
+                sep_icon = "",
+                depth = nil,
+            },
+        },
         lualine_x = {
             {
                 function()
