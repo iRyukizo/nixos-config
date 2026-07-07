@@ -51,6 +51,7 @@ local keys = {
     { "<leader>fC", telescope_builtin.git_commits, desc = "Git commits" },
     { "<leader>fs", telescope_builtin.treesitter, desc = "Treesitter symbols" },
     { "<leader>fS", telescope_builtin.lsp_document_symbols, desc = "LSP Document Symbols" },
+    { "<leader>fq", telescope_builtin.quickfix, desc = "Current Quickfix list" },
 }
 
 wk.add(keys)
