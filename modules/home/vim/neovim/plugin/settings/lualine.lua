@@ -152,12 +152,12 @@ require("lualine").setup({
                 list_spell_languages,
             },
             {
-                "aerial",
+                "custom_aerial",
                 dense = true,
                 dense_sep = ".",
                 sep_highlight = "",
                 sep_icon = "",
-                depth = nil,
+                depth = vim.g.aerial_lualine_depth,
             },
         },
         lualine_x = {
@@ -246,9 +246,18 @@ vim.api.nvim_create_autocmd("User", {
     callback = require("lualine").refresh,
 })
 
+function toggle_aerial_depth()
+    vim.g.aerial_lualine_depth = vim.g.aerial_lualine_depth == nil and -1 or nil
+
+    require("lualine").refresh()
+
+    vim.notify("Aerial Lualine Depth: " .. tostring(vim.g.aerial_lualine_depth))
+end
+
 local keys = {
     { "<leader>ci", toggle_lsp_display, desc = "Toggle LSP clients" },
     { "<leader>cI", toggle_diagnostics_display, desc = "Toggle Diagnostics display" },
+    { "<leader>cn", toggle_aerial_depth, desc = "Toggle Aerial Depth" },
     { "<leader>gi", toggle_gitinfo_display, desc = "Toggle git info display" },
 }
 
