@@ -24,6 +24,9 @@ aerial.setup({
         "Struct",
         "Field",
         "Variable",
+        "Constant",
+        "Object",
+        "String",
     },
 })
 
