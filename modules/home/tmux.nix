@@ -107,6 +107,10 @@ in
           # We need to run the plugin after the extraConfig is loaded.
           # Thus setting up here.
           extraConfig = ''
+            # Little fix because for some reason on some distros, the message are not filled by default
+            set -g message-style bg=brightblack,fg=cyan,fill=brightblack
+            set -g message-command-style bg=brightblack,fg=cyan,fill=brightblack
+
             set -g status-right-length "60"
             set -g status-right "#{prefix_highlight}#[fg=yellow,bg=black,nobold,noitalics,nounderscore]#[fg=black,bg=yellow] #{cpu_icon} #{cpu_percentage} #[fg=brightblack,bg=yellow,nobold,noitalics,nounderscore]#[fg=white,bg=brightblack] %I:%M %p #[fg=cyan,bg=brightblack,nobold,noitalics,nounderscore]#[fg=black,bg=cyan,bold] #H "
 
