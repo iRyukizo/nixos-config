@@ -84,6 +84,9 @@ in
 
         # Better than NetrW
         oil-nvim
+
+        aerial-nvim
+        nvim-web-devicons
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
