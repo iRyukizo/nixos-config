@@ -12,7 +12,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # font
-      meslo-lgs-nf
+      nerd-fonts.meslo-lg
     ];
 
     home.sessionVariables = {
@@ -47,7 +47,7 @@ in
 
         font = {
           normal = {
-            family = "MesloLGS NF";
+            family = "MesloLGS Nerd Font";
             style = "Regular";
           };
           size =
