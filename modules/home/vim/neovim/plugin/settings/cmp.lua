@@ -113,7 +113,18 @@ cmp.setup({
     experimental = {
         ghost_text = true,
     },
+    window = {
+        documentation = {
+            border = "rounded",
+            side_padding = 2,
+            winhighlight = "Normal:CmpDocumentation,FloatBorder:CmpDocumentationBorder,CursorLine:Visual,Search:None",
+        },
+    },
 })
+
+vim.o.winborder = "rounded"
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
 
 local snippets_lang = {
     "c",
