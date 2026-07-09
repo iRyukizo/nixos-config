@@ -246,7 +246,7 @@ vim.api.nvim_create_autocmd("User", {
     callback = require("lualine").refresh,
 })
 
-function toggle_aerial_depth()
+local function toggle_aerial_depth()
     vim.g.aerial_lualine_depth = vim.g.aerial_lualine_depth == nil and -1 or nil
 
     require("lualine").refresh()
@@ -254,11 +254,36 @@ function toggle_aerial_depth()
     vim.notify("Aerial Lualine Depth: " .. tostring(vim.g.aerial_lualine_depth))
 end
 
+local function toggle_lualine_display()
+    if
+        vim.g.aerial_lualine_depth == nil
+        or display_lsp_clients
+        or diagnostics_enabled
+        or gitinfo_display
+    then
+        vim.g.aerial_lualine_depth = -1
+        display_lsp_clients = false
+        diagnostics_enabled = false
+        gitinfo_display = false
+    else
+        vim.g.aerial_lualine_depth = nil
+        display_lsp_clients = true
+        diagnostics_enabled = true
+        gitinfo_display = true
+    end
+
+    require("lualine").refresh()
+
+    vim.notify("Lualine full display " .. (display_lsp_clients and "on" or "off"))
+end
+
 local keys = {
-    { "<leader>ci", toggle_lsp_display, desc = "Toggle LSP clients" },
-    { "<leader>cI", toggle_diagnostics_display, desc = "Toggle Diagnostics display" },
-    { "<leader>cn", toggle_aerial_depth, desc = "Toggle Aerial Depth" },
-    { "<leader>gi", toggle_gitinfo_display, desc = "Toggle git info display" },
+    { "<leader>l", group = "Lualine" },
+    { "<leader>lt", toggle_lualine_display, desc = "Toggle all display" },
+    { "<leader>ll", toggle_lsp_display, desc = "Toggle LSP clients" },
+    { "<leader>ld", toggle_diagnostics_display, desc = "Toggle Diagnostics display" },
+    { "<leader>la", toggle_aerial_depth, desc = "Toggle Aerial Depth" },
+    { "<leader>lg", toggle_gitinfo_display, desc = "Toggle git info display" },
 }
 
 wk.add(keys)
