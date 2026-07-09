@@ -60,7 +60,6 @@ local function sel_choice(fallback)
     end
 end
 
-
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -85,9 +84,6 @@ cmp.setup({
         ["<C-f>"] = cmp.mapping.scroll_docs(-5),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
-    },
-    view = {
-        entries = "native",
     },
     sources = {
         { name = "async_path", priority_weight = 120 },
@@ -119,6 +115,20 @@ cmp.setup({
             side_padding = 2,
             winhighlight = "Normal:CmpDocumentation,FloatBorder:CmpDocumentationBorder,CursorLine:Visual,Search:None",
         },
+    },
+    formatting = {
+        fields = { "abbr", "icon", "kind", "menu" },
+        format = require("lspkind").cmp_format({
+            maxwidth = {
+                menu = 30,
+                abbr = 40,
+            },
+            ellipsis_char = "...",
+
+            before = function(_, vim_item)
+                return vim_item
+            end,
+        }),
     },
 })
 

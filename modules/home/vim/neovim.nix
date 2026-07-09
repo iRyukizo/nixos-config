@@ -87,6 +87,7 @@ in
 
         aerial-nvim
         nvim-web-devicons
+        lspkind-nvim
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
