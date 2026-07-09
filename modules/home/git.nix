@@ -68,7 +68,7 @@ in
           pager = "less -iXFR --mouse";
         };
         pager = { branch = false; };
-        init = { defaultBranch = "master"; };
+        init = { defaultBranch = "main"; };
         push = { default = "simple"; };
         pull = { rebase = true; };
       };
@@ -79,14 +79,6 @@ in
           contents = {
             user = {
               email = "hmoreau@lrde.epita.fr";
-            };
-          };
-        }
-        {
-          condition = "gitdir:~/EPITA/ASSISTANTS/";
-          contents = {
-            init = {
-              defaultBranch = "main";
             };
           };
         }
