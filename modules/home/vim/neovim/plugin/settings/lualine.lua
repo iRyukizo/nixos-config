@@ -156,7 +156,7 @@ require("lualine").setup({
                 dense = true,
                 dense_sep = ".",
                 sep_highlight = "",
-                sep_icon = "",
+                sep_icon = " ",
                 depth = vim.g.aerial_lualine_depth,
             },
         },
