@@ -9,6 +9,13 @@ local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 
+-- Dynamic Insert Node
+local function di(pos, fn)
+    return d(pos, function()
+        return sn(nil, { i(1, fn()) })
+    end)
+end
+
 local function buffer_basename_noext(bufnr)
     local full_path = vim.api.nvim_buf_get_name(bufnr)
     return vim.fn.fnamemodify(full_path, ":t:r")
@@ -31,7 +38,9 @@ return {
     s(
         "inc",
         fmt([[#include "{header}"]], {
-            header = i(1, buffer_basename_noext(0) .. ".h"),
+            header = di(1, function()
+                return buffer_basename_noext(0) .. ".h"
+            end),
         })
     ),
     s(
@@ -53,7 +62,9 @@ return {
                 #endif /* {rep_value} */
             ]],
             {
-                value = i(1, buffer_headerguard_value(0)),
+                value = di(1, function()
+                    return buffer_headerguard_value(0)
+                end),
                 rep_value = rep(1),
                 code = i(2),
             }
@@ -257,7 +268,9 @@ return {
                 }};
             ]],
             {
-                name = i(1, buffer_struct_name(0)),
+                name = di(1, function()
+                    return buffer_struct_name(0)
+                end),
                 data = i(2, "/* data */"),
             }
         )
