@@ -105,7 +105,7 @@ local function toggle_tables()
     vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
 end
 
-keys = {
+local keys = {
     buffer = 0,
 
     { "<leader>m", group = "Markdown" },
