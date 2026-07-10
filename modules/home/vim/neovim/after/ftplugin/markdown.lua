@@ -29,11 +29,88 @@ local function toggle_headings()
     vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 end
 
+local function split_table_cells(line)
+    local cells = {}
+    for cell in line:gmatch("|([^|]+)") do
+        table.insert(cells, vim.trim(cell))
+    end
+    return cells
+end
+local function markdown_header_to_textile(line)
+    local cells = split_table_cells(line)
+    for i, cell in ipairs(cells) do
+        cells[i] = "_." .. cell
+    end
+    return "|" .. table.concat(cells, "|") .. "|"
+end
+local function textile_header_to_markdown(line)
+    local cells = split_table_cells(line)
+    for i, cell in ipairs(cells) do
+        cells[i] = cell:gsub("^_%.%s*", "")
+    end
+    return "| " .. table.concat(cells, " | ") .. " |"
+end
+local function is_markdown_separator(line)
+    local cells = split_table_cells(line)
+    if #cells == 0 then
+        return false
+    end
+    for _, cell in ipairs(cells) do
+        if not cell:match("^:?-+:?$") then
+            return false
+        end
+    end
+    return true
+end
+local function toggle_tables()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local has_textile = false
+    for _, line in ipairs(lines) do
+        if line:match("^|") and line:match("|_.") then
+            has_textile = true
+            break
+        end
+    end
+    local out = {}
+    local i = 1
+    while i <= #lines do
+        local line = lines[i]
+        if has_textile then
+            -- Textile -> Markdown
+            if line:match("^|") and line:match("|_.") then
+                local header = textile_header_to_markdown(line)
+                table.insert(out, header)
+                local cols = #split_table_cells(header)
+                local separator = {}
+                for _ = 1, cols do
+                    table.insert(separator, "---")
+                end
+                table.insert(out, "| " .. table.concat(separator, " | ") .. " |")
+            else
+                table.insert(out, line)
+            end
+            i = i + 1
+        else
+            -- Markdown -> Textile
+            local next_line = lines[i + 1]
+            if line:match("^|") and next_line and is_markdown_separator(next_line) then
+                table.insert(out, markdown_header_to_textile(line))
+                i = i + 2
+            else
+                table.insert(out, line)
+                i = i + 1
+            end
+        end
+    end
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
+end
+
 keys = {
     buffer = 0,
 
     { "<leader>m", group = "Markdown" },
     { "<leader>mh", toggle_headings, desc = "Toggle Markdown/Textile headings" },
+    { "<leader>mt", toggle_tables, desc = "Toggle Markdown/Textile tables" },
     { "<leader>mp", render_markdown.toggle, desc = "Toggle Markdown Render" },
 }
 
