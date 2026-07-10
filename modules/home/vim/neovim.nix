@@ -85,9 +85,11 @@ in
         # Better than NetrW
         oil-nvim
 
+        # UI Improvement
         aerial-nvim
         nvim-web-devicons
         lspkind-nvim
+        nvim-highlight-colors
 
         render-markdown-nvim
 
