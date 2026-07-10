@@ -1,4 +1,5 @@
 local wk = require("which-key")
+local render_markdown = require("render-markdown")
 
 local function toggle_headings()
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -33,6 +34,7 @@ keys = {
 
     { "<leader>m", group = "Markdown" },
     { "<leader>mh", toggle_headings, desc = "Toggle Markdown/Textile headings" },
+    { "<leader>mp", render_markdown.toggle, desc = "Toggle Markdown Render" },
 }
 
 wk.add(keys)

@@ -88,6 +88,8 @@ in
         aerial-nvim
         nvim-web-devicons
         lspkind-nvim
+
+        render-markdown-nvim
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
