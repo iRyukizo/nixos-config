@@ -90,6 +90,8 @@ in
         lspkind-nvim
 
         render-markdown-nvim
+
+        indent-blankline-nvim
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
