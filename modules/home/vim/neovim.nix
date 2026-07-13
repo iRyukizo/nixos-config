@@ -37,7 +37,7 @@ in
         # Theme
         nord-nvim
         lualine-nvim
-        lsp-progress-nvim
+        fidget-nvim
 
         # Which-key
         which-key-nvim
