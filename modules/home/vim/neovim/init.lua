@@ -42,6 +42,8 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.modeline = false
 
+vim.keymap.set("n", "<leader>K", "K", { remap = false, desc = "Keyword lookup" })
+
 -- Theme
 vim.opt.termguicolors = true
 
