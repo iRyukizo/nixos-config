@@ -21,7 +21,14 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 vim.lsp.config("*", {
     capabilities = capabilities,
-    on_attach = lsp.on_attach,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("ryuki.lsp", { clear = true }),
+    callback = function(args)
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+        lsp.on_attach(client, args.buf)
+    end,
 })
 
 local servers = {
