@@ -34,6 +34,7 @@ in
       aggressiveResize = true;
       terminal = if (cfg.type == "darwin") then "xterm-256color" else "tmux-256color";
       escapeTime = 0;
+      focusEvents = true;
 
       extraConfig = ''
         # Vim binding for copy mode
@@ -71,6 +72,7 @@ in
         set -g default-command ${pkgs.zsh}/bin/zsh
       '' + optionalString (cfg.type == "wsl") ''
         set -g default-command ${pkgs.zsh}/bin/zsh
+        set -as terminal-overrides ",xterm-256color:Tc"
       '';
 
       plugins = with pkgs.tmuxPlugins; [
