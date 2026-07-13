@@ -24,7 +24,6 @@ in
     home.packages = with pkgs; [
       docker
       xclip
-      gotop
       wakeonlan
       fd
 
