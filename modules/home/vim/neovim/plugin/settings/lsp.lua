@@ -1,5 +1,6 @@
 local lsp = require("ryuki.lsp")
 local xc8_clangd = require("ryuki.lsp.xc8_clangd")
+local wk = require("which-key")
 
 vim.diagnostic.config({
     virtual_text = false,
@@ -35,6 +36,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         lsp.on_attach(client, args.buf)
+
+        if client.name == "xc8_clangd" then
+            wk.add({
+                {
+                    "<leader>cH",
+                    "<Cmd>LspXc8ClangdSwitchSourceHeader<CR>",
+                    desc = "Switch Header/Source",
+                },
+            })
+        end
+        if client.name == "clangd" then
+            wk.add({
+                {
+                    "<leader>cH",
+                    "<Cmd>LspClangdSwitchSourceHeader<CR>",
+                    desc = "Switch Header/Source",
+                },
+            })
+        end
     end,
 })
 
