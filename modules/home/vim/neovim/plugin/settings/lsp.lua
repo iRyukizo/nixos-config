@@ -31,6 +31,14 @@ vim.lsp.config("*", {
     capabilities = capabilities,
 })
 
+-- Remove nvim 0.10 default lsp mappings.
+vim.keymap.del({ "n", "v" }, "gra")
+vim.keymap.del("n", "gri")
+vim.keymap.del("n", "grn")
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "grt")
+vim.keymap.del("n", "grx")
+
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("ryuki.lsp", { clear = true }),
     callback = function(args)
