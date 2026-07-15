@@ -382,4 +382,38 @@ return {
             }
         )
     ),
+    s(
+        "func",
+        fmt(
+            [[
+                {ret_type} {func_name}({param})
+                {{
+                    {code}
+                }}
+            ]],
+            {
+                func_name = di(1, function()
+                    return buffer_underscore_name(0) .. "_f"
+                end),
+                ret_type = i(2, "int"),
+                param = i(3, "void"),
+                code = i(4, "/* code */"),
+            }
+        )
+    ),
+    s(
+        "decl",
+        fmt(
+            [[
+                {ret_type} {func_name}({param});
+            ]],
+            {
+                func_name = di(1, function()
+                    return buffer_underscore_name(0) .. "_f"
+                end),
+                ret_type = i(2, "int"),
+                param = i(3, "void"),
+            }
+        )
+    ),
 }
