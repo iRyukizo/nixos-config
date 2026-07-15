@@ -310,7 +310,7 @@ return {
     s(
         "printf",
         fmt([[printf("{string}"{format});]], {
-            string = i(1, "%s\n"),
+            string = i(1, "%s\\n"),
             format = d(2, function(args)
                 local fmt = args[1][1]
 
@@ -329,7 +329,7 @@ return {
         "fprintf",
         fmt([[fprintf({file}, "{string}"{format});]], {
             file = i(1, "stderr"),
-            string = i(2, "%s\n"),
+            string = i(2, "%s\\n"),
             format = d(3, function(args)
                 local fmt = args[1][1]
 
