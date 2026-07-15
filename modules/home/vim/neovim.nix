@@ -94,6 +94,7 @@ in
         render-markdown-nvim
 
         indent-blankline-nvim
+        neogen
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
