@@ -21,16 +21,10 @@ local function buffer_basename_noext(bufnr)
     return vim.fn.fnamemodify(full_path, ":t:r")
 end
 
-local function buffer_headerguard_value(bufnr)
-    local full_path = vim.api.nvim_buf_get_name(bufnr)
-    local basename = vim.fn.fnamemodify(full_path, ":t")
-    return basename:gsub("%-", "_"):gsub("%.", "_"):gsub("%d", ""):upper()
-end
-
-local function buffer_struct_name(bufnr)
+local function buffer_underscore_name(bufnr)
     local full_path = vim.api.nvim_buf_get_name(bufnr)
     local basename = vim.fn.fnamemodify(full_path, ":t:r")
-    return basename:gsub("%-", "_"):gsub("%.", "_"):gsub("%d", "") .. "_t"
+    return basename:gsub("%-", "_"):gsub("%.", "_"):gsub("%d", "")
 end
 
 return {
@@ -63,7 +57,7 @@ return {
             ]],
             {
                 value = di(1, function()
-                    return buffer_headerguard_value(0)
+                    return buffer_underscore_name(0):upper()
                 end),
                 rep_value = rep(1),
                 code = i(2),
@@ -269,7 +263,7 @@ return {
             ]],
             {
                 name = di(1, function()
-                    return buffer_struct_name(0)
+                    return buffer_underscore_name(0) .. "_t"
                 end),
                 data = i(2, "/* data */"),
             }
