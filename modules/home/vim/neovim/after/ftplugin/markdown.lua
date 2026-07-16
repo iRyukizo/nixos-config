@@ -105,10 +105,58 @@ local function toggle_tables()
     vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
 end
 
+local function toggle_code_blocks()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local has_redmine = false
+    for _, line in ipairs(lines) do
+        if line:match("^<pre><code") then
+            has_redmine = true
+            break
+        end
+    end
+    local out = {}
+    local i = 1
+    while i <= #lines do
+        local line = lines[i]
+        if has_redmine then
+            -- Textile -> Markdown
+            local lang = line:match('^<pre><code class="([^"]*)">')
+            if lang then
+                table.insert(out, "```" .. lang)
+                i = i + 1
+                while i <= #lines and not lines[i]:match("^</code></pre>$") do
+                    table.insert(out, lines[i])
+                    i = i + 1
+                end
+                table.insert(out, "```")
+            else
+                table.insert(out, line)
+            end
+        else
+            -- Markdown -> Textile
+            local lang = line:match("^```([%w_+-]*)$")
+            if lang then
+                table.insert(out, string.format('<pre><code class="%s">', lang))
+                i = i + 1
+                while i <= #lines and not lines[i]:match("^```$") do
+                    table.insert(out, lines[i])
+                    i = i + 1
+                end
+                table.insert(out, "</code></pre>")
+            else
+                table.insert(out, line)
+            end
+        end
+        i = i + 1
+    end
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
+end
+
 local keys = {
     buffer = 0,
 
     { "<leader>m", group = "Markdown" },
+    { "<leader>mc", toggle_code_blocks, desc = "Toggle Markdown/Textile Code blocks" },
     { "<leader>mh", toggle_headings, desc = "Toggle Markdown/Textile headings" },
     { "<leader>mt", toggle_tables, desc = "Toggle Markdown/Textile tables" },
     { "<leader>mp", render_markdown.toggle, desc = "Toggle Markdown Render" },

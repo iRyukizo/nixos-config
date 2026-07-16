@@ -57,8 +57,22 @@ return {
         fmt(
             [[
                 <pre><code class="{lang}">
-                    {code}
+                {code}
                 </code></pre>
+            ]],
+            {
+                lang = i(1, "c"),
+                code = i(2, 'puts("here")'),
+            }
+        )
+    ),
+    s(
+        "codeb",
+        fmt(
+            [[
+                ```{lang}
+                {code}
+                ```
             ]],
             {
                 lang = i(1, "c"),
