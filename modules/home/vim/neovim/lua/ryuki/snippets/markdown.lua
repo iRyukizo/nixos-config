@@ -96,4 +96,36 @@ return {
         t({ "-->", "" }),
         d(3, make_mtable, { 1, 2 }),
     }),
+    s(
+        "beamerh",
+        fmt(
+            [[
+                ---
+                title:
+                    \textbf{{{title}}}
+                subtitle:
+                    {subtitle}
+                author: {author}
+                institute: {institute}
+                date: {date}
+                section-titles: false
+                lang: en-US
+                beamer: true
+                theme: Boadilla
+                urlcolor: blue
+                linkstyle: bold
+                aspectratio: 169
+                <!-- titlegraphic: TODEFINE.png -->
+                <!-- logo: TODEFINE.png -->
+                ---
+            ]],
+            {
+                title = i(1, "Title"),
+                subtitle = i(2, "Subtitle"),
+                author = i(3, "Hugo Moreau"),
+                institute = i(4, "Institute"),
+                date = i(5, os.date("%Y-%m-%d")),
+            }
+        )
+    ),
 }
