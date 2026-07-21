@@ -1,5 +1,6 @@
 local wk = require("which-key")
 local render_markdown = require("render-markdown")
+local utils = require("ryuki.utils")
 
 local function toggle_headings()
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -160,6 +161,18 @@ local keys = {
     { "<leader>mh", toggle_headings, desc = "Toggle Markdown/Textile headings" },
     { "<leader>mt", toggle_tables, desc = "Toggle Markdown/Textile tables" },
     { "<leader>mp", render_markdown.toggle, desc = "Toggle Markdown Render" },
+    {
+        "<leader>mP",
+        "<Cmd>!pandoc % -o %:r.pdf<CR>",
+        desc = "Generate PDF",
+        cond = utils.is_executable("pandoc"),
+    },
+    {
+        "<leader>mb",
+        "<Cmd>!pandoc -st beamer % -o %:r.pdf<CR>",
+        desc = "Generate beamer PDF",
+        cond = utils.is_executable("pandoc"),
+    },
 }
 
 wk.add(keys)
