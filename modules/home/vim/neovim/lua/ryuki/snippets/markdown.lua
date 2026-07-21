@@ -128,4 +128,37 @@ return {
             }
         )
     ),
+    s(
+        "pandoch",
+        fmt(
+            [[
+                ---
+                title: "{title}"
+                subtitle: "{subtitle}"
+                author: "{author}"
+                date: "{date}"
+                format: pdf
+                toc: true
+                numbersections: true
+                geometry:
+                - top=2cm
+                - bottom=1.5cm
+                - left=1.5cm
+                - right=1.5cm
+                fontsize: 11pt
+                documentclass: article
+                classoption: "a4paper"
+                mainfont: "Arial"
+                sansfont: "Calibri"
+                linkcolor: "#007bff"
+                ---
+            ]],
+            {
+                title = i(1, "Title"),
+                subtitle = i(2, "Subtitle"),
+                author = i(3, "Hugo Moreau"),
+                date = i(4, os.date("%Y-%m-%d")),
+            }
+        )
+    ),
 }
