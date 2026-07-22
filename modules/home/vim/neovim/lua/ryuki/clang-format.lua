@@ -46,6 +46,7 @@ function M.set_cc(bufnr)
     local config_file = find_config(vim.api.nvim_buf_get_name(bufnr))
 
     if not config_file then
+        vim.opt_local.colorcolumn = vim.opt.colorcolumn
         return
     end
 
@@ -53,7 +54,39 @@ function M.set_cc(bufnr)
 
     if limit and limit > 0 then
         vim.opt_local.colorcolumn = tostring(limit)
+    else
+        vim.opt_local.colorcolumn = vim.opt.colorcolumn
     end
+end
+
+--- Reload config if already present in cache
+--- @param bufnr integer? Buffer to look for (default: 0)
+function M.reload(bufnr)
+    bufnr = bufnr or 0
+
+    local config_file = find_config(vim.api.nvim_buf_get_name(bufnr))
+
+    if config_file then
+        cache[config_file] = nil
+    end
+
+    M.set_cc(bufnr)
+end
+
+--- Clear cache
+--- @param filepath string? Filepath to clear (if empty clear all caches)
+function M.clear_cache(filepath)
+    if filepath then
+        cache[filepath] = nil
+    else
+        cache = {}
+    end
+end
+
+--- Cache debug helper
+--- @return table Cache deepcopy
+function M.cache()
+    return vim.deepcopy(cache)
 end
 
 return M
