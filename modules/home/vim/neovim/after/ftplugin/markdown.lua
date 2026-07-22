@@ -7,9 +7,24 @@ local keys = {
     buffer = 0,
 
     { "<leader>m", group = "Markdown" },
-    { "<leader>mc", md.toggle_code_blocks, desc = "Toggle Markdown/Textile Code blocks" },
-    { "<leader>mh", md.toggle_headings, desc = "Toggle Markdown/Textile headings" },
-    { "<leader>mt", md.toggle_tables, desc = "Toggle Markdown/Textile tables" },
+    {
+        "<leader>mc",
+        md.toggle_code_blocks,
+        desc = "Toggle Markdown/Textile Code blocks",
+        mode = { "n", "v" },
+    },
+    {
+        "<leader>mh",
+        md.toggle_headings,
+        desc = "Toggle Markdown/Textile headings",
+        mode = { "n", "v" },
+    },
+    {
+        "<leader>mt",
+        md.toggle_tables,
+        desc = "Toggle Markdown/Textile tables",
+        mode = { "n", "v" },
+    },
     { "<leader>mp", render_markdown.toggle, desc = "Toggle Markdown Render" },
     {
         "<leader>mP",

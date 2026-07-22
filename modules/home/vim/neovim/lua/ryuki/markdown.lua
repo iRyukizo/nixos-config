@@ -1,8 +1,30 @@
 local M = {}
 
+local function get_buf_range()
+    local mode = vim.fn.mode()
+
+    if mode == "v" or mode == "V" or mode == "\22" then
+        local start_line = vim.fn.line("v")
+        local end_line = vim.fn.line(".")
+
+        if start_line > end_line then
+            start_line, end_line = end_line, start_line
+        end
+
+        return start_line - 1, end_line
+    end
+
+    return 0, -1
+end
+
+local function normal_mode()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+end
+
 --- Change heading styles between `markdown` and `textile`
 function M.toggle_headings()
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local start_line, end_line = get_buf_range()
+    local lines = vim.api.nvim_buf_get_lines(0, start_line, end_line, false)
 
     local has_h_style = false
     for _, line in ipairs(lines) do
@@ -26,7 +48,8 @@ function M.toggle_headings()
         end
         lines[i] = line
     end
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    vim.api.nvim_buf_set_lines(0, start_line, end_line, false, lines)
+    normal_mode()
 end
 
 local function split_table_cells(line)
@@ -68,7 +91,8 @@ end
 
 --- Change tables style between `markdown` and `textile`
 function M.toggle_tables()
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local start_line, end_line = get_buf_range()
+    local lines = vim.api.nvim_buf_get_lines(0, start_line, end_line, false)
     local has_textile = false
     for _, line in ipairs(lines) do
         if line:match("^|") and line:match("|_.") then
@@ -107,12 +131,14 @@ function M.toggle_tables()
             end
         end
     end
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
+    vim.api.nvim_buf_set_lines(0, start_line, end_line, false, out)
+    normal_mode()
 end
 
 --- Change code block styles between `markdown` and `textile`
 function M.toggle_code_blocks()
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local start_line, end_line = get_buf_range()
+    local lines = vim.api.nvim_buf_get_lines(0, start_line, end_line, false)
     local has_redmine = false
     for _, line in ipairs(lines) do
         if line:match("^<pre><code") then
@@ -155,7 +181,8 @@ function M.toggle_code_blocks()
         end
         i = i + 1
     end
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
+    vim.api.nvim_buf_set_lines(0, start_line, end_line, false, out)
+    normal_mode()
 end
 
 return M
