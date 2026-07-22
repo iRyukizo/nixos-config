@@ -1,4 +1,5 @@
 local ls = require("luasnip")
+local buffers = require("ryuki.buffers")
 
 local s = ls.snippet
 local i = ls.insert_node
@@ -16,24 +17,13 @@ local function di(pos, fn)
     end)
 end
 
-local function buffer_basename_noext(bufnr)
-    local full_path = vim.api.nvim_buf_get_name(bufnr)
-    return vim.fn.fnamemodify(full_path, ":t:r")
-end
-
-local function buffer_underscore_name(bufnr)
-    local full_path = vim.api.nvim_buf_get_name(bufnr)
-    local basename = vim.fn.fnamemodify(full_path, ":t:r")
-    return basename:gsub("%-", "_"):gsub("%.", "_"):gsub("%d", "")
-end
-
 return {
     -- Include directives
     s(
         "inc",
         fmt([[#include "{header}"]], {
             header = di(1, function()
-                return buffer_basename_noext(0) .. ".h"
+                return buffers.basename_noext(0) .. ".h"
             end),
         })
     ),
@@ -57,7 +47,7 @@ return {
             ]],
             {
                 value = di(1, function()
-                    return buffer_underscore_name(0):upper()
+                    return buffers.underscore_name(0):upper()
                 end),
                 rep_value = rep(1),
                 code = i(2),
@@ -263,7 +253,7 @@ return {
             ]],
             {
                 name = di(1, function()
-                    return buffer_underscore_name(0) .. "_t"
+                    return buffers.underscore_name(0) .. "_t"
                 end),
                 data = i(2, "/* data */"),
             }
@@ -393,7 +383,7 @@ return {
             ]],
             {
                 func_name = di(1, function()
-                    return buffer_underscore_name(0) .. "_f"
+                    return buffers.underscore_name(0) .. "_f"
                 end),
                 ret_type = i(2, "int"),
                 param = i(3, "void"),
@@ -409,7 +399,7 @@ return {
             ]],
             {
                 func_name = di(1, function()
-                    return buffer_underscore_name(0) .. "_f"
+                    return buffers.underscore_name(0) .. "_f"
                 end),
                 ret_type = i(2, "int"),
                 param = i(3, "void"),
