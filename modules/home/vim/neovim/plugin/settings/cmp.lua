@@ -138,6 +138,7 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
 
 local snippets_lang = {
     "c",
+    "cpp",
     "nix",
     "json",
     "gitcommit",
@@ -148,6 +149,8 @@ local snippets_lang = {
 for _, lang in pairs(snippets_lang) do
     luasnip.add_snippets(lang, require("ryuki.snippets." .. lang))
 end
+
+luasnip.filetype_extend("cpp", { "c" })
 
 local keys = {
     { "<leader>c", group = "Code" },
