@@ -4,6 +4,7 @@ local wk = require("which-key")
 aerial.setup({
     backends = {
         ["c"] = { "lsp", "treesitter" },
+        ["cpp"] = { "lsp", "treesitter" },
         ["lua"] = { "lsp", "treesitter" },
 
         ["_"] = { "treesitter", "lsp", "markdown", "asciidoc", "man" },
@@ -27,6 +28,7 @@ aerial.setup({
         "Constant",
         "Object",
         "String",
+        "Namespace",
     },
 })
 
