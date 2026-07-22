@@ -1,49 +1,55 @@
 local M = {}
 
+local cache = {}
+
 --- Read ColumnLimit from `.clang-format` file
 --- @param filepath string `.clang-format` filepath
 --- @return integer? colorcolumn value
-local function get_cf_cc(filepath)
-    local file = io.open(filepath, "r")
-    if not file then
-        return nil
+local function get_cc(filepath)
+    if cache[filepath] ~= nil then
+        return cache[filepath]
     end
 
-    for line in file:lines() do
-        local limit = line:match("^%s*ColumnLimit:%s*(%d+)")
+    local limit = nil
+
+    for line in io.lines(filepath) do
+        limit = tonumber(line:match("^%s*ColumnLimit:%s*(%d+)"))
         if limit then
-            file:close()
-            return tonumber(limit)
+            break
         end
     end
 
-    file:close()
-    return nil
+    cache[filepath] = limit
+    return limit
 end
 
 --- Search upward for `.clang-format` or `_clang-format`
+--- @param start_dir string Directory to start the search
 --- @return string? `clang-format` filepath
-local function find_cf()
-    local cwd = vim.fn.expand("%:p:h")
+local function find_config(start_dir)
     local paths = { ".clang-format", "_clang-format" }
 
-    while cwd and cwd ~= "/" do
-        for _, name in ipairs(paths) do
-            local candidate = cwd .. "/" .. name
+    local found = vim.fs.find(paths, {
+        path = start_dir,
+        upward = true,
+        stop = vim.loop.os_homedir(),
+    })
 
-            if vim.fn.filereadable(candidate) == 1 then
-                return candidate
-            end
-        end
-        cwd = vim.fn.fnamemodify(cwd, ":h")
-    end
-    return nil
+    return found[1]
 end
 
 --- Apply colorcolumn based on root folders' `.clang-format` ColumnLimit
-function M.set_cf_cc()
-    local config_file = find_cf()
-    local limit = config_file and get_cf_cc(config_file) or nil
+--- @param bufnr integer? Buffer to start looking for (default: 0)
+function M.set_cc(bufnr)
+    bufnr = bufnr or 0
+
+    local config_file = find_config(vim.api.nvim_buf_get_name(bufnr))
+
+    if not config_file then
+        return
+    end
+
+    local limit = config_file and get_cc(config_file) or nil
 
     if limit and limit > 0 then
         vim.opt_local.colorcolumn = tostring(limit)
