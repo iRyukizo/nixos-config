@@ -28,7 +28,7 @@ local function make_table(args, prefix, suffix, separator)
     end
     table.insert(nodes, t("|"))
     if separator then
-        table.insert(nodes, t({ "", table.concat(sep, "|") .. "|" }))
+        table.insert(nodes, t({ "", "|" .. table.concat(sep, "|") .. "|" }))
     end
 
     for _ = 1, rows do
