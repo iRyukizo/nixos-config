@@ -50,7 +50,7 @@ return {
                     return buffers.underscore_name(0):upper()
                 end),
                 rep_value = rep(1),
-                code = i(2),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -73,7 +73,7 @@ return {
             {
                 value = i(1, "0"),
                 rep_value = rep(1),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -89,7 +89,7 @@ return {
                 }}
             ]],
             {
-                statement = i(1, "/* code */"),
+                statement = i(0, "/* code */"),
             }
         )
     ),
@@ -104,7 +104,7 @@ return {
                 }}
             ]],
             {
-                statement = i(1, "/* code */"),
+                statement = i(0, "/* code */"),
             }
         )
     ),
@@ -125,7 +125,7 @@ return {
                 count = i(3, "count"),
                 type = i(4, "size_t"),
 
-                code = i(5, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -134,7 +134,6 @@ return {
         fmt(
             [[
                 for ({init}; {condition}; {incr})
-
                 {{
                     {code}
                 }}
@@ -144,7 +143,7 @@ return {
                 condition = i(2),
 
                 incr = i(3),
-                code = i(4, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -160,7 +159,7 @@ return {
             {
                 string = i(1, "str"),
                 rep(1),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -176,7 +175,7 @@ return {
             ]],
             {
                 condition = i(1, "/* condition */"),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -191,7 +190,7 @@ return {
             ]],
             {
                 condition = i(1, "/* condition */"),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -207,7 +206,7 @@ return {
             ]],
             {
                 condition = i(1, "/* condition */"),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -223,7 +222,7 @@ return {
             ]],
             {
                 condition = i(1, "/* condition */"),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -237,7 +236,7 @@ return {
                 }}
             ]],
             {
-                code = i(1, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -255,7 +254,7 @@ return {
                 name = di(1, function()
                     return buffers.underscore_name(0) .. "_t"
                 end),
-                data = i(2, "/* data */"),
+                data = i(0, "/* data */"),
             }
         )
     ),
@@ -270,7 +269,7 @@ return {
             ]],
             {
                 name = i(1, "name"),
-                data = i(2, "/* data */"),
+                data = i(0, "/* data */"),
             }
         )
     ),
@@ -292,7 +291,7 @@ return {
             ]],
             {
                 name = i(1, "MyCustomType"),
-                data = i(2, "/* data */"),
+                data = i(0, "/* data */"),
             }
         )
     ),
@@ -353,7 +352,7 @@ return {
                 case = i(2, "/* case */"),
                 code = i(3, "/* code */"),
                 brk = i(4, "break;"),
-                default_code = i(5, "/* code */"),
+                default_code = i(0, "/* code */"),
             }
         )
     ),
@@ -367,8 +366,8 @@ return {
             ]],
             {
                 case = i(1, "/* case */"),
-                code = i(2, "/* code */"),
-                brk = i(3, "break;"),
+                brk = i(2, "break;"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -387,7 +386,7 @@ return {
                 end),
                 ret_type = i(2, "int"),
                 param = i(3, "void"),
-                code = i(4, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),

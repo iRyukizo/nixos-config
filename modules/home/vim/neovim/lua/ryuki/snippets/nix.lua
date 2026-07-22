@@ -22,7 +22,7 @@ return {
             {
                 source = i(1, "nixpkgs"),
                 name = i(2, "nix"),
-                package = i(3, "nix-prefetch-git"),
+                package = i(0, "nix-prefetch-git"),
             }
         )
     ),
@@ -40,7 +40,7 @@ return {
             {
                 name = i(1, "default"),
                 name_rep = rep(1),
-                pkg = i(2, "# Add packages"),
+                pkg = i(0, "# Add packages"),
             }
         )
     ),
@@ -70,7 +70,7 @@ return {
                 pname = i(2, "my-package"),
                 version = i(3, os.date("%Y-%m-%d")),
                 description = i(4, "My Description"),
-                data = i(5, "# Add sources and installation process"),
+                data = i(0, "# Add sources and installation process"),
             }
         )
     ),
@@ -85,7 +85,7 @@ return {
             {
                 packages = i(1, "packages"),
                 pkgs = i(2, "with pkgs; "),
-                pkg = i(3, "# Add packages"),
+                pkg = i(0, "# Add packages"),
             }
         )
     ),
@@ -99,7 +99,7 @@ return {
             ]],
             {
                 ver = i(1, "312"),
-                pkg = i(2, "# Add packages"),
+                pkg = i(0, "# Add packages"),
             }
         )
     ),
@@ -155,7 +155,7 @@ return {
             ]],
             {
                 name = i(1, "Name"),
-                pkg = i(2, "# Add packages"),
+                pkg = i(0, "# Add packages"),
                 rep_name = rep(1),
             }
         )

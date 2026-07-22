@@ -32,7 +32,7 @@ return {
                 par1 = n(2, "("),
                 par2 = n(2, ")"),
                 excl = c(3, { t(""), t("!") }),
-                desc = i(4, "commit description"),
+                desc = i(0, "commit description"),
             }
         )
     ),
@@ -48,8 +48,8 @@ return {
             ]],
             {
                 issue = i(1, "xxx"),
-                desc = i(2, "Description"),
-                reviewer = i(3, "Me"),
+                reviewer = i(2, "Me"),
+                desc = i(0, "Description"),
             }
         )
     ),

@@ -47,7 +47,7 @@ return {
                 }}
             ]],
             {
-                statement = i(1, "/* code */"),
+                statement = i(0, "/* code */"),
             }
         )
     ),
@@ -67,7 +67,7 @@ return {
                 const = c(3, { t("const "), t("") }),
                 type = i(4, "auto&"),
 
-                code = i(5, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -90,7 +90,7 @@ return {
                 rep_var = rep(4),
                 rep_container = rep(5),
 
-                code = i(6, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -111,7 +111,7 @@ return {
                 rep_var = rep(1),
                 rep_container = rep(2),
 
-                code = i(3, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -137,7 +137,7 @@ return {
                 end),
                 rep_name = rep(1),
                 args = i(2, "/* arguments */"),
-                data = i(3, "/* data */"),
+                data = i(0, "/* data */"),
             }
         )
     ),
@@ -157,7 +157,7 @@ return {
                     return nname
                 end),
                 rep_name = rep(1),
-                code = i(2, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -219,7 +219,7 @@ return {
             {
                 catch = i(1, "/* catch */"),
                 args = i(2, "/* arguments */"),
-                code = i(3, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),
@@ -240,7 +240,7 @@ return {
             {
                 error = i(1, "const std::exception& e"),
                 code = i(2, "/* code */"),
-                error_handling = i(3, "/* error handling */"),
+                error_handling = i(0, "/* error handling */"),
             }
         )
     ),
@@ -265,7 +265,7 @@ return {
                 end),
                 ret_type = i(3, "void"),
                 param = i(4, "/* parameters */"),
-                code = i(5, "/* code */"),
+                code = i(0, "/* code */"),
             }
         )
     ),

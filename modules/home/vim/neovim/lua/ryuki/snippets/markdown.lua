@@ -62,7 +62,7 @@ return {
             ]],
             {
                 lang = i(1, "c"),
-                code = i(2, 'puts("here")'),
+                code = i(0, 'puts("here")'),
             }
         )
     ),
@@ -76,7 +76,7 @@ return {
             ]],
             {
                 lang = i(1, "c"),
-                code = i(2, 'puts("here")'),
+                code = i(0, 'puts("here")'),
             }
         )
     ),
