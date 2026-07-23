@@ -1,5 +1,8 @@
 local telescope = require("telescope")
+local lga_actions = require("telescope-live-grep-args.actions")
 local telescope_builtin = require("telescope.builtin")
+local lga = require("telescope").extensions.live_grep_args
+local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
 local wk = require("which-key")
 
 telescope.setup({
@@ -17,18 +20,29 @@ telescope.setup({
             override_file_sorter = true,
             case_mode = "smart_case",
         },
+        live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+                i = {
+                    ["<C-o>"] = lga_actions.quote_prompt(),
+                    ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                    ["<C-space>"] = lga_actions.to_fuzzy_refine,
+                },
+            },
+        },
     },
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("live_grep_args")
 
 local keys = {
     { "<leader>f", group = "Fuzzy finder" },
     { "<leader>fb", telescope_builtin.buffers, desc = "Open buffers" },
     { "<leader>ff", telescope_builtin.git_files, desc = "Git tracked files" },
     { "<leader>fF", telescope_builtin.find_files, desc = "Files" },
-    { "<leader>fg", telescope_builtin.live_grep, desc = "Grep string" },
-    { "<leader>fG", telescope_builtin.grep_string, desc = "Grep string under cursor" },
+    { "<leader>fg", lga.live_grep_args, desc = "Grep string" },
+    { "<leader>fG", lga_shortcuts.grep_word_under_cursor, desc = "Grep string under cursor" },
     {
         "<leader>fm",
         function()

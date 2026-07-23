@@ -49,6 +49,7 @@ in
         # Telescope
         dressing-nvim
         telescope-fzf-native-nvim
+        telescope-live-grep-args-nvim
         telescope-nvim
 
         # LSP
