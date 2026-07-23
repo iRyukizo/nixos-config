@@ -53,7 +53,6 @@ in
 
         # LSP
         nvim-lspconfig
-        lsp-format-nvim
         none-ls-nvim
 
         # Treesitter
