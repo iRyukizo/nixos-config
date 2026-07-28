@@ -144,6 +144,7 @@ local snippets_lang = {
     "gitcommit",
     "markdown",
     "make",
+    "yaml",
 }
 
 for _, lang in pairs(snippets_lang) do

@@ -45,6 +45,22 @@ return {
         )
     ),
     s(
+        "embedhook",
+        fmt(
+            [[
+                shellHook = ''
+                  export CLANGD_FLAGS="--query-driver={path}"
+
+                  {hook}
+                '';
+            ]],
+            {
+                path = i(1, "${pkgs.gcc-arm-embedded}/bin/arm-none-eabi-gcc"),
+                hook = i(0, 'echo "Embedded CLANGD_FLAGS loaded"'),
+            }
+        )
+    ),
+    s(
         "version",
         fmt([[version = {version};]], {
             version = i(1, os.date("%Y-%m-%d")),
