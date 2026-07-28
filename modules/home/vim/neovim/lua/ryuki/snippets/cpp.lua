@@ -149,7 +149,7 @@ return {
                 namespace {name}
                 {{
                     {code}
-                }} // namespace {rep_name}
+                }} /* namespace {rep_name} */
             ]],
             {
                 name = di(1, function()

@@ -47,7 +47,7 @@ return {
             ]],
             {
                 value = di(1, function()
-                    return buffers.underscore_name(0):upper()
+                    return buffers.underscore_name(0):upper() .. "_H"
                 end),
                 rep_value = rep(1),
                 code = i(0, "/* code */"),
