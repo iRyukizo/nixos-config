@@ -7,6 +7,25 @@ M.on_attach = function(client, bufnr)
         vim.print(vim.lsp.buf.list_workspace_folders())
     end
 
+    local function toggle_diagnostics_sign()
+        if vim.diagnostic.config().signs then
+            vim.diagnostic.config({
+                signs = false,
+            })
+        else
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "󰅚",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "󰌵",
+                        [vim.diagnostic.severity.INFO] = "󰋼",
+                    },
+                },
+            })
+        end
+    end
+
     local function cycle_diagnostics_display()
         local text = vim.diagnostic.config().virtual_text
         local lines = vim.diagnostic.config().virtual_lines
@@ -53,6 +72,7 @@ M.on_attach = function(client, bufnr)
         { "<leader>cf", vim.lsp.buf.format, desc = "Format code", mode = { "n", "x" } },
         { "<leader>cd", cycle_diagnostics_display, desc = "Cycle diagnostics display" },
         { "<leader>cD", show_buffer_diagnostics, desc = "Show buffer diagnostics" },
+        { "<leader>cg", toggle_diagnostics_sign, desc = "Toggle diagnostics signs" },
         { "<leader>ch", toggle_inlay_hints, desc = "Toggle inlay hints" },
         { "<leader>cr", vim.lsp.buf.rename, desc = "Rename symbol" },
         { "<leader>cs", vim.lsp.buf.signature_help, desc = "Show signature" },
