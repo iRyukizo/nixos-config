@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, standaloneHome, ... }:
 
 let
   inherit (lib) literalExpression mkEnableOption mkIf mkOption types;
@@ -142,11 +142,15 @@ in
         {
           plugin = resurrect;
           extraConfig = ''
-            set -g @resurrect-strategy-vim 'session'
+            set -g @resurrect-strategy-nvim 'session'
             set -g @resurrect-processes '~vim'
 
             set -g @resurrect-dir '${config.xdg.stateHome}/tmux/resurrect'
-          '';
+          '' + (if !standaloneHome then ''
+            set -g @resurrect-hook-post-save-all 'sed "s|/nix/store/[^ ]*/bin/nvim|/etc/profiles/per-user/$USER/bin/nvim|g" -i ${config.xdg.stateHome}/tmux/resurrect/last'
+          '' else ''
+            set -g @resurrect-hook-post-save-all 'sed "s|/nix/store/[^ ]*/bin/nvim|$HOME/.nix-profile/bin/nvim|g" -i ${config.xdg.stateHome}/tmux/resurrect/last'
+          '');
         }
       ];
     };
