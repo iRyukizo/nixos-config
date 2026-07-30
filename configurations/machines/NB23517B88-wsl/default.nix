@@ -22,7 +22,13 @@ in
     defaultUser = "ryuki";
   };
 
-  boot.isContainer = true;
+  boot = {
+    isContainer = true;
+    tmp = {
+      cleanOnBoot = true;
+      useTmpfs = true;
+    };
+  };
   security.sudo.wheelNeedsPassword = true;
 
   networking = {
