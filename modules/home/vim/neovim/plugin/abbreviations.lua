@@ -1,6 +1,9 @@
 local abbreviations = {
     ["(deg)"] = "°",
     ["micro"] = "μ",
+    ["-->"] = "→",
+    [">>="] = "≥",
+    ["<<="] = "≤",
 }
 
 for text, result in pairs(abbreviations) do
