@@ -1,4 +1,5 @@
 local telescope = require("telescope")
+local t_actions = require("telescope.actions")
 local lga_actions = require("telescope-live-grep-args.actions")
 local telescope_builtin = require("telescope.builtin")
 local lga = require("telescope").extensions.live_grep_args
@@ -27,6 +28,7 @@ telescope.setup({
                     ["<C-o>"] = lga_actions.quote_prompt(),
                     ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                     ["<C-space>"] = lga_actions.to_fuzzy_refine,
+                    ["<Tab>"] = t_actions.toggle_selection + t_actions.move_selection_worse,
                 },
             },
         },
