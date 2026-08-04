@@ -112,6 +112,9 @@ in
         # Set shell in vi mode
         set -o vi
         bindkey -M vicmd "^V" edit-command-line
+        __git_files () {
+            _wanted files expl 'local files' _files
+        }
       '';
 
       sessionVariables = {
