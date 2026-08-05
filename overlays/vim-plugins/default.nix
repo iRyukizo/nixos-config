@@ -28,5 +28,15 @@ final: prev:
         hash = "sha256-kUis49tTpJJ04F4MxQYIQyr6gfxAsWk3lnNrXB6K+yc=";
       };
     };
+    tunnelvision-nvim = final.vimUtils.buildVimPlugin {
+      name = "tunnelvision-nvim";
+      version = "v0.4.0";
+      src = final.fetchFromGitHub {
+        owner = "leolaurindo";
+        repo = "tunnelvision.nvim";
+        rev = "110ad7dbdbfce759a02741a712f78da774e7fcb8";
+        hash = "sha256-M/pY+hpOABU3EzzRCk6K9WoaK8yUeuzUwq9P+zKmAuk=";
+      };
+    };
   };
 }
