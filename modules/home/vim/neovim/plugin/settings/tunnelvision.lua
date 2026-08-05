@@ -12,7 +12,7 @@ tv.setup({
 })
 
 local keys = {
-    { "<leader>t", group = "TunnelVision" },
+    { "<leader>t", group = "Focus" },
     { "<leader>tt", tv.toggle, desc = "Toggle TunnelVision" },
     {
         "<leader>tf",

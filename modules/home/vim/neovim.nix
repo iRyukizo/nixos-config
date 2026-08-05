@@ -97,6 +97,7 @@ in
         neogen
 
         tunnelvision-nvim
+        twilight-nvim
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
