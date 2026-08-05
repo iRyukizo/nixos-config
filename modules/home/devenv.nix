@@ -65,6 +65,7 @@ in
 
       zsh = {
         enable = mkDefault true;
+        inherit (cfg) type;
       } // optionalAttrs (cfg.type == "darwin" || cfg.type == "wsl") {
         theme = "robbyrussell";
       };

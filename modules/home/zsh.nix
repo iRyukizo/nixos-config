@@ -8,6 +8,15 @@ in
 {
   options.my.home.zsh = {
     enable = mkEnableOption "Zsh home configuration";
+    type = mkOption {
+      type = types.enum [ "standard" "darwin" "remote" "wsl" ];
+      default = "standard";
+      example = literalExpression ''standard'';
+      description = ''
+        Type of system (default: standard).
+        Options: standard darwin remote wsl
+      '';
+    };
     theme = mkOption {
       type = types.enum [ "powerlevel10k" "robbyrussell" ];
       default = "powerlevel10k";
@@ -112,8 +121,19 @@ in
         # Set shell in vi mode
         set -o vi
         bindkey -M vicmd "^V" edit-command-line
+      '' + optionalString (cfg.type == "wsl") ''
+        # WSL2 is really slow in the way they mount their windows system
+        # Little work around to have both untracked files and all files on /mnt/c/ and /mnt/d/
+        # https://github.com/microsoft/WSL/issues/873
+        source ${pkgs.zsh}/share/zsh/${pkgs.zsh.version}/functions/_git
+
+        functions[__git_files_orig]=$functions[__git_files]
         __git_files () {
-            _wanted files expl 'local files' _files
+            if [[ $PWD == /mnt/[cd](|/*) ]]; then
+                _wanted files expl 'local files' _files
+            else
+                __git_files_orig "$@"
+            fi
         }
       '';
 
