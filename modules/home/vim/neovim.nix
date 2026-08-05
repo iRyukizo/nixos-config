@@ -95,6 +95,8 @@ in
 
         indent-blankline-nvim
         neogen
+
+        tunnelvision-nvim
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString
