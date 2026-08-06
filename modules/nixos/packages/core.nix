@@ -25,6 +25,7 @@ in
       wakeonlan
       wget
       zip
+      kmod
 
       inputs.agenix.packages."${stdenv.hostPlatform.system}".default
     ];
