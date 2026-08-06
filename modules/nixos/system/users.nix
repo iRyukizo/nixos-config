@@ -50,6 +50,7 @@ in
             "networkmanager"
             "video"
             "wheel"
+            "dialout"
           ];
         };
       };
