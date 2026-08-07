@@ -130,6 +130,7 @@ in
         # LSP
         bash-language-server
         clang-tools
+        neocmakelsp
         gopls
         harper
         nil

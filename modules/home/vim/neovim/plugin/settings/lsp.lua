@@ -198,6 +198,7 @@ local servers = {
             },
         },
     },
+    neocmake = {},
 }
 
 for server, config in pairs(servers) do
