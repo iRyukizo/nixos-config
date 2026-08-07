@@ -10,6 +10,7 @@ local function list_clients(bufnr)
     local names = {}
 
     local clients_suffixes = {
+        "-ls",
         "_ls",
         "_lsp",
         "-lsp",
