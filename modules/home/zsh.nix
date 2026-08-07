@@ -59,6 +59,10 @@ in
       dotDir = "${config.home.homeDirectory}/.zsh";
       plugins = [
         {
+          name = "zsh-completions";
+          src = pkgs.zsh-completions;
+        }
+        {
           name = "zsh-nix-shell";
           file = "nix-shell.plugin.zsh";
           src = pkgs.fetchFromGitHub {
