@@ -21,6 +21,8 @@ oil.setup({
                 end
             end,
         },
+        ["`"] = false,
+        ["g`"] = { "actions.cd", mode = "n" },
     },
 })
 
