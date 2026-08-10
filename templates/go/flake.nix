@@ -21,7 +21,7 @@
     { self
     , futils
     , nixpkgs
-    }@inputs:
+    }:
     let
       inherit (futils.lib) eachDefaultSystem;
 
