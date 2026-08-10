@@ -79,14 +79,10 @@
 
   outputs =
     { self
-    , agenix
     , flake-utils
     , home-manager
     , nixpkgs
     , git-hooks
-    , mac-app-util
-    , nixos-wsl
-    , nix-index-database
     , ...
     }@inputs:
     let
