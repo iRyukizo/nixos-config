@@ -99,6 +99,8 @@
           pre-commit = git-hooks.lib.${system}.run {
             src = ./.;
             hooks = {
+              deadnix.enable = true;
+              nixf-diagnose.enable = true;
               nixpkgs-fmt.enable = true;
               stylua.enable = true;
             };
