@@ -45,7 +45,7 @@ in
         prefixSecretsSet =
           if (cfg.folderPrefixes.enable)
           then
-            (filterAttrs (n: v: any (p: hasPrefix p n) cfg.folderPrefixes.prefixes) secretsSet)
+            (filterAttrs (n: _: any (p: hasPrefix p n) cfg.folderPrefixes.prefixes) secretsSet)
           else
             secretsSet;
       in
