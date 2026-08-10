@@ -5,8 +5,7 @@ let
     any
     attrValues
     isList
-    isAttrs
-    map;
+    isAttrs;
   inherit (lib)
     literalExpression
     mkEnableOption

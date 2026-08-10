@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
 let
-  inherit (builtins) map;
   inherit (lib) mkEnableOption mkIf mkOption types;
   cfg = config.my.home.git;
 

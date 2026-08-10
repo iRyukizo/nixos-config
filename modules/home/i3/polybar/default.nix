@@ -2,7 +2,7 @@
 
 with lib;
 let
-  inherit (builtins) listToAttrs toString;
+  inherit (builtins) listToAttrs;
   inherit (lib.strings) optionalString;
 
   cfg = config.my.home.polybar;

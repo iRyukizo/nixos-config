@@ -1,7 +1,6 @@
 { lib, ... }:
 
 let
-  inherit (builtins) map;
   inherit (lib.my) recursiveMerge;
 
   toImport = [
