@@ -91,6 +91,8 @@ in
         lspkind-nvim
         nvim-highlight-colors
 
+        quicker-nvim
+
         render-markdown-nvim
 
         indent-blankline-nvim
