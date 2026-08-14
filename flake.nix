@@ -94,7 +94,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
-      {
+      rec {
         checks = {
           pre-commit = git-hooks.lib.${system}.run {
             src = ./.;
@@ -107,7 +107,7 @@
           };
         };
 
-        devShells = (import ./shells { inherit (self) lib; inherit pkgs; }) // {
+        devShells = (import ./shells { inherit (self) lib; inherit packages pkgs; }) // {
           default = pkgs.mkShell {
             name = "NixOS-config-devShell";
             nativeBuildInputs = with pkgs; [
