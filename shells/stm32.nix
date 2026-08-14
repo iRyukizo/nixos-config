@@ -23,7 +23,7 @@ pkgs.mkShell {
     # Connection to ST devices
     stlink # ST Communication
     picocom # Shell
-    ryuki.stm32-openocd # Debugger Server
+    ryuki.openocd-stm32 # Debugger Server
   ] ++ lib.optionals (!stdenv.isAarch64) [
     gdb
   ] ++ lib.optionals (!stdenv.isDarwin) [

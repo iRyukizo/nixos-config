@@ -7,7 +7,7 @@
 
 openocd.overrideAttrs (
   finalAttrs: old: {
-    pname = "stm32-openocd";
+    pname = "openocd-stm32";
     version = "openocd-cubeide-r7";
     src = fetchFromGitHub {
       owner = "STMicroelectronics";
