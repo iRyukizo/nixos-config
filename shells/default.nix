@@ -11,7 +11,7 @@ let
   ];
 
   importFunc = name: {
-    "${name}" = import (./. + "/${name}.nix") { inherit pkgs; };
+    "${name}" = import (./. + "/${name}.nix") { inherit lib pkgs; };
   };
 in
 recursiveMerge (map importFunc toImport)
