@@ -14,10 +14,10 @@ pkgs.mkShell {
 
     criterion
     gtest
-  ] ++ lib.optionals (!stdenv.isAarch64) [
+
     gdb
+    valgrind
   ] ++ lib.optionals (!stdenv.isDarwin) [
     strace
-    valgrind
   ];
 }
