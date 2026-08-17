@@ -100,6 +100,13 @@ require("lualine").setup({
                 cond = function()
                     return gitinfo_display
                 end,
+                fmt = function(str)
+                    local branch_name = str:gsub("^origin/", "")
+                    if #branch_name > 10 then
+                        branch_name = branch_name:sub(1, 9) .. "…"
+                    end
+                    return branch_name
+                end,
             },
             {
                 "diff",
