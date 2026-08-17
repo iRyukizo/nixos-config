@@ -24,11 +24,11 @@ pkgs.mkShell {
     stlink # ST Communication
     picocom # Shell
     ryuki.openocd-stm32 # Debugger Server
-  ] ++ lib.optionals (!stdenv.isAarch64) [
+
     gdb
+    valgrind
   ] ++ lib.optionals (!stdenv.isDarwin) [
     strace
-    valgrind
   ];
 
   shellHook = ''
