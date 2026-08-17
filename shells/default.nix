@@ -9,6 +9,7 @@ let
     "nix"
     "rust"
     "stm32"
+    "xc8"
   ];
 
   importFunc = name: {
