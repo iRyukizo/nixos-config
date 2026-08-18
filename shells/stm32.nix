@@ -1,5 +1,17 @@
-{ pkgs, lib, ryuki, ... }:
+{ pkgs, lib, ryuki, git-hooks, system, ... }:
 
+let
+  pre-commit = git-hooks.lib.${system}.run {
+    src = ./.;
+    hooks = {
+      clang-format = {
+        enable = true;
+        types_or = lib.mkForce [ "c" "c++" ];
+      };
+      cmake-format.enable = true;
+    };
+  };
+in
 pkgs.mkShell {
   name = "stm32-shell";
 
@@ -37,5 +49,7 @@ pkgs.mkShell {
     export CLANGD_FLAGS="--query-driver=${pkgs.gcc-arm-embedded}/bin/arm-none-eabi-gcc"
 
     echo "Embedded CLANGD_FLAGS loaded"
+
+    ${pre-commit.shellHook}
   '';
 }

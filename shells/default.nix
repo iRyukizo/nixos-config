@@ -1,4 +1,4 @@
-{ lib, pkgs, packages, ... }:
+{ lib, pkgs, packages, git-hooks, system, ... }:
 
 let
   inherit (lib.my) recursiveMerge;
@@ -13,7 +13,7 @@ let
   ];
 
   importFunc = name: {
-    "${name}" = import (./. + "/${name}.nix") { inherit lib pkgs; ryuki = packages; };
+    "${name}" = import (./. + "/${name}.nix") { inherit lib pkgs git-hooks system; ryuki = packages; };
   };
 in
 recursiveMerge (map importFunc toImport)

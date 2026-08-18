@@ -107,7 +107,7 @@
           };
         };
 
-        devShells = (import ./shells { inherit (self) lib; inherit packages pkgs; }) // {
+        devShells = (import ./shells { inherit (self) lib; inherit git-hooks packages pkgs system; }) // {
           default = pkgs.mkShell {
             name = "NixOS-config-devShell";
             nativeBuildInputs = with pkgs; [
