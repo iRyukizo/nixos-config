@@ -27,6 +27,8 @@ pkgs.mkShell {
 
     gdb
     valgrind
+
+    pre-commit
   ] ++ lib.optionals (!stdenv.isDarwin) [
     strace
   ];
