@@ -7,6 +7,11 @@ let
       clang-format = {
         enable = true;
         types_or = lib.mkForce [ "c" "c++" ];
+        excludes = [
+          "Core/.*"
+          "Drivers/.*"
+          "Middlewares/.*"
+        ];
       };
       cmake-format.enable = true;
     };
