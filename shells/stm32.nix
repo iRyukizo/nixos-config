@@ -13,7 +13,6 @@ let
           "Middlewares/.*"
         ];
       };
-      cmake-format.enable = true;
     };
   };
 in
