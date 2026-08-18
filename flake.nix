@@ -113,7 +113,11 @@
             nativeBuildInputs = with pkgs; [
               nix-prefetch-github
               nixpkgs-fmt
-            ];
+            ] ++ checks.pre-commit.enabledPackages;
+
+            shellHook = ''
+              ${checks.pre-commit.shellHook}
+            '';
           };
         };
 
