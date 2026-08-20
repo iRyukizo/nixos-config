@@ -93,3 +93,7 @@ vim.api.nvim_create_autocmd("FileType", {
         treesitter_try_attach(buf, language)
     end,
 })
+
+vim.api.nvim_set_hl(0, "@character.printf", {
+    link = "@character.special",
+})
