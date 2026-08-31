@@ -96,6 +96,9 @@ mapAttrs buildHomeConfiguration {
               neovim = true;
             };
             type = "remote";
+            ctagsSupport = false;
+            clangFormatSupport = false;
+            goSupport = false;
           };
           zsh = {
             enable = true;
