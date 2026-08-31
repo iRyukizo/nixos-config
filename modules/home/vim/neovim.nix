@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  inherit (lib) mkIf nameValuePair optional;
+  inherit (lib) mkIf nameValuePair optional optionals;
   inherit (lib.strings) optionalString;
 
   neovimConfigFiles =
@@ -131,15 +131,16 @@ in
 
         # LSP
         bash-language-server
+        harper
+        nil
+        ruff
+        typos-lsp
+      ] ++ optionals (cfg.type != "remote") [
+        lua-language-server
         clang-tools
         neocmakelsp
         gopls
-        harper
-        nil
         pyright
-        ruff
-        typos-lsp
-        lua-language-server
       ] ++ optional cfg.options.xc8Support pkgs.ryuki.microchip-xc8;
     };
   };

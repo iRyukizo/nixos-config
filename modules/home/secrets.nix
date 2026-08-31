@@ -1,7 +1,8 @@
-{ config, options, inputs, ... }:
+{ config, options, inputs, lib, ... }:
 
 let
   xdgCfg = config.my.home.xdg;
+  secretsCfg = config.my.secrets;
 in
 {
   imports = [
@@ -10,14 +11,14 @@ in
   ];
 
   config.my.secrets = {
-    enable = true;
+    enable = lib.mkDefault true;
     folderPrefixes = {
       enable = true;
       prefixes = [ "home/" ];
     };
   };
 
-  config.age = {
+  config.age = lib.mkIf secretsCfg.enable {
     identityPaths = options.age.identityPaths.default ++ [
       "${config.home.homeDirectory}/.ssh/agenix"
     ];

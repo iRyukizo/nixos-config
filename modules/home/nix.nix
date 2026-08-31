@@ -9,6 +9,7 @@ let
     types;
 
   cfg = config.my.home.nix;
+  secretsCfg = config.my.secrets;
 in
 {
   options.my.home.nix = {
@@ -51,7 +52,7 @@ in
         ];
       };
 
-      extraOptions = ''
+      extraOptions = mkIf secretsCfg.enable ''
         !include ${config.age.secrets."home/nix/extra-config".path}
       '';
     };
