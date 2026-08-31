@@ -1,4 +1,4 @@
-{ config, inputs, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, standaloneHome, ... }:
 
 let
   inherit (lib)
@@ -41,12 +41,12 @@ in
       settings = {
         warn-dirty = true;
         experimental-features = [ "nix-command" "flakes" ];
-        extra-substituters = [
+        "${if !standaloneHome then "extra-" else ""}substituters" = [
           "https://nix-community.cachix.org"
           "https://iryukizo.cachix.org"
         ];
 
-        extra-trusted-public-keys = [
+        "${if !standaloneHome then "extra-" else ""}trusted-public-keys" = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "iryukizo.cachix.org-1:F7M4oyFKTfx6rJgI2MYB7FTXV+EL8c9BP3v1tDSNr08="
         ];
