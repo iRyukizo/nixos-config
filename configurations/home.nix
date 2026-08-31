@@ -76,21 +76,25 @@ mapAttrs buildHomeConfiguration {
     homePrefix = "/Users";
     configModule = {
       my = {
-        secrets.enable = false; # TODO: Handle not using secrets
+        secrets.enable = false;
         home = {
           bat.enable = true;
           dircolors.enable = true;
           direnv.enable = true;
           fzf.enable = true;
-          nix.enable = true; # remove secrets package
+          nix.enable = true;
           nix-index.enable = true;
+          tmux = {
+            enable = true;
+            type = "darwin";
+          };
           vim = {
             enable = true;
             programs = {
               vim = true;
               neovim = true;
             };
-            type = "remote"; # TODO: remove useless package
+            type = "remote";
           };
           zsh = {
             enable = true;
