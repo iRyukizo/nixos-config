@@ -26,6 +26,7 @@ in
       xclip
       wakeonlan
       fd
+      coreutils
 
       inputs.agenix.packages."${stdenv.hostPlatform.system}".default
     ];
