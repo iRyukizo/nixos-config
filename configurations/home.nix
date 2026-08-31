@@ -92,7 +92,10 @@ mapAttrs buildHomeConfiguration {
             };
             type = "remote"; # TODO: remove useless package
           };
-          zsh.enable = true;
+          zsh = {
+            enable = true;
+            viMode = false;
+          };
         };
       };
     };

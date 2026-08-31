@@ -30,6 +30,7 @@ in
         overwrite it if needed.
       '';
     };
+    viMode = mkEnableOption "zsh vi-mode option" // { default = true; };
   };
 
   config = mkIf cfg.enable {
@@ -121,7 +122,7 @@ in
       '' + ''
         ZSH_HIGHLIGHT_STYLES[arg0]=fg=4,bold
         ZLE_RPROMPT_INDENT=0
-
+      '' + optionalString cfg.viMode ''
         # Set shell in vi mode
         set -o vi
         bindkey -M vicmd "^V" edit-command-line
@@ -181,7 +182,7 @@ in
           "golang"
           "tmux"
           "zsh-syntax-highlighting"
-        ] ++ optional (cfg.theme == "robbyrussell") "vi-mode";
+        ] ++ optional (cfg.theme == "robbyrussell" && cfg.viMode) "vi-mode";
       };
     };
   };
