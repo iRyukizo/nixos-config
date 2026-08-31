@@ -71,4 +71,30 @@ mapAttrs buildHomeConfiguration {
       };
     };
   };
+  "rd1" = {
+    system = "aarch64-darwin";
+    homePrefix = "/Users";
+    configModule = {
+      my = {
+        secrets.enable = false; # TODO: Handle not using secrets
+        home = {
+          bat.enable = true;
+          dircolors.enable = true;
+          direnv.enable = true;
+          fzf.enable = true;
+          nix.enable = true; # remove secrets package
+          nix-index.enable = true;
+          vim = {
+            enable = true;
+            programs = {
+              vim = true;
+              neovim = true;
+            };
+            type = "remote"; # TODO: remove useless package
+          };
+          zsh.enable = true;
+        };
+      };
+    };
+  };
 }
