@@ -37,14 +37,14 @@ pkgs.mkShell {
     ctags
 
     # Connection to ST devices
-    stlink # ST Communication
     picocom # Shell
     ryuki.openocd-stm32 # Debugger Server
 
     gdb
-    valgrind
   ] ++ lib.optionals (!stdenv.isDarwin) [
     strace
+    valgrind
+    stlink # ST Communication
   ];
 
   shellHook = ''

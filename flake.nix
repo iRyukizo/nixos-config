@@ -86,10 +86,14 @@
     , ...
     }@inputs:
     let
-      inherit (flake-utils.lib) eachDefaultSystem flattenTree;
+      inherit (flake-utils.lib) eachSystem flattenTree system;
       inherit (nixpkgs.lib) recursiveUpdate;
     in
-    eachDefaultSystem
+    eachSystem [
+      system.x86_64-linux
+      system.aarch64-linux
+      system.aarch64-darwin
+    ]
       (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
@@ -134,9 +138,15 @@
         {
           my = import ./lib { inherit inputs; pkgs = nixpkgs; lib = final; };
         }
-        (eachDefaultSystem (system: {
-          my = import ./pkgs/lib { pkgs = import nixpkgs { inherit system; } // self.packages.${system}; };
-        })));
+        (eachSystem [
+          system.x86_64-linux
+          system.aarch64-linux
+          system.aarch64-darwin
+        ]
+          (system: {
+            my = import ./pkgs/lib { pkgs = import nixpkgs { inherit system; } // self.packages.${system}; };
+          })
+        ));
 
       templates = import ./templates { inherit (self) lib; };
 

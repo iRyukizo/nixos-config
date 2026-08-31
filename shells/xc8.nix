@@ -15,11 +15,11 @@ pkgs.mkShell {
     clang-tools
     ctags
 
-    ryuki.microchip-xc8
-
     gdb
-    valgrind
   ] ++ lib.optionals (!stdenv.isDarwin) [
     strace
+    valgrind
+  ] ++ lib.optionals (stdenv.isx86_64 && stdenv.isLinux) [
+    ryuki.microchip-xc8
   ];
 }
