@@ -99,6 +99,7 @@ mapAttrs buildHomeConfiguration {
           zsh = {
             enable = true;
             viMode = false;
+            theme = "robbyrussell";
           };
         };
       };
