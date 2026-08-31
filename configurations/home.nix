@@ -82,6 +82,7 @@ mapAttrs buildHomeConfiguration {
           dircolors.enable = true;
           direnv.enable = true;
           fzf.enable = true;
+          man.enable = true;
           nix.enable = true;
           nix-index.enable = true;
           tmux = {
