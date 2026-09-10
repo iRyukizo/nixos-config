@@ -100,6 +100,8 @@ in
 
         tunnelvision-nvim
         twilight-nvim
+      ] ++ optionals cfg.options.codeCompanionSupport [
+        codecompanion-nvim
       ];
 
       initLua = builtins.readFile ./neovim/init.lua + optionalString

@@ -34,6 +34,7 @@ in
       # Might be a fix to manually define a function to remove them
       wslClipboard = mkEnableOption "Home vim wsl linked clipboard";
       xc8Support = mkEnableOption "Home nvim xc8-clangd support";
+      codeCompanionSupport = mkEnableOption "Home nvim code companion support";
     };
 
     clangFormatSupport = mkEnableOption "Home vim-clang-format support" // { default = true; };
