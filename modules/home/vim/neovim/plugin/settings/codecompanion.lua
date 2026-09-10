@@ -49,6 +49,23 @@ cc.setup({
             },
         },
     },
+    extensions = {
+        history = {
+            enabled = true,
+            opts = {
+                auto_save = true,
+                expiration_days = 60,
+
+                picker = "telescope",
+
+                picker_keymaps = {
+                    rename = { n = "r", i = "<C-o>" },
+                    delete = { n = "d", i = "<C-e>" },
+                    duplicate = { n = "<C-y>", i = "<C-y>" },
+                },
+            },
+        },
+    },
 })
 
 ccfidget:setup()
@@ -63,6 +80,7 @@ local keys = {
     { "<leader>ot", "<cmd>:CodeCompanion /tests<CR>", desc = "Tests", mode = { "v" } },
     { "<leader>ol", "<cmd>:CodeCompanion /lsp<CR>", desc = "LSP", mode = { "v" } },
     { "<leader>oa", "<cmd>:CodeCompanionActions<CR>", desc = "Actions" },
+    { "<leader>oh", "<cmd>:CodeCompanionHistory<CR>", desc = "History" },
 }
 
 wk.add(keys)
