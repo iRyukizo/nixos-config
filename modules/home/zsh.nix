@@ -122,6 +122,10 @@ in
       '' + ''
         ZSH_HIGHLIGHT_STYLES[arg0]=fg=4,bold
         ZLE_RPROMPT_INDENT=0
+
+        if [ -f ~/.ollama_remote_config ]; then
+          export $(cat ~/.ollama_remote_config | xargs)
+        fi
       '' + optionalString cfg.viMode ''
         # Set shell in vi mode
         set -o vi
