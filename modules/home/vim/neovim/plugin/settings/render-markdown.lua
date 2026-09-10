@@ -2,6 +2,7 @@ local render_markdown = require("render-markdown")
 
 render_markdown.setup({
     enabled = false,
+    file_types = { "markdown", "codecompanion" },
     overrides = {
         preview = {
             enabled = true,
