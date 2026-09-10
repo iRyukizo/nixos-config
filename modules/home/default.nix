@@ -5,6 +5,7 @@
     ./aerospace.nix
     ./bat.nix
     ./bluetooth.nix
+    ./codex.nix
     ./ctags.nix
     ./delta.nix
     ./devenv.nix

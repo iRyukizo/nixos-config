@@ -12,6 +12,7 @@ in
         enable = true;
         type = "wsl";
       };
+      codex.enable = true;
       vim.options.xc8Support = true;
     };
   };
