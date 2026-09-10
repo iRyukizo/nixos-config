@@ -10,7 +10,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.codex.enable = true;
+    programs.codex = {
+      enable = true;
+      settings = {
+        check_for_update_on_startup = false;
+      };
+    };
     home.packages = with pkgs; [
       codex-acp
     ];
