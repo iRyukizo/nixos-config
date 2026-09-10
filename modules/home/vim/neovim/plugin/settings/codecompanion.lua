@@ -21,6 +21,14 @@ cc.setup({
     },
     interactions = {
         chat = {
+            roles = {
+                llm = function(adapter)
+                    local model = adapter.model
+                        and (adapter.model.formatted_name or adapter.model.name)
+                    return adapter.formatted_name .. (model and (" - " .. model) or "")
+                end,
+                user = "ryuki",
+            },
             adapter = {
                 name = "codex",
             },
