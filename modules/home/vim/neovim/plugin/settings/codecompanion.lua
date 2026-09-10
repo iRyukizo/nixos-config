@@ -37,7 +37,7 @@ cc.setup({
         },
         cmd = {
             adapter = {
-                name = "codex",
+                name = "ollama",
             },
         },
     },
