@@ -5,6 +5,7 @@ if not pcall(require, "codecompanion") then
 end
 
 local cc = require("codecompanion")
+local ccfidget = require("ryuki.codecompanion-fidget")
 
 cc.setup({
     adapters = {
@@ -41,6 +42,8 @@ cc.setup({
         },
     },
 })
+
+ccfidget:setup()
 
 local keys = {
     { "<leader>o", group = "CodeCompanion" },
