@@ -85,6 +85,15 @@ local function toggle_gitinfo_display()
     vim.notify("Git Info Display " .. (gitinfo_display and "on" or "off"))
 end
 
+local function codecompanion_metadata()
+    local metadata = _G.codecompanion_chat_metadata
+    if type(metadata) ~= "table" then
+        return {}
+    end
+
+    return metadata[vim.api.nvim_get_current_buf()] or {}
+end
+
 require("lualine").setup({
     options = {
         theme = "nord",
@@ -212,6 +221,43 @@ require("lualine").setup({
                 lualine_b = { "branch" },
             },
             filetypes = { "gitsigns-blame" },
+        },
+        {
+            sections = {
+                lualine_a = {
+                    function()
+                        local adapter = codecompanion_metadata().adapter
+                        if type(adapter) ~= "table" then
+                            return "CodeCompanion"
+                        end
+
+                        return tostring(adapter.name or "")
+                    end,
+                },
+                lualine_b = {
+                    function()
+                        local adapter = codecompanion_metadata().adapter
+                        if type(adapter) ~= "table" then
+                            return "CodeCompanion"
+                        end
+
+                        return tostring(adapter.model or "")
+                    end,
+                },
+                lualine_x = {
+                    function()
+                        return tostring(codecompanion_metadata().cycles or 0)
+                    end,
+                },
+                lualine_y = {
+                    function()
+                        return tostring(codecompanion_metadata().tokens or 0)
+                    end,
+                    "searchcount",
+                },
+                lualine_z = { { pretty_location } },
+            },
+            filetypes = { "codecompanion" },
         },
     },
 })
