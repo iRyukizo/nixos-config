@@ -73,12 +73,12 @@ ccfidget:setup()
 local keys = {
     { "<leader>o", group = "CodeCompanion" },
     { "<leader>oc", "<cmd>:CodeCompanionChat Toggle<CR>", desc = "Chat", mode = { "n" } },
-    { "<leader>oc", "<cmd>:CodeCompanionChat Add<CR>", desc = "Add to Chat", mode = { "v" } },
-    { "<leader>op", "<cmd>:CodeCompanion<CR>", desc = "Prompt", mode = { "n", "v" } },
-    { "<leader>oe", "<cmd>:CodeCompanion /explain<CR>", desc = "Explain", mode = { "v" } },
-    { "<leader>of", "<cmd>:CodeCompanion /fix<CR>", desc = "Fix", mode = { "v" } },
-    { "<leader>ot", "<cmd>:CodeCompanion /tests<CR>", desc = "Tests", mode = { "v" } },
-    { "<leader>ol", "<cmd>:CodeCompanion /lsp<CR>", desc = "LSP", mode = { "v" } },
+    { "<leader>oc", ":CodeCompanionChat Add<CR>", desc = "Add to Chat", mode = { "v" } },
+    { "<leader>op", ":CodeCompanion<CR>", desc = "Prompt", mode = { "n", "v" } },
+    { "<leader>oe", ":CodeCompanion /explain<CR>", desc = "Explain", mode = { "v" } },
+    { "<leader>of", ":CodeCompanion /fix<CR>", desc = "Fix", mode = { "v" } },
+    { "<leader>ot", ":CodeCompanion /tests<CR>", desc = "Tests", mode = { "v" } },
+    { "<leader>ol", ":CodeCompanion /lsp<CR>", desc = "LSP", mode = { "v" } },
     { "<leader>oa", "<cmd>:CodeCompanionActions<CR>", desc = "Actions" },
     { "<leader>oh", "<cmd>:CodeCompanionHistory<CR>", desc = "History" },
 }
