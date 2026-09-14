@@ -5,15 +5,36 @@ if not pcall(require, "codecompanion") then
 end
 
 local cc = require("codecompanion")
+local cca = require("codecompanion.adapters")
 local ccfidget = require("ryuki.codecompanion-fidget")
+
+local function env_default_model()
+    return vim.env.OLLAMA_DEFAULT_MODEL or ""
+end
 
 cc.setup({
     adapters = {
         acp = {
             codex = function()
-                return require("codecompanion.adapters").extend("codex", {
+                return cca.extend("codex", {
                     defaults = {
                         auth_method = "chat-gpt",
+                    },
+                })
+            end,
+        },
+        http = {
+            ollama = function()
+                return cca.extend("ollama", {
+                    env = {
+                        api_key = "OLLAMA_API_KEY",
+                    },
+                    headers = {
+                        ["Content-Type"] = "application/json",
+                        ["Authorization"] = "Bearer ${api_key}",
+                    },
+                    parameters = {
+                        sync = true,
                     },
                 })
             end,
@@ -30,22 +51,26 @@ cc.setup({
                 user = "ryuki",
             },
             adapter = {
-                name = "codex",
+                name = "ollama",
+                model = env_default_model(),
             },
         },
         inline = {
             adapter = {
                 name = "ollama",
+                model = env_default_model(),
             },
         },
         cli = {
             adapter = {
-                name = "codex",
+                name = "ollama",
+                model = env_default_model(),
             },
         },
         cmd = {
             adapter = {
                 name = "ollama",
+                model = env_default_model(),
             },
         },
     },
@@ -62,6 +87,10 @@ cc.setup({
                     rename = { n = "r", i = "<C-o>" },
                     delete = { n = "d", i = "<C-e>" },
                     duplicate = { n = "<C-y>", i = "<C-y>" },
+                },
+
+                title_generation_opts = {
+                    adapter = "ollama",
                 },
             },
         },
