@@ -13,6 +13,7 @@ in
         type = "wsl";
       };
       codex.enable = true;
+      opencode.enable = true;
       vim.options = {
         xc8Support = true;
         codeCompanionSupport = true;

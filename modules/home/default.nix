@@ -24,6 +24,7 @@
     ./man.nix
     ./nix-index.nix
     ./nix.nix
+    ./opencode.nix
     ./programs.nix
     ./ranger.nix
     ./rofi
