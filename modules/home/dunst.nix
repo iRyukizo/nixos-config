@@ -5,7 +5,7 @@ let
   cfg = config.my.home.dunst;
 
   faba-path = "${pkgs.faba-icon-theme}/share/icons/Faba";
-  gnome-path = "${pkgs.gnome-icon-theme}/share/icons/gnome";
+  papirus-path = "${pkgs.papirus-icon-theme}/share/icons/Papirus";
 in
 {
   options.my.home.dunst = {
@@ -15,7 +15,7 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       faba-icon-theme
-      gnome-icon-theme
+      papirus-icon-theme
     ];
 
     services.dunst = {
@@ -28,7 +28,7 @@ in
           corner_radius = 10;
           indicate_hidden = "yes";
           shrink = "no";
-          transparancy = 0;
+          transparency = 0;
           notification_height = 0;
           separator_height = 2;
           padding = 12;
@@ -40,7 +40,7 @@ in
           idle_threshhold = 120;
           line_height = 0;
           font = "SanFranciscoDisplay Nerd Font 10";
-          icon_path = mkForce "${faba-path}/48x48/notifications/:${faba-path}/24x24/panel/:${faba-path}/16x16/status/:${faba-path}/symbolic/status/:${faba-path}/16x16/devices/:${faba-path}/16x16/mimetypes/:${faba-path}/16x16/notifications/:${faba-path}/16x16/emblems:${gnome-path}/16x16/status/:${gnome-path}/16x16/devices/";
+          icon_path = mkForce "${faba-path}/48x48/notifications/:${faba-path}/24x24/panel/:${faba-path}/16x16/status/:${faba-path}/symbolic/status/:${faba-path}/16x16/devices/:${faba-path}/16x16/mimetypes/:${faba-path}/16x16/notifications/:${faba-path}/16x16/emblems:${papirus-path}/16x16/status/:${papirus-path}/16x16/devices/";
           sticky_history = "yes";
           history_length = 20;
           dmenu = "rofi -show run";

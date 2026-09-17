@@ -20,7 +20,7 @@ in
     };
 
     services.picom = {
-      enable = !pkgs.stdenv.isDarwin;
+      enable = !pkgs.stdenv.hostPlatform.isDarwin;
       settings = {
         backend = "glx";
         blur = {
@@ -35,9 +35,9 @@ in
 
       settings = {
         window = {
-          decorations = if pkgs.stdenv.isDarwin then "Buttonless" else "None";
+          decorations = if pkgs.stdenv.hostPlatform.isDarwin then "Buttonless" else "None";
           opacity = 0.6;
-          blur = pkgs.stdenv.isDarwin;
+          blur = pkgs.stdenv.hostPlatform.isDarwin;
           option_as_alt = "OnlyLeft";
         };
 
@@ -51,7 +51,7 @@ in
             style = "Regular";
           };
           size =
-            if !pkgs.stdenv.isDarwin
+            if !pkgs.stdenv.hostPlatform.isDarwin
             then 12
             else 17;
         };
