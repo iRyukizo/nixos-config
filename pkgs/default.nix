@@ -9,8 +9,8 @@ with pkgs;
   san-francisco-display-regular-nerd-font = callPackage ./san-francisco-display-regular-nerd-font { };
   san-francisco-font = callPackage ./san-francisco-font { };
   openocd-stm32 = callPackage ./openocd-stm32 { };
-} // lib.optionalAttrs (stdenv.isx86_64 && stdenv.isLinux) {
+} // lib.optionalAttrs (stdenv.hostPlatform.isx86_64 && stdenv.hostPlatform.isLinux) {
   microchip-xc8 = callPackage ./microchip-xc8 { };
-} // lib.optionalAttrs (!stdenv.isDarwin) {
+} // lib.optionalAttrs (!stdenv.hostPlatform.isDarwin) {
   spotify-song-getter = callPackage ./spotify-song-getter { };
 }

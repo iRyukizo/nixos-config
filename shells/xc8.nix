@@ -16,10 +16,10 @@ pkgs.mkShell {
     ctags
 
     gdb
-  ] ++ lib.optionals (!stdenv.isDarwin) [
+  ] ++ lib.optionals (!stdenv.hostPlatform.isDarwin) [
     strace
     valgrind
-  ] ++ lib.optionals (stdenv.isx86_64 && stdenv.isLinux) [
+  ] ++ lib.optionals (stdenv.hostPlatform.isx86_64 && stdenv.hostPlatform.isLinux) [
     ryuki.microchip-xc8
   ];
 }

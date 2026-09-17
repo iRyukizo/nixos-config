@@ -46,7 +46,7 @@ pkgs.mkShell {
     ryuki.openocd-stm32 # Debugger Server
 
     gdb
-  ] ++ lib.optionals (!stdenv.isDarwin) [
+  ] ++ lib.optionals (!stdenv.hostPlatform.isDarwin) [
     strace
     valgrind
     stlink # ST Communication

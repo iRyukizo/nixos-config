@@ -16,7 +16,7 @@ pkgs.mkShell {
     gtest
 
     gdb
-  ] ++ lib.optionals (!stdenv.isDarwin) [
+  ] ++ lib.optionals (!stdenv.hostPlatform.isDarwin) [
     valgrind
     strace
   ];
