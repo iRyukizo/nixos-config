@@ -22,6 +22,7 @@ in
           savePath = "${config.home.homeDirectory}/Pictures/screenshots";
           uploadWithoutConfirmation = true;
           useJpgForClipboard = true;
+          useX11LegacyScreenshot = true;
         };
       };
     };
