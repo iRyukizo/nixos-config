@@ -13,7 +13,7 @@ openocd.overrideAttrs (
       owner = "STMicroelectronics";
       repo = "openocd";
       tag = finalAttrs.version;
-      hash = "sha256-1upCnj0QUTUc/t0tUt7sl+bjFq1ryLb455gr5Mls4UI=";
+      hash = "sha256-HjyxTGg/4ALevoWbQ7tLc3KWHg2dIP1NSgv5QT0Z/qw=";
       fetchSubmodules = false;
     };
     nativeBuildInputs = old.nativeBuildInputs ++ [
