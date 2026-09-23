@@ -1,0 +1,27 @@
+diff --git a/tcl/target/stm32c5x.cfg b/tcl/target/stm32c5x.cfg
+index 03bce02b1..1df2d8432 100644
+--- a/tcl/target/stm32c5x.cfg
++++ b/tcl/target/stm32c5x.cfg
+@@ -126,6 +126,14 @@ set dev_id_loader {
+ }
+ 
+ $_CHIPNAME.cpu configure -event examine-end {
++    set dev_id_loader {
++        0x45A "flash/STM32C5\[56\]x.xldr"
++    }
++    if { [info exists CHIPNAME] } {
++        set _CHIPNAME $CHIPNAME
++    } else {
++        set _CHIPNAME stm32c5x
++    }
+     # Enable debug during low power modes (uses more power)
+     # DBGMCU_CR |= DBG_STANDBY | DBG_STOP | DBG_SLEEP
+     stm32c5x_dbgmcu_mmw 0x4 0x00000007 0
+@@ -134,6 +142,7 @@ $_CHIPNAME.cpu configure -event examine-end {
+     # DBGMCU_APB1LFZR |= DBG_IWDG_STOP | DBG_WWDG_STOP
+     stm32c5x_dbgmcu_mmw 0x8 0x00001800 0
+ 
++
+     # Read DBGMCU ID code and get device identification in hexadecimal
+     # dev_id = DBGMCU_IDCODE[0..11]
+     set dev_id [format 0x%03X [expr {([stm32c5x_mrw $_CHIPNAME.ap0 0XE00E4000] & 0xFFF)}]]
