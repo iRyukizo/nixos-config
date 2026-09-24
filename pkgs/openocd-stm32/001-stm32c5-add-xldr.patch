@@ -7,7 +7,7 @@ index 03bce02b1..1df2d8432 100644
  
  $_CHIPNAME.cpu configure -event examine-end {
 +    set dev_id_loader {
-+        0x45A "flash/STM32C5\[56\]x.xldr"
++        0x45A "flash/STM32C5\[9A\]x.xldr"
 +    }
 +    if { [info exists CHIPNAME] } {
 +        set _CHIPNAME $CHIPNAME

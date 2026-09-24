@@ -9,7 +9,7 @@
 openocd.overrideAttrs (
   finalAttrs: old: {
     pname = "openocd-stm32";
-    version = "openocd-cubeide-r7";
+    version = "v2.2.0";
     src = fetchFromGitHub {
       owner = "STMicroelectronics";
       repo = "openocd";
@@ -27,12 +27,37 @@ openocd.overrideAttrs (
 
     postInstall = old.postInstall + ''
       mkdir -p $out/share/openocd/scripts/flash
-      cp ${fetchurl {
-        url = "https://raw.githubusercontent.com/STMicroelectronics/stm32c5xx-dfp/main/Flash/STM32C5%5B56%5Dx.xldr";
-        hash = "sha256-ExeEwuTrRYkgC2FOVrg6vSGjSQbB/Uhco9gGN40ocy0=";
-      }} "$out/share/openocd/scripts/flash/STM32C5[56]x.xldr"
+      ${
+        let files = [
+          {
+            name = "STM32C5%5B34%5Dx.xldr";
+            unespacedName = "STM32C5[34]x.xldr";
+            hash = "sha256-RkVXTydPUnTehp29Kms1/XnRNPfsByJMPxftLUDHuLY=";
+          }
+          {
+            name = "STM32C5%5B56%5Dx.xldr";
+            unespacedName = "STM32C5[56]x.xldr";
+            hash = "sha256-ExeEwuTrRYkgC2FOVrg6vSGjSQbB/Uhco9gGN40ocy0=";
+          }
+          {
+            name = "STM32C5%5B9A%5Dx.xldr";
+            unespacedName = "STM32C5[9A]x.xldr";
+            hash = "sha256-uarOyDdhPyc7DYj7PKQcXFJxJ1L9JicZWd0DpB2rjlM=";
+          }
+        ];
+        in
+        builtins.concatStringsSep "\n" (
+          map (file: ''
+            cp ${fetchurl {
+              url = "https://github.com/STMicroelectronics/stm32c5xx-dfp/raw/refs/tags/2.1.0/Flash/${file.name}";
+              hash = file.hash;
+            }} "$out/share/openocd/scripts/flash/${file.unespacedName}"
+          ''
+          ) files 
+        )
+      }
       substituteInPlace $out/share/openocd/scripts/target/stm32c5x.cfg \
-        --replace-fail 'flash/STM32C5\[56\]x.xldr' $out'/share/openocd/scripts/flash/STM32C5\[56\]x.xldr'
+        --replace-fail 'flash/' $out'/share/openocd/scripts/flash/'
     '';
 
 
