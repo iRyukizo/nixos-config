@@ -11,6 +11,11 @@ let
           "Core/.*"
           "Drivers/.*"
           "Middlewares/.*"
+          "generated/.*"
+          "middlewares/.*"
+          ".*_drivers/.*"
+          ".*_dfp/.*"
+          "utilities/.*"
         ];
       };
     };
