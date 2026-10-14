@@ -13,7 +13,7 @@ openocd.overrideAttrs (
     src = fetchFromGitHub {
       owner = "STMicroelectronics";
       repo = "openocd";
-      tag = finalAttrs.version;
+      tag = "openocd-cubeide-" + finalAttrs.version;
       hash = "sha256-HjyxTGg/4ALevoWbQ7tLc3KWHg2dIP1NSgv5QT0Z/qw=";
       fetchSubmodules = false;
     };
@@ -23,6 +23,7 @@ openocd.overrideAttrs (
 
     patches = [
       ./001-stm32c5-add-xldr.patch
+      ./002-configure-version.patch
     ];
 
     postInstall = old.postInstall + ''

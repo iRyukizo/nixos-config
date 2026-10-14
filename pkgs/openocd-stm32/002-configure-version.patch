@@ -1,0 +1,13 @@
+diff --git a/configure.ac b/configure.ac
+index 761384837..135cf0101 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0-or-later
+ 
+ AC_PREREQ([2.69])
+-AC_INIT([openocd], [0.12.0+dev],
++AC_INIT([openocd], [openocd-cubeide-v2.2.0],
+   [OpenOCD Mailing List <openocd-devel@lists.sourceforge.net>])
+ AC_CONFIG_SRCDIR([src/openocd.c])
+ AC_CONFIG_AUX_DIR([build-aux])
