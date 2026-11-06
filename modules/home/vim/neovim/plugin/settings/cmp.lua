@@ -142,6 +142,7 @@ local snippets_lang = {
     "nix",
     "json",
     "gitcommit",
+    "go",
     "markdown",
     "make",
     "yaml",
