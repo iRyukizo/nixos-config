@@ -139,6 +139,10 @@ local servers = {
     gopls = {
         settings = {
             gopls = {
+                semanticTokens = true,
+                semanticTokenTypes = {
+                    string = false,
+                },
                 analyses = {
                     unusedparams = true,
                 },
