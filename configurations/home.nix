@@ -71,42 +71,4 @@ mapAttrs buildHomeConfiguration {
       };
     };
   };
-  "rd1" = {
-    system = "aarch64-darwin";
-    homePrefix = "/Users";
-    configModule = {
-      my = {
-        secrets.enable = false;
-        home = {
-          bat.enable = true;
-          dircolors.enable = true;
-          direnv.enable = true;
-          fzf.enable = true;
-          man.enable = true;
-          nix.enable = true;
-          nix-index.enable = true;
-          tmux = {
-            enable = true;
-            type = "darwin";
-          };
-          vim = {
-            enable = true;
-            programs = {
-              vim = true;
-              neovim = true;
-            };
-            type = "remote";
-            ctagsSupport = false;
-            clangFormatSupport = false;
-            goSupport = false;
-          };
-          zsh = {
-            enable = true;
-            viMode = false;
-            theme = "robbyrussell";
-          };
-        };
-      };
-    };
-  };
 }
