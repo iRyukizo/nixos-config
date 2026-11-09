@@ -4,13 +4,10 @@ let
   all = with keys; [
     root.dragon
     root.millenium
-    root.NB23517B88-wsl
 
     agenix.dragon
     agenix.millenium
     agenix.milano
-    agenix.NB23517B88
-    agenix.NB23517B88-wsl
   ];
 in
 {
