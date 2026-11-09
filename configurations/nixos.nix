@@ -47,9 +47,4 @@ mapAttrs buildMachine {
       inputs.nixos-hardware.nixosModules.common-cpu-intel
     ];
   };
-  NB23517B88-wsl = {
-    inherit system;
-    hardwareModules = [ ];
-    isWsl = true;
-  };
 }
